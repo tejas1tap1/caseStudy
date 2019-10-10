@@ -17,14 +17,14 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+
+        return Collections.singleton(new SimpleGrantedAuthority(userCredentials.getRole()));
     }
 
     @Override
     public String getPassword() {
         return userCredentials.getPassword();
     }
-
     @Override
     public String getUsername() {
         return userCredentials.getEmail();

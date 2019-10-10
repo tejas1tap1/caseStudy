@@ -10,7 +10,7 @@ public class ProductDTO {
     private String name;
     private String details;
     private CategoryDTO categoryDTO;
-    private List<SubCategoryDTO> subCategoryDTOS;
+    private SubCategoryDTO subCategoryDTO;
 
     public long getProductId() {
         return productId;
@@ -44,11 +44,11 @@ public class ProductDTO {
         this.categoryDTO = categoryDTO;
     }
 
-    public List<SubCategoryDTO> getSubCategoryDTOS() {
-        return subCategoryDTOS;
+    public SubCategoryDTO getSubCategoryDTO() {
+        return subCategoryDTO;
     }
 
-    public void setSubCategoryDTOS(List<SubCategoryDTO> subCategoryDTOS) {
-        this.subCategoryDTOS = subCategoryDTOS;
+    public void setSubCategoryDTO(SubCategoryDTO subCategoryDTO) {
+        this.subCategoryDTO = subCategoryDTO;
     }
 }

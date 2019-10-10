@@ -2,6 +2,7 @@ package com.beehyv.shoppingcart.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -14,6 +15,15 @@ public class UserCredentials {
     private String password;
     @OneToOne
     private UserProfile userProfile;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;

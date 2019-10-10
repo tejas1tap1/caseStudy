@@ -21,9 +21,8 @@ public class Product {
 	   private String details;
 	   @ManyToOne(cascade=CascadeType.ALL)
 	   private Category category;
-
-	   @ManyToMany(cascade=CascadeType.ALL)
-	   private List <SubCategory> subcategories;
+	   @ManyToOne(cascade=CascadeType.ALL)
+	   private SubCategory subCategory;
 	public long getProductId() {
 		return productId;
 	}
@@ -48,18 +47,23 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	public List<SubCategory> getSubcategories() {
-		return subcategories;
+
+	public SubCategory getSubCategory() {
+		return subCategory;
 	}
-	public void setSubcategories(List<SubCategory> subcategories) {
-		this.subcategories = subcategories;
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
 	}
+
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", name=" + name + ", details=" + details + ", category=" + category
-				+ ", subcategories=" + subcategories + "]";
+		return "Product{" +
+				"productId=" + productId +
+				", name='" + name + '\'' +
+				", details='" + details + '\'' +
+				", category=" + category +
+				", subCategory=" + subCategory +
+				'}';
 	}
-	
-	
-	   
 }

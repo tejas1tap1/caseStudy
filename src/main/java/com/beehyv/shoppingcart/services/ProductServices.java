@@ -27,16 +27,11 @@ public class ProductServices {
         {
          product.setCategory(category);
         }
-        List<SubCategory> subCategories=new ArrayList<>();
-        for(int i=0;i<product.getSubcategories().size();i++)
+        SubCategory subCategory = subCategoryRepo.findByName(product.getSubCategory().getName());
+        if(subCategory!=null)
         {
-            subCategories.add(i, subCategoryRepo.findByName(product.getSubcategories().get(i).getName()));
-            if(subCategories.get(i)==null)
-            {
-                subCategories.add(i,product.getSubcategories().get(i));
-            }
+            product.setSubCategory(subCategory);
         }
-        product.setSubcategories(subCategories);
 
         return productRepo.save(product);
     }

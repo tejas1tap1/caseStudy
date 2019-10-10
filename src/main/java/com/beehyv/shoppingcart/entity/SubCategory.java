@@ -2,12 +2,7 @@ package com.beehyv.shoppingcart.entity;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class SubCategory {
@@ -17,9 +12,9 @@ public class SubCategory {
 	   private long subCategoryId;
 	 @Column(name="name")
 	   private String name;
-	 @ManyToMany(mappedBy = "subcategories")
-	 private List<Product> products;
-	public long getSubCategoryId() {
+	  @OneToMany
+	  List<SubCategory> subCategories;
+	 public long getSubCategoryId() {
 		return subCategoryId;
 	}
 	public void setSubCategoryId(long subCategoryId) {
@@ -32,6 +27,13 @@ public class SubCategory {
 		this.name = name;
 	}
 
+	public List<SubCategory> getSubCategories() {
+		return subCategories;
+	}
+
+	public void setSubCategories(List<SubCategory> subCategories) {
+		this.subCategories = subCategories;
+	}
 
 	@Override
 	public String toString() {

@@ -3,7 +3,6 @@ package com.beehyv.shoppingcart.dto;
 public class SubCategoryDTO {
     private long subCategoryId;
     private String name;
-
     public long getSubCategoryId() {
         return subCategoryId;
     }
