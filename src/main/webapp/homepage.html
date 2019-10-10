@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style_homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <script src="script_homepage.js"></script>
+    <title>
+        HomePage
+    </title>
+</head>
+
+<body class="bg-info">
+    <header class="container-flow sticky-top">
+        <nav class="navbar navbar-expand-sm  bg-dark navbar-dark p-3 sticky-top">
+            <a class="navbar-brand text-center ml-4 mr-5 px-2 " id="demo" href="#">Shopping Cart</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="form-inline col-md-8 " action="/action_page.php">
+                <div class="input-group w-75 mx-auto">
+                    <input class="form-control" type="text" placeholder="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-light" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+                <ul class="navbar-nav text-center ml-auto ">
+                    <li><a href="/logout">Logout</a></li>
+                    <li class="nav-item d-inline-block"><a href="" title="" class="nav-link" data-toggle="modal" data-target="#signup"><i class="fa fa-user pr-2" aria-hidden="true"></i>Sign Up</a></li>
+                    <li class="nav-item "><a title=""  class="nav-link" onclick="logPage()" style="cursor: pointer"><i class="fa fa-sign-in pr-2" aria-hidden="true"></i>Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="modal" id="login">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content pt-5">
+                <h4 class="modal-title mx-auto text-center">LOGIN</h4>
+
+                <form class="mt-5" action="login" method="Post">
+
+                    <div class="input-group w-75 mx-auto mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white"><i class="fa fa-user icon" style="width:16px"></i></span>
+                        </div>
+                        <input type="text" class="form-control border border-left-0 pl-0" id="username" placeholder="Enter email" name="username">
+                    </div>
+                    <div class="input-group w-75 mx-auto mb-5">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white "> <i class="fa fa-key icon" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="pwd" placeholder="Enter password" name="password">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger" style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group w-75 mx-auto mb-4">
+                        <input type="submit" name="login" value="LOGIN" class="btn btn-primary w-100">
+                    </div>
+                </form>
+                <a class="mx-auto text-primary mb-4" style="font-size:1em" id="forgot" href="addUser">New User</a>
+
+
+
+            </div>
+            <button type="button" class="close text-secondary cross_close" data-dismiss="modal" style=" margin-bottom: 16.7em">&times;</button>
+        </div>
+    </div>
+    <div class="modal" id="signup">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content pt-5">
+                <h4 class="modal-title mx-auto text-center">SIGN UP</h4>
+
+                <form class="mt-5" action="add-user" method="Post">
+                    <div class="input-group w-75 mx-auto mb-3">
+
+                        <input type="text" class="form-control" id="email" placeholder="Enter name" name="userProfileDTO.name">
+                    </div>
+                    <div class="input-group w-75 mx-auto mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white"><i class="fa fa-user icon" style="width:16px"></i></span>
+                        </div>
+                        <input type="email" class="form-control border border-left-0 pl-0" id="email" placeholder="Enter email" name="email">
+                    </div>
+                    <div class="input-group w-75 mx-auto mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white "> <i class="fa fa-key icon" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="pwd" placeholder="Enter password" name="password">
+                    </div>
+                    <div class="input-group w-75 mx-auto mb-5">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white "> <i class="fa fa-key icon text-danger" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="pwd" placeholder="Reenter password">
+                    </div>
+                    <div class="input-group w-75 mx-auto mb-4">
+                        <input type="submit" name="Submit" value="Submit" class="btn btn-primary w-100">
+                    </div>
+                </form>
+
+
+            </div>
+            <button type="button" class="close text-danger cross_close" data-dismiss="modal" style="margin-bottom: 19em">&times;</button>
+        </div>
+    </div>
+<div class="container-flow sticky-top ">
+    <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
+        <!-- <ul class="navbar-nav w-50 mx-auto">
+            <li class="nav-item ">Electronics</li>
+            <li class="nav-item ">Men</li>
+            <li class="nav-item ">Women</li>
+            <li class="nav-item ">Home & Furniture</li>
+            <li class="nav-item ">Books</li>
+        </ul> -->
+        <div class="d-flex w-50 mx-auto text-center">
+            <div class="flex-fill dropdown" >
+               <span class="dropbtn p-2">Electronics</span>
+                <div class="dropdown-content">
+                    <h5 class="header">Dropdown header</h5>
+                    <a class="item" href="#">Link 1</a>
+                    <a class="item" href="#">Link 2</a>
+                    <a class="item" href="#">Link 3</a>
+                    <h5 class="header">Dropdown header</h5>
+                    <a class="item" href="#">Another link</a>
+                  </div>
+            </div>
+            <div class="flex-fill dropdown" >
+                    <span class="dropbtn p-2">Men</span>
+                     <div class="dropdown-content">
+                         <h5 class="header">Dropdown header</h5>
+                         <a class="item" href="#">Link 1</a>
+                         <a class="item" href="#">Link 2</a>
+                         <a class="item" href="#">Link 3</a>
+                         <h5 class="header">Dropdown header</h5>
+                         <a class="item" href="#">Another link</a>
+                       </div>
+            </div>
+            <div class="flex-fill dropdown" >
+                        <span class="dropbtn p-2">Women</span>
+                         <div class="dropdown-content">
+                             <h5 class="header">Dropdown header</h5>
+                             <a class="item" href="#">Link 1</a>
+                             <a class="item" href="#">Link 2</a>
+                             <a class="item" href="#">Link 3</a>
+                             <h5 class="header">Dropdown header</h5>
+                             <a class="item" href="#">Another link</a>
+                           </div>
+            </div>
+            <div class="flex-fill dropdown" >
+                            <span class="dropbtn p-2">Home & Furniture</span>
+                             <div class="dropdown-content">
+                                 <h5 class="header">Dropdown header</h5>
+                                 <a class="item" href="#">Link 1</a>
+                                 <a class="item" href="#">Link 2</a>
+                                 <a class="item" href="#">Link 3</a>
+                                 <h5 class="header">Dropdown header</h5>
+                                 <a class="item" href="#">Another link</a>
+                               </div>
+            </div>
+            <div class="flex-fill dropdown" >
+                                <span class="dropbtn p-2">Books</span>
+                                 <div class="dropdown-content">
+                                     <h5 class="header">Dropdown header</h5>
+                                     <a class="item" href="#">Link 1</a>
+                                     <a class="item" href="#">Link 2</a>
+                                     <a class="item" href="#">Link 3</a>
+                                     <h5 class="header">Dropdown header</h5>
+                                     <a class="item" href="#">Another link</a>
+                                   </div>
+            </div>
+          </div>
+    </nav>
+</div>
+
+</body>
+
+</html>
