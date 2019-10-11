@@ -21,7 +21,6 @@ public class UserCredentialsController {
 	@GetMapping("/login")
 	public Boolean login()
 	{
-
 		return true;
 	}
 //	@PostMapping("/login-user")
