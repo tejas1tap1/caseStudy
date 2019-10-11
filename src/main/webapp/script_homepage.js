@@ -12,3 +12,34 @@ function logPage() {
 function dropdown(){
     $(".dropdown-toggle").dropdown();
 }
+function getProductByCategory(category) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("products").innerHTML=this.responseText;
+        }
+    };
+
+    var u="/products/"+category;
+    xhttp.open("GET", u, true);
+    xhttp.send();
+
+}
+function loadUsername() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("username").innerHTML=this.responseText;
+
+            if (this.responseText!="") {
+                document.getElementById("sign").style.display = "none";
+                document.getElementById("log").style.display = "none";
+                document.getElementById("userS").style.display = "inline-block";
+                document.getElementById("logout").style.display = "inline-block";
+            }
+        }
+    };
+    xhttp.open("GET", "/user-email", true);
+    xhttp.send();
+
+}

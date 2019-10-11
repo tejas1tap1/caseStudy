@@ -13,7 +13,6 @@ public class PageController {
 	public String user()
 	{
 		return "homepage.html";
-
 	}
 
 	@RequestMapping("/logout-success")

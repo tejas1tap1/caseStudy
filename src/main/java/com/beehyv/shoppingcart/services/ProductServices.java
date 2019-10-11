@@ -22,6 +22,7 @@ public class ProductServices {
     @Autowired
     private SubCategoryRepo subCategoryRepo;
     public Product addProduct(Product product) {
+
         Category category = categoryRepo.findByName(product.getCategory().getName());
         if(category!=null)
         {

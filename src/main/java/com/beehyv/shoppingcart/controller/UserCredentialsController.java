@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserCredentialsController {
  @Autowired
  private UserCredentialsServices userCredentialsServices;
-
 	@GetMapping("/login")
 	public Boolean login()
 	{

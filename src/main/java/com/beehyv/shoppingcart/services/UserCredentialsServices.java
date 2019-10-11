@@ -42,6 +42,7 @@ public class UserCredentialsServices {
             userProfileRepo.save(userProfile);
             userCredentials.setUserProfile(userProfile);
             userCredentials.setPassword(new BCryptPasswordEncoder().encode(userCredentials.getPassword()));
+            userCredentials.setRole("USER");
             userCredentialsRepo.save(userCredentials);
             Long userId=userCredentialsRepo.findByEmail(userCredentials.getEmail()).getUserProfile().getUserId();
             Cart cart =new Cart();

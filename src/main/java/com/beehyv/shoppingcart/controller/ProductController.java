@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
     @Autowired
     private ProductServices productServices;
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/products/add-product")
     public ProductDTO addProduct(ProductDTO productDTO) {
 
         return ProductMapper.INSTANCE.toProductDTO(productServices.addProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
     }
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/products/update")
     public ProductDTO updateProduct(ProductDTO productDTO) {
         return ProductMapper.INSTANCE.toProductDTO(productServices.updateProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
