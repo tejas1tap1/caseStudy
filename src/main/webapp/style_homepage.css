@@ -1,4 +1,11 @@
-/* Dropdown Button */
+#category{
+  position: sticky;
+  top:3em;
+  z-index: 0
+}
+.account{
+  text-decoration: none;
+}
 .username{
   display: none;
 }

@@ -18,7 +18,11 @@ public class PageController {
 	@RequestMapping("/logout-success")
 	public String logout() {
 		return "homepage.html";
-
+	}
+	@RequestMapping("/profile")
+	public String profile()
+	{
+		return "profile.html";
 	}
 }
 

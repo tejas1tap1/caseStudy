@@ -49,4 +49,14 @@ public class ProductServices {
 
         return productRepo.findByCategory(categoryRepo.findByName(category));
     }
+    public List<Product> getProductsBySearchString(String search)
+    {
+        List<Product> searchProduct = productRepo.findByNameContaining(search);
+        searchProduct.addAll(productRepo.findByDetailsContaining(search));
+        searchProduct.addAll(productRepo.findBySubCategory(subCategoryRepo.findByNameLike(search)));
+        searchProduct.addAll(productRepo.findByCategory(categoryRepo.findByNameLike(search)));
+
+     return  searchProduct;
+    }
+
 }
