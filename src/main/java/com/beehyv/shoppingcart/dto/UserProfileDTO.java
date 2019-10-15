@@ -2,12 +2,14 @@ package com.beehyv.shoppingcart.dto;
 
 import com.beehyv.shoppingcart.entity.Address;
 
+import java.util.List;
+
 public class UserProfileDTO {
     private long userId;
     private String name;
     private String email;
     private long phone;
-    private Address address;
+    private List<Address> addresses;
 
     public long getUserId() {
         return userId;
@@ -41,11 +43,11 @@ public class UserProfileDTO {
         this.phone = phone;
     }
 
-    public Address getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }

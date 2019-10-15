@@ -1,6 +1,7 @@
 function logPage() {
     $('#login').modal('show');
 }
+
 function dropdown(){
     $(".dropdown-toggle").dropdown();
 }
@@ -21,8 +22,7 @@ function getProductByCategory(category) {
                             "<p>"+products[i].subCategoryDTO.name+"</p></div>";
 
             }
-            console.log(products[0].price)
-            //$("#products").text(this.responseText);
+            
             $("#products").html(txt);
         }
     };

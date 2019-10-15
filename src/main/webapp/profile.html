@@ -14,11 +14,11 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <script src="script_profile.js"></script>
     <script src="script_homepage.js"></script>
-    <script>
-        $(function(){
-            $("#header").load("homepage.html");
-        });
-    </script>
+<!--    <script>-->
+<!--        $(function(){-->
+<!--            $("#header").load("homepage.html");-->
+<!--        });-->
+<!--    </script>-->
     <title>Profile</title>
 
 </head>
@@ -230,67 +230,92 @@
         </div>
         <div class="bg-white shadow ">
             <div class="border border-bottom-1 p-3">
-                <i class="fa fa-server mr-2 text-primary" aria-hidden="true"></i>
-                <span class="text-secondary font-weight-bold">MY ORDERS</span> <i class="fa fa-chevron-right ml-4 text-secondary" aria-hidden="true"></i>
+                <div class="d-inline setting">
+                    <i class="fa fa-server mr-2 text-primary" aria-hidden="true"></i>
+                    <span class="text-secondary font-weight-bold">MY ORDERS</span> <i class="fa fa-chevron-right ml-4 text-secondary" aria-hidden="true"></i>
+                </div>
             </div>
             <div class="border border-bottom-1 p-3">
                 <i class="fa fa-user mr-2 text-primary" aria-hidden="true"></i> <span class="text-secondary font-weight-bold">ACCOUNT SETTINGS</span>
                 <ul id="setting-list">
-                    <li>Personal Info</li>
-                    <li>Manage Address</li>
+                    <li id="personal-info-btn" class="setting">Personal Info</li>
+                    <li id="manage-addresses-btn" class="setting">Manage Address</li>
                 </ul>
             </div>
             <div class="border border-bottom-1 p-3">
-                <i class="fa fa-power-off mr-2 text-primary" aria-hidden="true"></i> <span class="text-secondary font-weight-bold">LOGOUT</span>
+                <div class="d-inline setting" onclick="logout()"><i class="fa fa-power-off mr-2 text-primary" aria-hidden="true"></i> <span class="text-secondary font-weight-bold">LOGOUT</span></div>
             </div>
         </div>
     </div>
-    <div class="container col-sm-8" id="right-bar">
-        <div class="bg-white h-100">
+    <div class="container col-sm-8" id="personal-info-bar">
+        <div class="bg-white my-3  h-100">
         <div>
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Personal Information <span class="text-primary ml-3 small">Edit</span></div>
+            <div class="bg-white p-4 font-weight-bolder" >Personal Information <span class="text-primary ml-3 small">Edit</span></div>
             <form action="#">
                 <div class="d-inline-flex">
                     <div class="form-group pl-3 mb-0">
                     <input type="text" class="form-control" id="first-name" placeholder="First Name">
                     </div>
-                    <div class="form-group px-3 mb-0">
+                    <div class="form-group px-3 mb-0 ">
                         <input type="text" class="form-control " id="last-name" placeholder="Last Name">
                     </div>
-                    <input type="submit" class="btn btn-primary " id="save-btn" value="Save">
+                    <input type="submit" class="btn btn-primary " id="name-save-btn" value="Save">
                 </div>
-                <br>
-                <div class="d-inline-flex ml-3 mt-3">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="optradio">Male
-                        </label>
-                    </div>
-                    <div class="form-check ml-2">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="optradio">Female
-                        </label>
-                    </div>
-                </div>
+
             </form>
         </div>
         <div class="mt-5">
             <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span class="text-primary ml-3 small">Edit</span> <span class="text-primary ml-3 small">Change Password</span></div>
             <form action="#">
-                <div class="form-group pl-3 mb-0 w-50">
+                <div class="d-inline-flex">
+                <div class="form-group pl-3 mb-0 w-75 px-3">
                     <input type="text" class="form-control" id="emailId" placeholder="Email">
+                </div>
+                <input type="submit" class="btn btn-primary " id="email-save-btn" value="Save">
                 </div>
             </form>
         </div>
         <div class="mt-5">
             <div class="bg-white my-3 p-2 font-weight-bolder" >Mobile Number <span class="text-primary ml-3 small">Edit</span></div>
             <form action="#">
-                <div class="form-group pl-3 mb-0 w-50">
-                    <input type="text" class="form-control" id="mobile-number" placeholder="Mobile">
+                <div class="d-inline-flex">
+                    <div class="form-group pl-3 mb-0 w-75 px-3">
+                        <input type="text" class="form-control" id="mobile-number" placeholder="Mobile">
+                    </div>
+                    <input type="submit" class="btn btn-primary " id="phone-save-btn" value="Save">
                 </div>
             </form>
         </div>
         </div>
+    </div>
+    <div class="container col-sm-8 " id="manage-addresses-bar">
+        <div class="bg-white my-3 h-100">
+            <div>
+                <div class="bg-white p-4 font-weight-bolder" >Manage Addresses</div>
+            </div>
+            <div class="border mx-3 p-3 text-primary rounded setting" id="add-address-btn">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>ADD A NEW ADDRESS</span>
+            </div>
+            <div id="add-address">
+                <form action="#">
+                    <div class="d-inline-flex">
+                        <div class="form-group pl-3 mb-0">
+                            <input type="text" class="form-control" id="first-name" placeholder="First Name">
+                        </div>
+                        <div class="form-group px-3 mb-0 ">
+                            <input type="text" class="form-control " id="last-name" placeholder="Last Name">
+                        </div>
+                        <input type="submit" class="btn btn-primary " id="name-save-btn" value="Save">
+                    </div>
+
+                </form>
+            </div>
+            <div id="addresses">
+
+            </div>
+        </div>
+
     </div>
 </div>
 </body>

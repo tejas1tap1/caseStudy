@@ -1,12 +1,8 @@
 package com.beehyv.shoppingcart.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Entity
@@ -23,8 +19,8 @@ public class UserProfile {
     private String email;
     @Column(nullable = true)
     private long phone;
-    @Column(nullable = true)
-    private Address address;
+    @OneToMany
+    private List<Address> addresses;
 
     public long getUserId() {
         return userId;
@@ -58,19 +54,22 @@ public class UserProfile {
         this.phone = phone;
     }
 
-    public Address getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     @Override
     public String toString() {
-        return "UserProfile [userId=" + userId + ", name=" + name + ", email=" + email + ", phone=" + phone
-                + ", address=" + address + "]";
+        return "UserProfile{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", addresses=" + addresses +
+                '}';
     }
-
-
 }

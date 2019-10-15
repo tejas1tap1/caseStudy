@@ -1,11 +1,13 @@
 package com.beehyv.shoppingcart.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
-@Embeddable
+@Entity
 public class Address {
-
+	@Id
+	@Column(name = "addressId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long addressId;
 private String street;
 
 private String city;

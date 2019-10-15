@@ -12,13 +12,14 @@ html,body
 }
 
 #left-bar {
-    padding-left: 10%;
+    padding-left: 12%;
     padding-right: 1em;
     background-color: #e6e6e6;
 }
-#right-bar {
-    padding-right: 10%;
+#personal-info-bar {
+    padding-right: 12%;
     background-color: #e6e6e6;
+    display: none;
 }
 #setting-list{
     list-style-type: none;
@@ -26,4 +27,29 @@ html,body
 }
 #setting-list li{
     padding:5px;
+}
+#personal-info-btn{
+    color: dodgerblue;
+}
+.setting:hover{
+    cursor: pointer;
+}
+#manage-addresses-bar{
+    padding-right: 12%;
+    background-color: #e6e6e6;
+}
+#addresses{
+    display:flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: start;
+
+}
+.address{
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
 }
