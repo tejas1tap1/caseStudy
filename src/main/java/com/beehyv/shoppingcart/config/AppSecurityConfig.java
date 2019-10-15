@@ -51,10 +51,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/user-home").authenticated()
+                .authorizeRequests().antMatchers("/").authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
+                //.loginPage("/login").permitAll()
                 .failureHandler(new AuthenticationFailureHandler() {
                     @Override
                     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
@@ -75,7 +75,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
 
                 })
-                .defaultSuccessUrl("/homepage.html", true)
+                .defaultSuccessUrl("/home", true)
                 //.failureUrl("/home?error=true")
                 .and()
                 .logout().invalidateHttpSession(true)

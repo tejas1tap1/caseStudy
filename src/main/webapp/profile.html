@@ -15,11 +15,7 @@
     <script src="script_homepage.js"></script>
 
     <title>Profile</title>
-<!--    <script>-->
-<!--        $(function(){-->
-<!--            $("#header").load("homepage.html");-->
-<!--        });-->
-<!--    </script>-->
+
 </head>
 <body onload="getDetails(),loadUsername()">
 <header class="container-flow sticky-top">
@@ -51,7 +47,7 @@
                 <li class="nav-item dropdown py-3 pr-2" id="userS">
                     <a href="" title="" class="nav-link dropbtn"><i class="fa fa-user pr-2"
                                                                     aria-hidden="true"></i><span
-                            id="username"></span><i class="fa fa-caret-down pl-1" aria-hidden="true"></i>
+                            id="user-name"></span><i class="fa fa-caret-down pl-1" aria-hidden="true"></i>
                     </a>
                     <div class="arrow-up"></div>
                     <div class="dropdown-content" style="top:72px;left:-25px;">
@@ -84,14 +80,14 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="username">
+                           placeholder="Enter email" name="username" id="username">
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-white "> <i class="fa fa-key icon"
                                                                      aria-hidden="true"></i></span>
                     </div>
-                    <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="pwd"
+                    <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
                            placeholder="Enter password" name="password">
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
@@ -117,7 +113,7 @@
         <div class="modal-content pt-5">
             <h4 class="modal-title mx-auto text-center">SIGN UP</h4>
 
-            <form class="mt-5" action="add-user" method="Post">
+            <form class="mt-5" id="signupform" method="Post">
                 <div class="input-group w-75 mx-auto mb-3">
 
                     <input type="text" class="form-control" id="name" placeholder="Enter name"
@@ -129,7 +125,7 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="email" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="email">
+                           placeholder="Enter email" name="email" id="email">
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -137,7 +133,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Enter password" name="password">
+                           placeholder="Enter password" name="password" id="pwd">
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -145,7 +141,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Reenter password">
+                           placeholder="Reenter password" id="repwd">
                 </div>
                 <div class="input-group w-75 mx-auto mb-4">
                     <input type="submit" name="Submit" value="Submit" class="btn btn-primary w-100">
@@ -277,7 +273,7 @@
             <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span class="text-primary ml-3 small">Edit</span> <span class="text-primary ml-3 small">Change Password</span></div>
             <form action="#">
                 <div class="form-group pl-3 mb-0 w-50">
-                    <input type="text" class="form-control" id="email" placeholder="Email">
+                    <input type="text" class="form-control" id="emailId" placeholder="Email">
                 </div>
             </form>
         </div>

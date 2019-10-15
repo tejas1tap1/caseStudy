@@ -19,7 +19,8 @@ public class ProductController {
     //@PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/products/add-product")
     public ProductDTO addProduct(ProductDTO productDTO) {
-
+        System.out.println(productDTO.getPrice());
+        System.out.println(ProductMapper.INSTANCE.toProduct(productDTO).getPrice());
         return ProductMapper.INSTANCE.toProductDTO(productServices.addProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
     }
     //@PreAuthorize("hasAnyRole('ADMIN')")
@@ -38,7 +39,7 @@ public class ProductController {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getProductByCategory(category));
     }
     @GetMapping("/products/search/{searchString}")
-    public List<ProductDTO> getProductBySerchString(@PathVariable("serchString")String search)
+    public List<ProductDTO> getProductBySerchString(@PathVariable("searchString")String search)
     {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getProductsBySearchString(search));
     }

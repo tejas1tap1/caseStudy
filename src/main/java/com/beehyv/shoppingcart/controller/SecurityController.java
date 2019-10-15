@@ -22,7 +22,6 @@ public class SecurityController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
-            System.out.println("here");
             return userProfileRepo.findByEmail(currentUserName).getName();
         }
         return null;

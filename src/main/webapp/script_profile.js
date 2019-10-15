@@ -15,7 +15,7 @@ function getDetails() {
             var user = JSON.parse(this.responseText);
             document.getElementById("display-name").innerHTML=user.name;
             document.getElementById("first-name").value=user.name;
-            document.getElementById("email").value=user.email;
+            document.getElementById("emailId").value=user.email;
             document.getElementById("mobile-number").value=user.phone;
         }
     };

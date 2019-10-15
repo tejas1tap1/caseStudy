@@ -10,11 +10,6 @@ public class PageController {
 		return "homepage.html";
 	}
 
-	@RequestMapping("/user-home")
-	public String user() {
-		return "homepage.html";
-	}
-
 	@RequestMapping("/logout-success")
 	public String logout() {
 		return "homepage.html";

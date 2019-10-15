@@ -22,7 +22,7 @@ public class ProductServices {
     @Autowired
     private SubCategoryRepo subCategoryRepo;
     public Product addProduct(Product product) {
-
+        System.out.println(product.getPrice());
         Category category = categoryRepo.findByName(product.getCategory().getName());
         if(category!=null)
         {
@@ -33,7 +33,6 @@ public class ProductServices {
         {
             product.setSubCategory(subCategory);
         }
-
         return productRepo.save(product);
     }
     //need to be rewrite the code

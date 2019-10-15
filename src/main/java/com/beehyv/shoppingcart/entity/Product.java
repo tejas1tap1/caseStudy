@@ -18,32 +18,50 @@ public class Product {
 	   @Column(name="name")
 	   private String name;
 	   @Column
+	   private int price;
+	   @Column
 	   private String details;
 	   @ManyToOne(cascade=CascadeType.ALL)
 	   private Category category;
 	   @ManyToOne(cascade=CascadeType.ALL)
 	   private SubCategory subCategory;
+
 	public long getProductId() {
 		return productId;
 	}
-	public void setProductId(long porductId) {
-		this.productId = porductId;
+
+	public void setProductId(long productId) {
+		this.productId = productId;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	public String getDetails() {
 		return details;
 	}
+
 	public void setDetails(String details) {
 		this.details = details;
 	}
+
 	public Category getCategory() {
 		return category;
 	}
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}
@@ -61,6 +79,7 @@ public class Product {
 		return "Product{" +
 				"productId=" + productId +
 				", name='" + name + '\'' +
+				", price=" + price +
 				", details='" + details + '\'' +
 				", category=" + category +
 				", subCategory=" + subCategory +
