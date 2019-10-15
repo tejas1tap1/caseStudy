@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <script src="script_profile.js"></script>
     <script src="script_homepage.js"></script>
-
+    <script>
+        $(function(){
+            $("#header").load("homepage.html");
+        });
+    </script>
     <title>Profile</title>
 
 </head>
@@ -61,18 +66,79 @@
                 </li>
                 <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" onclick="logPage()" style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Login</a></li>
-                <li class="nav-item username py-3 pr-2" id="logout" ><a href="/logout" title="" class="nav-link" style="cursor: pointer"><i
+                <li class="nav-item username py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
     </nav>
+    <div class="container-flow border border-bottom-2" id="category">
+        <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
+            <div class="d-flex w-50 mx-auto text-center">
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics')">Electronics</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('men')">Men</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('women')">Women</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture')">Home & Furniture</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('books')">Books</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 </header>
 <div class="modal" id="login">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content pt-5">
             <h4 class="modal-title mx-auto text-center">LOGIN</h4>
 
-            <form class="mt-5" action="/login" method="Post">
+            <form class="mt-5" id="loginform" method="Post">
 
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -88,7 +154,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
-                           placeholder="Enter password" name="password">
+                           placeholder="Enter password" name="password" >
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
                                                                         style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
@@ -154,67 +220,6 @@
             &times;
         </button>
     </div>
-</div>
-<div class="container-flow border border-bottom-2" id="category">
-    <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
-        <div class="d-flex w-50 mx-auto text-center">
-            <div class="flex-fill dropdown">
-                <span class="dropbtn p-2" onclick="getProductByCategory('electronics')">Electronics</span>
-                <div class="dropdown-content">
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Link 1</a>
-                    <a class="item" href="#">Link 2</a>
-                    <a class="item" href="#">Link 3</a>
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Another link</a>
-                </div>
-            </div>
-            <div class="flex-fill dropdown">
-                <span class="dropbtn p-2" onclick="getProductByCategory('men')">Men</span>
-                <div class="dropdown-content">
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Link 1</a>
-                    <a class="item" href="#">Link 2</a>
-                    <a class="item" href="#">Link 3</a>
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Another link</a>
-                </div>
-            </div>
-            <div class="flex-fill dropdown">
-                <span class="dropbtn p-2" onclick="getProductByCategory('womne')">Women</span>
-                <div class="dropdown-content">
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Link 1</a>
-                    <a class="item" href="#">Link 2</a>
-                    <a class="item" href="#">Link 3</a>
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Another link</a>
-                </div>
-            </div>
-            <div class="flex-fill dropdown">
-                <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture')">Home & Furniture</span>
-                <div class="dropdown-content">
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Link 1</a>
-                    <a class="item" href="#">Link 2</a>
-                    <a class="item" href="#">Link 3</a>
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Another link</a>
-                </div>
-            </div>
-            <div class="flex-fill dropdown">
-                <span class="dropbtn p-2" onclick="getProductByCategory('books')">Books</span>
-                <div class="dropdown-content">
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Link 1</a>
-                    <a class="item" href="#">Link 2</a>
-                    <a class="item" href="#">Link 3</a>
-                    <h5 class="header">Dropdown header</h5>
-                    <a class="item" href="#">Another link</a>
-                </div>
-            </div>
-        </div>
-    </nav>
 </div>
 <!--<div id="header"></div>-->
 <div class="container-flow row" id="body">

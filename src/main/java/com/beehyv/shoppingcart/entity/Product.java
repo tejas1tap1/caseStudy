@@ -18,7 +18,7 @@ public class Product {
 	   @Column(name="name")
 	   private String name;
 	   @Column
-	   private int price;
+	   private long price;
 	   @Column
 	   private String details;
 	   @ManyToOne(cascade=CascadeType.ALL)
@@ -42,11 +42,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
 

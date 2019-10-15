@@ -1,13 +1,5 @@
 function logPage() {
-    // var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         if(this.response=="true")
-                 $('#login').modal('show');
-    //     }
-    // };
-    // xhttp.open("GET", "/user-home", true);
-    // xhttp.send();
+    $('#login').modal('show');
 }
 function dropdown(){
     $(".dropdown-toggle").dropdown();
@@ -21,7 +13,8 @@ function getProductByCategory(category) {
             if(products.length==0)$("#products").text("No product of category "+category+" available")
             for(var i=0;i<products.length;i++)
             {
-                 txt+="<div class='product'><h>"+products[i].name+"</h><br>"+
+                     txt+="<div class='product'><span style='display:none'>"+products[i].productId+"</span>" +
+                            "<h>"+products[i].name+"</h><br>"+
                             "<p>"+products[i].price+"</p>"+
                             "<p>"+products[i].details+"</p>"+
                             "<p>"+products[i].categoryDTO.name+"</p>"+
@@ -40,11 +33,21 @@ function getProductByCategory(category) {
 
 }
 function loadUsername() {
+    if($.cookie('username')!='' && $.cookie('username')!=undefined)
+    {
+        console.log($.cookie('username'));
+        document.getElementById("user-name").innerHTML=$.cookie('username');
+        document.getElementById("sign").style.display = "none";
+        document.getElementById("log").style.display = "none";
+        document.getElementById("userS").style.display = "inline-block";
+        document.getElementById("logout").style.display = "inline-block";
+        return;
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("user-name").innerHTML=this.responseText;
-
+            $.cookie('username',this.responseText);
             if (this.responseText!="") {
                 document.getElementById("sign").style.display = "none";
                 document.getElementById("log").style.display = "none";
@@ -90,3 +93,9 @@ jQuery(document).ready(function ($) {
         });
     });
 });
+function logout() {
+    $.removeCookie('username');
+    $.removeCookie('userId');
+    window.location.href = "/logout";
+
+}

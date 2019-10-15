@@ -8,7 +8,7 @@ import java.util.List;
 public class ProductDTO {
     private long productId;
     private String name;
-    private int price;
+    private long price;
     private String details;
     private CategoryDTO categoryDTO;
     private SubCategoryDTO subCategoryDTO;
@@ -53,11 +53,11 @@ public class ProductDTO {
         this.subCategoryDTO = subCategoryDTO;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }

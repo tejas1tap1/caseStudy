@@ -1,14 +1,5 @@
 function getDetails() {
-    var userId;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            userId=JSON.parse(this.responseText);
-
-        }
-    };
-    xhttp.open("GET", "/user-id", false);
-    xhttp.send();
+    var userId= getUserId();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -23,5 +14,25 @@ function getDetails() {
     var u= "/user-profile/"+userId;
     xhttp.open("GET",u , false);
     xhttp.send();
+
+}
+function getUserId() {
+    var userId;
+    if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
+    {
+        console.log($.cookie('userId'));
+        return $.cookie('userId');
+    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            userId=JSON.parse(this.responseText);
+            $.cookie('userId');
+
+        }
+    };
+    xhttp.open("GET", "/user-id", false);
+    xhttp.send();
+    return userId;
 
 }

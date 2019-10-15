@@ -11,10 +11,12 @@ import java.util.List;
 @Mapper(uses= {CategoryMapper.class,SubCategoryMapper.class})
 public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+    @Mapping(target = "productId", source = "productId")
     @Mapping(target = "price", source = "price")
     @Mapping(target = "subCategoryDTO", source = "subCategory")
     @Mapping(target = "categoryDTO", source = "category")
     ProductDTO toProductDTO(Product product);
+    @Mapping(target = "productId", source = "productId")
     @Mapping(target = "price", source = "price")
     @Mapping(target = "subCategory", source = "subCategoryDTO")
     @Mapping(target = "category", source = "categoryDTO")
