@@ -249,38 +249,39 @@
     </div>
     <div class="container col-sm-8" id="personal-info-bar">
         <div class="bg-white my-3  h-100">
+            <div id="message" class="text-success"></div>
         <div>
-            <div class="bg-white p-4 font-weight-bolder" >Personal Information <span class="text-primary ml-3 small">Edit</span></div>
+            <div class="bg-white p-4 font-weight-bolder" >Personal Information <span id="edit-personal-info" class="text-primary ml-3 small edit">Edit</span></div>
             <form action="#">
                 <div class="d-inline-flex">
                     <div class="form-group pl-3 mb-0">
-                    <input type="text" class="form-control" id="first-name" placeholder="First Name">
+                    <input type="text" class="form-control" id="first-name" placeholder="First Name" readonly>
                     </div>
                     <div class="form-group px-3 mb-0 ">
-                        <input type="text" class="form-control " id="last-name" placeholder="Last Name">
+                        <input type="text" class="form-control " id="last-name" placeholder="Last Name" readonly>
                     </div>
-                    <input type="submit" class="btn btn-primary " id="name-save-btn" value="Save">
+                    <input type="submit"  class="btn btn-primary " id="name-save-btn" value="Save">
                 </div>
 
             </form>
         </div>
         <div class="mt-5">
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span class="text-primary ml-3 small">Edit</span> <span class="text-primary ml-3 small">Change Password</span></div>
+            <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span id="edit-email" class="text-primary ml-3 small edit">Edit</span> <span class="text-primary ml-3 small">Change Password</span></div>
             <form action="#">
                 <div class="d-inline-flex">
                 <div class="form-group pl-3 mb-0 w-75 px-3">
-                    <input type="text" class="form-control" id="emailId" placeholder="Email">
+                    <input type="text" class="form-control" id="emailId" placeholder="Email" readonly>
                 </div>
                 <input type="submit" class="btn btn-primary " id="email-save-btn" value="Save">
                 </div>
             </form>
         </div>
         <div class="mt-5">
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Mobile Number <span class="text-primary ml-3 small">Edit</span></div>
+            <div class="bg-white my-3 p-2 font-weight-bolder" >Mobile Number <span id="edit-mobile-number" class="text-primary ml-3 small edit">Edit</span></div>
             <form action="#">
                 <div class="d-inline-flex">
                     <div class="form-group pl-3 mb-0 w-75 px-3">
-                        <input type="text" class="form-control" id="mobile-number" placeholder="Mobile">
+                        <input type="text" class="form-control" id="mobile-number" placeholder="Mobile" readonly>
                     </div>
                     <input type="submit" class="btn btn-primary " id="phone-save-btn" value="Save">
                 </div>
@@ -290,23 +291,38 @@
     </div>
     <div class="container col-sm-8 " id="manage-addresses-bar">
         <div class="bg-white my-3 h-100">
-            <div>
-                <div class="bg-white p-4 font-weight-bolder" >Manage Addresses</div>
+            <div id="message-address" class="text-success"></div>
+            <div >
+                <h5 class="bg-white p-4 font-weight-bolder m-0" >Manage Addresses</h5>
             </div>
             <div class="border mx-3 p-3 text-primary rounded setting" id="add-address-btn">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 <span>ADD A NEW ADDRESS</span>
             </div>
-            <div id="add-address">
+            <div id="add-address" class="px-3">
+                <span id="address-id"></span>
                 <form action="#">
-                    <div class="d-inline-flex">
+                    <div class="text-primary p-3 font-weight-bold" id="address-heading" >Add New Address</div>
+                    <div class="d-inline-flex p-2">
                         <div class="form-group pl-3 mb-0">
-                            <input type="text" class="form-control" id="first-name" placeholder="First Name">
+                            <input type="text" class="form-control" id="street" placeholder="Area and Street">
                         </div>
                         <div class="form-group px-3 mb-0 ">
-                            <input type="text" class="form-control " id="last-name" placeholder="Last Name">
+                            <input type="text" class="form-control " id="city" placeholder="City">
                         </div>
-                        <input type="submit" class="btn btn-primary " id="name-save-btn" value="Save">
+                    </div>
+                    <div class="d-inline-flex p-2 ">
+                        <div class="form-group pl-3 mb-0">
+                            <input type="text" class="form-control" id="pincode" placeholder="Pincode">
+                        </div>
+                        <div class="form-group px-3 mb-0 ">
+                            <input type="text" class="form-control " id="state" placeholder="State">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="d-inline-flex px-4 py-2 w-50">
+                        <input type="submit" class="btn btn-primary px-3 font-weight-bold" id="address-save-btn" value="Save">
+                        <a href="#" id="hide-add-address" class="text-primary font-weight-bold ml-4 pt-2" style="text-decoration: none"> Cancel </a>
                     </div>
 
                 </form>
@@ -318,5 +334,6 @@
 
     </div>
 </div>
+
 </body>
 </html>

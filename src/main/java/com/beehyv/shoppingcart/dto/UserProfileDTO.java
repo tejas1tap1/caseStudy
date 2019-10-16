@@ -50,4 +50,15 @@ public class UserProfileDTO {
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
     }
+
+    @Override
+    public String toString() {
+        return "UserProfileDTO{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", addresses=" + addresses +
+                '}';
+    }
 }

@@ -5,10 +5,13 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
-    overflow-y:hidden;
+    /*overflow-y:hidden;*/
 }
 #body{
     height: 683px;
+}
+#message{
+
 }
 
 #left-bar {
@@ -19,7 +22,7 @@ html,body
 #personal-info-bar {
     padding-right: 12%;
     background-color: #e6e6e6;
-    display: none;
+
 }
 #setting-list{
     list-style-type: none;
@@ -37,10 +40,11 @@ html,body
 #manage-addresses-bar{
     padding-right: 12%;
     background-color: #e6e6e6;
+    display: none;
 }
 #addresses{
     display:flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     width: 80%;
     margin-right: auto;
     margin-left: auto;
@@ -48,8 +52,43 @@ html,body
 
 }
 .address{
+    display:block;
     background-color: #f1f1f1;
     margin: 10px;
     padding: 20px;
-    font-size: 30px;
+    font-size: 1em;
+}
+#add-address{
+    display: none;
+}
+#name-save-btn,#email-save-btn,#phone-save-btn{
+    display: none;
+}
+.address-option{
+    cursor: pointer;
+   float: right;
+}
+.address-option-btn{
+    float: right;
+}
+.address-option:hover .address-options{
+    display: block;
+}
+.address-option:hover .address-option-btn{
+    display: none;
+}
+.address-options{
+    display: none;
+}
+.delete-address:hover{
+    color: red;
+}
+.edit-address:hover{
+    color: purple;
+}
+.edit:hover{
+    cursor: pointer;
+}
+#address-id{
+    display: none;
 }

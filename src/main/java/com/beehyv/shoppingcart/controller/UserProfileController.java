@@ -25,8 +25,9 @@ public class UserProfileController {
 
     
    @PutMapping("/user-profile/update")
-   public ResponseEntity<?> updateProfile(UserProfileDTO userProfileDTO)
+   public ResponseEntity<?> updateProfile(@RequestBody UserProfileDTO userProfileDTO)
    {
+       System.out.println(userProfileDTO);
 	return userProfileServices.updateProfile(UserProfileMapper.INSTANCE.toUserProfile(userProfileDTO));
    }
 }

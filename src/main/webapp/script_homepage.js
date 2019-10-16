@@ -35,7 +35,6 @@ function getProductByCategory(category) {
 function loadUsername() {
     if($.cookie('username')!='' && $.cookie('username')!=undefined)
     {
-        console.log($.cookie('username'));
         document.getElementById("user-name").innerHTML=$.cookie('username');
         document.getElementById("sign").style.display = "none";
         document.getElementById("log").style.display = "none";
@@ -46,8 +45,9 @@ function loadUsername() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("user-name").innerHTML=this.responseText;
-            $.cookie('username',this.responseText);
+            var name=this.responseText.split(" ");
+            document.getElementById("user-name").innerHTML=name[0];
+            $.cookie('username',name[0]);
             if (this.responseText!="") {
                 document.getElementById("sign").style.display = "none";
                 document.getElementById("log").style.display = "none";
@@ -96,6 +96,7 @@ jQuery(document).ready(function ($) {
 function logout() {
     $.removeCookie('username');
     $.removeCookie('userId');
+    $.removeCookie('user');
     window.location.href = "/logout";
 
 }
