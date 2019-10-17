@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style_profile.css">
     <link rel="stylesheet" type="text/css" href="style_homepage.css">
+    <link rel="stylesheet" type="text/css" href="style_cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -12,17 +13,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    <script src="script_profile.js"></script>
+    <script src="script_cart.js"></script>
     <script src="script_homepage.js"></script>
-<!--    <script>-->
-<!--        $(function(){-->
-<!--            $("#header").load("homepage.html");-->
-<!--        });-->
-<!--    </script>-->
-    <title>Profile</title>
-
+    <title>
+        Cart
+    </title>
 </head>
-<body onload="getDetails(),loadUsername()">
+
+<body class="" onload="loadUsername(),loadCartItems()">
 <header class="container-flow sticky-top">
     <nav class="navbar navbar-expand-sm  bg-dark navbar-dark p-0 sticky-top">
         <a class="navbar-brand text-center ml-4 mr-5 px-2 " id="demo" href="/home">Shopping Cart</a>
@@ -43,7 +41,7 @@
             <ul class="navbar-nav text-center ml-auto ">
 
 
-                <li class="nav-item py-3 pr-2" id="cart" ><a href="/cart" title="" class="nav-link" style="cursor: pointer">
+                <li class="nav-item py-3 pr-2" id="cart" ><a href="" title="" class="nav-link" style="cursor: pointer">
                     <i class="fa fa-shopping-cart pr-2" aria-hidden="true"></i>Cart</a></li>
                 <li class="nav-item py-3 pr-2" id="sign"><a href="" title="" class="nav-link" data-toggle="modal"
                                                             data-target="#signup"><i class="fa fa-user pr-2"
@@ -221,119 +219,51 @@
         </button>
     </div>
 </div>
-<!--<div id="header"></div>-->
 <div class="container-flow row" id="body">
-    <div class="container col-sm-4" id="left-bar">
-        <div class="bg-white my-3 shadow p-2">
-            <img class="mr-3" height="50px" width="50px" src="profile.svg">
-            Hello <span id="display-name"></span>
-        </div>
-        <div class="bg-white shadow ">
-            <div class="border border-bottom-1 p-3">
-                <div class="d-inline setting">
-                    <i class="fa fa-server mr-2 text-primary" aria-hidden="true"></i>
-                    <span class="text-secondary font-weight-bold">MY ORDERS</span> <i class="fa fa-chevron-right ml-4 text-secondary" aria-hidden="true"></i>
-                </div>
-            </div>
-            <div class="border border-bottom-1 p-3">
-                <i class="fa fa-user mr-2 text-primary" aria-hidden="true"></i> <span class="text-secondary font-weight-bold">ACCOUNT SETTINGS</span>
-                <ul id="setting-list">
-                    <li id="personal-info-btn" class="setting">Personal Info</li>
-                    <li id="manage-addresses-btn" class="setting">Manage Address</li>
-                </ul>
-            </div>
-            <div class="border border-bottom-1 p-3">
-                <div class="d-inline setting" onclick="logout()"><i class="fa fa-power-off mr-2 text-primary" aria-hidden="true"></i> <span class="text-secondary font-weight-bold">LOGOUT</span></div>
-            </div>
-        </div>
-    </div>
-    <div class="container col-sm-8" id="personal-info-bar">
+    <div class="container col-sm-8" id="left-bar">
         <div class="bg-white mt-3" style="height: 97%">
             <div id="message" class="text-success"></div>
-        <div>
-            <div class="bg-white p-4 font-weight-bolder" >Personal Information <span id="edit-personal-info" class="text-primary ml-3 small edit">Edit</span></div>
-            <form action="#">
-                <div class="d-inline-flex">
-                    <div class="form-group pl-3 mb-0">
-                    <input type="text" class="form-control" id="first-name" placeholder="First Name" readonly>
+            <div class="border border-bottom-1 p-3 d-flex justify-content-between">
+                <h5 class="font-weight-bold d-inline mb-0 pt-2">My Cart (<span class="no-of-cartItems"></span>)</h5>
+                <div class="d-flex">
+                    <span class="pt-2 pr-3"><i class="fa fa-map-marker text-primary pr-2" aria-hidden="true"></i>Deliver to</span>
+                    <div class="form-group mb-0" id="select-address">
+                        <select class="form-control" id="">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
                     </div>
-                    <div class="form-group px-3 mb-0 ">
-                        <input type="text" class="form-control " id="last-name" placeholder="Last Name" readonly>
-                    </div>
-                    <input type="submit"  class="btn btn-primary " id="name-save-btn" value="Save">
                 </div>
-
-            </form>
-        </div>
-        <div class="mt-5">
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span id="edit-email" class="text-primary ml-3 small edit">Edit</span> <span class="text-primary ml-3 small">Change Password</span></div>
-            <form action="#">
-                <div class="d-inline-flex">
-                <div class="form-group pl-3 mb-0 w-75 px-3">
-                    <input type="text" class="form-control" id="emailId" placeholder="Email" readonly>
-                </div>
-                <input type="submit" class="btn btn-primary " id="email-save-btn" value="Save">
-                </div>
-            </form>
-        </div>
-        <div class="mt-5">
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Mobile Number <span id="edit-mobile-number" class="text-primary ml-3 small edit">Edit</span></div>
-            <form action="#">
-                <div class="d-inline-flex">
-                    <div class="form-group pl-3 mb-0 w-75 px-3">
-                        <input type="text" class="form-control" id="mobile-number" placeholder="Mobile" readonly>
-                    </div>
-                    <input type="submit" class="btn btn-primary " id="phone-save-btn" value="Save">
-                </div>
-            </form>
-        </div>
+            </div>
+            <div id="cart-items">
+            </div>
+            <div class="border py-2 px-4 d-flex justify-content-end">
+                <button type="button" id="place-order-btn">PLACE ORDER</button>
+            </div>
         </div>
     </div>
-    <div class="container col-sm-8 " id="manage-addresses-bar">
-        <div class="bg-white mt-3" style="height: 97%">
-            <div id="message-address" class="text-success"></div>
-            <div >
-                <h5 class="bg-white p-4 font-weight-bolder m-0" >Manage Addresses</h5>
+    <div class="container col-sm-4" id="right-bar">
+        <div class="bg-white shadow mt-3">
+            <div class="border border-bottom-1 p-3">
+                <span class="text-secondary font-weight-bold">PRICE DETAILS</span>
             </div>
-            <div class="border mx-3 p-3 text-primary rounded setting" id="add-address-btn">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>ADD A NEW ADDRESS</span>
+            <div class="border border-bottom-1 p-3">
+                 <div>
+                     Price(<span class="no-of-cartItems">n</span> items)<span  class="money total-price">$</span>
+                 </div>
+                <div>
+                    Delivery<span class="money">₹ 0</span>
+                </div>
             </div>
-            <div id="add-address" class="px-3">
-                <span id="address-id"></span>
-                <form action="#">
-                    <div class="text-primary p-3 font-weight-bold" id="address-heading" >Add New Address</div>
-                    <div class="d-inline-flex p-2">
-                        <div class="form-group pl-3 mb-0">
-                            <input type="text" class="form-control" id="street" placeholder="Area and Street">
-                        </div>
-                        <div class="form-group px-3 mb-0 ">
-                            <input type="text" class="form-control " id="city" placeholder="City">
-                        </div>
-                    </div>
-                    <div class="d-inline-flex p-2 ">
-                        <div class="form-group pl-3 mb-0">
-                            <input type="text" class="form-control" id="pincode" placeholder="Pincode">
-                        </div>
-                        <div class="form-group px-3 mb-0 ">
-                            <input type="text" class="form-control " id="state" placeholder="State">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="d-inline-flex px-4 py-2 w-50">
-                        <input type="submit" class="btn btn-primary px-3 font-weight-bold" id="address-save-btn" value="Save">
-                        <a href="#" id="hide-add-address" class="text-primary font-weight-bold ml-4 pt-2" style="text-decoration: none"> Cancel </a>
-                    </div>
-
-                </form>
-            </div>
-            <div id="addresses">
-
+            <div class="border border-bottom-1 p-3 font-weight-bold">
+                Total Payable <span class="money total-price">$</span>
             </div>
         </div>
-
     </div>
 </div>
 
 </body>
+
 </html>

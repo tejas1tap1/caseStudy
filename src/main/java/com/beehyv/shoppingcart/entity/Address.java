@@ -41,10 +41,19 @@ public void setPincode(long pincode) {
 	this.pincode = pincode;
 }
 
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
+
 	@Override
 	public String toString() {
 		return "Address{" +
-				"street='" + street + '\'' +
+				"addressId=" + addressId +
+				", street='" + street + '\'' +
 				", city='" + city + '\'' +
 				", state='" + state + '\'' +
 				", pincode=" + pincode +

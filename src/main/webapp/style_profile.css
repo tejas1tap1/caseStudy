@@ -23,6 +23,7 @@ html,body
     padding-right: 12%;
     background-color: #e6e6e6;
 
+
 }
 #setting-list{
     list-style-type: none;
@@ -41,6 +42,7 @@ html,body
     padding-right: 12%;
     background-color: #e6e6e6;
     display: none;
+
 }
 #addresses{
     display:flex;

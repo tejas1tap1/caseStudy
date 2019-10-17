@@ -61,11 +61,11 @@ public class CartServices {
         CartItem cartItem = cartItemRepo.findByProductAndCart(product, cart);
 
         if (cartItem == null) {
-           return "product with the specified productId is not in the cart";
+           return "Product with the specified productId is not in the cart";
 
         } else {
             cartItemRepo.delete(cartItem);
-            return cartItem.getProduct().getName()+" removed from cart";
+            return cartItem.getProduct().getName()+" Removed from cart";
         }
     }
     public CartItem changeQuantityOfProduct(long userId,long productId,long quantity)

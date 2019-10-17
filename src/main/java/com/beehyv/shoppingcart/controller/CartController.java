@@ -35,7 +35,7 @@ public class CartController {
         return cartServices.removeFromCart(userId,productId);
     }
     @PutMapping("/cart/{userId}/changeQuantity/{productId}")
-    public CartItemDTO changeQuantityOfProduct(@PathVariable("userId") long userId,@PathVariable("productId")long productId,long quantity)
+    public CartItemDTO changeQuantityOfProduct(@PathVariable("userId") long userId,@PathVariable("productId")long productId,@RequestBody long quantity)
     {
         return  CartItemMapper.INSTANCE.cartItemToCartItemDTO(cartServices.changeQuantityOfProduct(userId, productId, quantity));
     }

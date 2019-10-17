@@ -19,8 +19,9 @@ function getProductByCategory(category) {
                             "<p>"+products[i].price+"</p>"+
                             "<p>"+products[i].details+"</p>"+
                             "<p>"+products[i].categoryDTO.name+"</p>"+
-                            "<p>"+products[i].subCategoryDTO.name+"</p></div>";
-
+                            "<p>"+products[i].subCategoryDTO.name+"</p>"+
+                            "<button type=\"button\" onclick=\"addToCart(this)\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
+                         "ADD TO CART</button></div>";
             }
             
             $("#products").html(txt);
@@ -98,5 +99,39 @@ function logout() {
     $.removeCookie('userId');
     $.removeCookie('user');
     window.location.href = "/logout";
+
+}
+function addToCart(Obj) {
+    productId=Obj.parentNode.children[0].innerHTML;
+    userId=getUserId();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        window.location="/cart";
+        }
+    };
+
+    var u="/cart/"+userId+"/add/"+productId;
+    xhttp.open("POST", u, true);
+    xhttp.send();
+
+}
+function getUserId() {
+    var userId;
+    if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
+    {
+        return $.cookie('userId');
+    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            userId=JSON.parse(this.responseText);
+            $.cookie('userId',userId);
+
+        }
+    };
+    xhttp.open("GET", "/user-id", false);
+    xhttp.send();
+    return userId;
 
 }

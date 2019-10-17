@@ -19,5 +19,10 @@ public class PageController {
 	{
 		return "profile.html";
 	}
+	@RequestMapping("/cart")
+	public String cart()
+	{
+		return "cart.html";
+	}
 }
 

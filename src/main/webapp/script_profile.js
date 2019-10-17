@@ -42,7 +42,6 @@ function getDetails() {
 }
 function deleteAddress(Obj)
 {
-
     var id=Obj.children[0].innerHTML;
     var user = JSON.parse($.cookie('user'));
     user.addresses.splice(id,1);
