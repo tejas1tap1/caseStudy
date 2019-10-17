@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style_admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <script src="script_admin.js"></script>
+    <title>
+        HomePage
+    </title>
+</head>
+
+<body class="" onload="loadUsername()">
+<header class="container-flow sticky-top">
+    <nav class="navbar navbar-expand-sm  bg-dark navbar-dark p-0 sticky-top">
+        <a class="navbar-brand text-center ml-4 mr-5 px-2 " id="demo" href="/home">Shopping Cart</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="form-inline col-md-8 " action="/action_page.php">
+            <div class="input-group w-75 mx-auto">
+                <input class="form-control" type="text" placeholder="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-light" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </form>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+            <ul class="navbar-nav text-center ml-auto ">
+
+
+                <li class="nav-item py-3 pr-2" id="cart" ><a href="/cart" title="" class="nav-link" style="cursor: pointer">
+                    <i class="fa fa-shopping-cart pr-2" aria-hidden="true"></i>Cart</a></li>
+
+                <li class="nav-item dropdown py-3 pr-2" id="userS">
+                    <a href="" title="" class="nav-link dropbtn"><i class="fa fa-user pr-2"
+                                                                    aria-hidden="true"></i><span
+                            id="user-name"></span><i class="fa fa-caret-down pl-1" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="nav-item  py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
+                        class="fa fa-sign-in pr-2" aria-hidden="true"></i>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-flow border border-bottom-2" id="category">
+        <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
+            <div class="d-flex w-50 mx-auto text-center">
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics')">Electronics</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('men')">Men</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('women')">Women</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture')">Home & Furniture</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+                <div class="flex-fill dropdown">
+                    <span class="dropbtn p-2" onclick="getProductByCategory('books')">Books</span>
+                    <div class="dropdown-content">
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Link 1</a>
+                        <a class="item" href="#">Link 2</a>
+                        <a class="item" href="#">Link 3</a>
+                        <h5 class="header">Dropdown header</h5>
+                        <a class="item" href="#">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<div id="products"></div>
+
+
+</body>
+
+</html>
