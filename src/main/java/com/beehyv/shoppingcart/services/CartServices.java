@@ -4,6 +4,7 @@ import com.beehyv.shoppingcart.entity.Cart;
 import com.beehyv.shoppingcart.entity.CartItem;
 
 import com.beehyv.shoppingcart.entity.Product;
+import com.beehyv.shoppingcart.entity.UserProfile;
 import com.beehyv.shoppingcart.repo.CartItemRepo;
 import com.beehyv.shoppingcart.repo.CartRepo;
 import com.beehyv.shoppingcart.repo.ProductRepo;
@@ -26,8 +27,9 @@ public class CartServices {
     ProductRepo productRepo;
 
     public List<CartItem> getAllCartItems(long userId) {
-
-        return cartRepo.findCartByUserProfile(userProfileRepo.findByUserId(userId)).getCartItems();
+        Cart cart=cartRepo.findCartByUserProfile(userProfileRepo.findByUserId(userId));
+        if(cart==null)return null;
+        else return cart.getCartItems();
 
     }
 
@@ -39,7 +41,16 @@ public class CartServices {
     public CartItem addToCart(long userId, long productId) {
 
         Product product = productRepo.findByProductId(productId);
-        Cart cart = cartRepo.findCartByUserProfile(userProfileRepo.findByUserId(userId));
+        UserProfile userProfile=userProfileRepo.findByUserId(userId);
+        Cart cart = cartRepo.findCartByUserProfile(userProfile);
+        if(cart==null)
+        {
+            Cart cartNew=new Cart();
+            cartNew.setUserProfile(userProfile);
+            cartRepo.save(cartNew);
+            cart=cartNew;
+        }
+
         CartItem cartItem=new CartItem();
         if (cartItemRepo.findByProductAndCart(product, cart) == null) {
             cartItem.setProduct(product);

@@ -75,6 +75,9 @@ function editAddress(Obj)
 
 }
 jQuery(document).ready(function ($){
+    $("#get-orders").click(function () {
+        window.location="/orderHistory";
+    })
     $("#add-address-btn").click(function(){
         console.log("here");
         $("#address-heading").text("Add New Address");

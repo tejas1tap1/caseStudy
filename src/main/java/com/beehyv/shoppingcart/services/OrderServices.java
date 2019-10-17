@@ -2,6 +2,7 @@ package com.beehyv.shoppingcart.services;
 
 import com.beehyv.shoppingcart.entity.*;
 import com.beehyv.shoppingcart.repo.AddressRepo;
+import com.beehyv.shoppingcart.repo.CartRepo;
 import com.beehyv.shoppingcart.repo.OrdersRepo;
 import com.beehyv.shoppingcart.repo.UserProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class OrderServices {
     private CartServices cartServices;
     @Autowired
     private AddressRepo addressRepo;
+    @Autowired
+    private CartRepo cartRepo;
     public List<Orders> orderHistory(long userId) {
         System.out.println(ordersRepo.findByUserProfile(userProfileRepo.findByUserId(userId)));
         return ordersRepo.findByUserProfile(userProfileRepo.findByUserId(userId));
@@ -30,6 +33,7 @@ public class OrderServices {
         Orders orders =new Orders();
         orders.setAddress(address);
         orders.setUserProfile(userProfile);
+        orders.setOrderStatus("Your Order is on the way");
         orders=ordersRepo.save(orders);
         int n=cartItems.size();
         List<OrderItem> orderItems=new ArrayList<>();
@@ -41,6 +45,7 @@ public class OrderServices {
             orderItem.setOrders(orders);
             orderItems.add(orderItem);
         }
+        cartRepo.delete(cartRepo.findCartByUserProfile(userProfile));
         orders.setOrderItems(orderItems);
         return ordersRepo.save(orders);
     }

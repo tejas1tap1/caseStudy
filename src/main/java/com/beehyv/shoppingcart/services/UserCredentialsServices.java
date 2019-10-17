@@ -45,9 +45,6 @@ public class UserCredentialsServices {
             userCredentials.setRole("USER");
             userCredentialsRepo.save(userCredentials);
             Long userId=userCredentialsRepo.findByEmail(userCredentials.getEmail()).getUserProfile().getUserId();
-            Cart cart =new Cart();
-            cart.setUserProfile(userProfileRepo.findByUserId(userId));
-            cartRepo.save(cart);
             return ResponseEntity.ok(userId);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failure");
