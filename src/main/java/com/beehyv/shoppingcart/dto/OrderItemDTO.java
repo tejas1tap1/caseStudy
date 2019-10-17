@@ -4,7 +4,7 @@ import com.beehyv.shoppingcart.entity.Product;
 
 public class OrderItemDTO {
     private long OrderItemId;
-    private Product product;
+    private ProductDTO productDTO;
     private long quantity;
 
     public long getOrderItemId() {
@@ -15,12 +15,12 @@ public class OrderItemDTO {
         OrderItemId = orderItemId;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductDTO getProductDTO() {
+        return productDTO;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductDTO(ProductDTO productDTO) {
+        this.productDTO = productDTO;
     }
 
     public long getQuantity() {
@@ -29,5 +29,14 @@ public class OrderItemDTO {
 
     public void setQuantity(long quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItemDTO{" +
+                "OrderItemId=" + OrderItemId +
+                ", productDTO=" + productDTO +
+                ", quantity=" + quantity +
+                '}';
     }
 }

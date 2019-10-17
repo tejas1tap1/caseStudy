@@ -1,5 +1,6 @@
 package com.beehyv.shoppingcart.dto;
 
+import com.beehyv.shoppingcart.entity.Address;
 import com.beehyv.shoppingcart.entity.OrderItem;
 
 import java.util.List;
@@ -8,6 +9,7 @@ public class OrdersDTO {
     private long orderId;
     private List<OrderItemDTO> orderItemDTOS;
     private String orderStatus;
+    private Address address;
 
     public long getOrderId() {
         return orderId;
@@ -17,11 +19,11 @@ public class OrdersDTO {
         this.orderId = orderId;
     }
 
-    public List<OrderItemDTO> getOrderItem() {
+    public List<OrderItemDTO> getOrderItemDTOS() {
         return orderItemDTOS;
     }
 
-    public void setOrderItem(List<OrderItemDTO> orderItemDTOS) {
+    public void setOrderItemDTOS(List<OrderItemDTO> orderItemDTOS) {
         this.orderItemDTOS = orderItemDTOS;
     }
 
@@ -31,5 +33,23 @@ public class OrdersDTO {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "OrdersDTO{" +
+                "orderId=" + orderId +
+                ", orderItemDTOS=" + orderItemDTOS +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", address=" + address +
+                '}';
     }
 }

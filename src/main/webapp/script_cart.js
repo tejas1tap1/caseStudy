@@ -10,6 +10,17 @@ function incQuantity(Obj) {
     Obj.parentNode.children[1].value=q;
     changeQuantity(Obj.parentNode.children[1]);
 }
+function loadAddresses() {
+   var user = JSON.parse($.cookie('user'));
+   var txt="";
+   var addresses=user.addresses;
+   for(var i=0;i<user.addresses.length;i++)
+   {
+       txt+="<option value='"+addresses[i].addressId+"'>"+addresses[i].street+", "+
+           addresses[i].city+", "+addresses[i].pincode+", "+addresses[i].state+"</option>";
+   }
+   $("#addresses").html(txt);
+}
 function loadCartItems() {
     getUserId();
     var userId=$.cookie('userId');
@@ -69,8 +80,6 @@ function removeProduct(Obj) {
 }
 function changeQuantity(Obj) {
     var q=Obj.value;
-    console.log("here");
-    console.log(q);
     var productId=Obj.parentNode.parentNode.parentNode.children[1].children[0].innerHTML;
     var userId=$.cookie('userId');
     var xhttp = new XMLHttpRequest();
@@ -83,4 +92,18 @@ function changeQuantity(Obj) {
     xhttp.open("PUT",u, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(q));
+}
+function placeOrder() {
+    var addressId=$("select.address-option").children("option:selected").val();
+    var userId=$.cookie('userId');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           window.location="/orderHistory"
+        }
+    };
+    var u= "/order/"+userId+"/createOrder";
+    xhttp.open("POST",u, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(addressId));
 }

@@ -7,9 +7,7 @@ import com.beehyv.shoppingcart.entity.Orders;
 import com.beehyv.shoppingcart.mapper.OrdersMapper;
 import com.beehyv.shoppingcart.services.OrderServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,12 +17,13 @@ public class OrderController {
     private OrderServices orderServices;
 
     @GetMapping("/order/{userId}/getOrders")
-    public List<Orders> orderHistory(@PathVariable("userId") long userId) {
-        return orderServices.orderHistory(userId);
+    public List<OrdersDTO> orderHistory(@PathVariable("userId") long userId) {
+        System.out.println(OrdersMapper.INSTANCE.toOrdersDTOS(orderServices.orderHistory(userId)));
+        return OrdersMapper.INSTANCE.toOrdersDTOS(orderServices.orderHistory(userId));
     }
 
-    @GetMapping("/order/{userId}/createOrder")
-    public OrdersDTO createOrder(@PathVariable("userId") long userId, List<CartItem> cartItems) {
-        return OrdersMapper.INSTANCE.toOrdersDTO(orderServices.createOrder(userId, cartItems));
+    @PostMapping("/order/{userId}/createOrder")
+    public OrdersDTO createOrder(@PathVariable("userId") long userId,@RequestBody long addressId) {
+        return OrdersMapper.INSTANCE.toOrdersDTO(orderServices.createOrder(userId,addressId));
     }
 }

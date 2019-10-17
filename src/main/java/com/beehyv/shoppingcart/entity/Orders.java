@@ -11,14 +11,15 @@ public class Orders {
     @Column(name = "orderId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
-    @OneToMany(mappedBy = "orders")
-    private List<OrderItem> orderItem;
+    @OneToMany(mappedBy = "orders",cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
     @Column
     private String orderStatus;
 	@ManyToOne
 	UserProfile userProfile;
-
-    public UserProfile getUserProfile() {
+	@ManyToOne
+    Address address;
+	public UserProfile getUserProfile() {
         return userProfile;
     }
 
@@ -35,12 +36,12 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public List<OrderItem> getOrderItem() {
-        return orderItem;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setOrderItem(List<OrderItem> orderItem) {
-        this.orderItem = orderItem;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public String getOrderStatus() {
@@ -51,13 +52,22 @@ public class Orders {
         this.orderStatus = orderStatus;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
-        return "Order{" +
+        return "Orders{" +
                 "orderId=" + orderId +
-                ", orderItem=" + orderItem +
+                ", orderItems=" + orderItems +
                 ", orderStatus='" + orderStatus + '\'' +
                 ", userProfile=" + userProfile +
+                ", address=" + address +
                 '}';
     }
 }

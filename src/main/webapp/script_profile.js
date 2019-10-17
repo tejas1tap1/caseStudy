@@ -51,6 +51,7 @@ function deleteAddress(Obj)
             $("#message-address").text("Deleted Successfully");
             $("#message-address").fadeIn();
             $("#message-address").fadeOut(3000);
+
             //Obj.parentNode.parentNode.parentNode.parentNode.removeChild(Obj.parentNode.parentNode.parentNode);
             getDetails();
         }
@@ -75,6 +76,7 @@ function editAddress(Obj)
 }
 jQuery(document).ready(function ($){
     $("#add-address-btn").click(function(){
+        console.log("here");
         $("#address-heading").text("Add New Address");
         $("#address-id").text('');
         $("#street").attr('value','');
@@ -83,7 +85,6 @@ jQuery(document).ready(function ($){
         $("#state").attr('value','');
         $("#add-address").show();
         $("#add-address-btn").hide();
-
     });
     $("#hide-add-address").click(function () {
         $("#add-address").hide();

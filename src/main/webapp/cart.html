@@ -20,7 +20,7 @@
     </title>
 </head>
 
-<body class="" onload="loadUsername(),loadCartItems()">
+<body class="" onload="loadUsername(),loadCartItems(),loadAddresses()">
 <header class="container-flow sticky-top">
     <nav class="navbar navbar-expand-sm  bg-dark navbar-dark p-0 sticky-top">
         <a class="navbar-brand text-center ml-4 mr-5 px-2 " id="demo" href="/home">Shopping Cart</a>
@@ -228,11 +228,8 @@
                 <div class="d-flex">
                     <span class="pt-2 pr-3"><i class="fa fa-map-marker text-primary pr-2" aria-hidden="true"></i>Deliver to</span>
                     <div class="form-group mb-0" id="select-address">
-                        <select class="form-control" id="">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                        <select class="form-control address-option" id="addresses" >
+                            <option name="category">No address set</option>
                         </select>
                     </div>
                 </div>
@@ -240,7 +237,7 @@
             <div id="cart-items">
             </div>
             <div class="border py-2 px-4 d-flex justify-content-end">
-                <button type="button" id="place-order-btn">PLACE ORDER</button>
+                <button type="button" id="place-order-btn" onclick="placeOrder()">PLACE ORDER</button>
             </div>
         </div>
     </div>

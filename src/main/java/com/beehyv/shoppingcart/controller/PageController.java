@@ -24,5 +24,10 @@ public class PageController {
 	{
 		return "cart.html";
 	}
+	@RequestMapping("/orderHistory")
+	public String orderHistory()
+	{
+		return "order.html";
+	}
 }
 
