@@ -18,13 +18,13 @@ public class Product {
 	   @Column(name="name")
 	   private String name;
 	   @Column
-	   private long price;
+	   private double price;
 	   @Column
 	   private String details;
 	   @ManyToOne(cascade=CascadeType.ALL)
 	   private Category category;
-	   @ManyToOne(cascade=CascadeType.ALL)
-	   private SubCategory subCategory;
+	   @ManyToMany(cascade=CascadeType.ALL)
+	   private List<SubCategory> subCategories;
 
 	public long getProductId() {
 		return productId;
@@ -42,11 +42,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public long getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -66,12 +66,12 @@ public class Product {
 		this.category = category;
 	}
 
-	public SubCategory getSubCategory() {
-		return subCategory;
+	public List<SubCategory> getSubCategories() {
+		return subCategories;
 	}
 
-	public void setSubCategory(SubCategory subCategory) {
-		this.subCategory = subCategory;
+	public void setSubCategories(List<SubCategory> subCategories) {
+		this.subCategories = subCategories;
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class Product {
 				", price=" + price +
 				", details='" + details + '\'' +
 				", category=" + category +
-				", subCategory=" + subCategory +
+				", subCategories=" + subCategories +
 				'}';
 	}
 }

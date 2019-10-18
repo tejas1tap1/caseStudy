@@ -72,20 +72,18 @@ function editAddress(Obj)
     $("#state").attr('value',user.addresses[id].state);
     $("#address-id").text(id);
     $("#add-address").show();
-
 }
 jQuery(document).ready(function ($){
     $("#get-orders").click(function () {
         window.location="/orderHistory";
     })
     $("#add-address-btn").click(function(){
-        console.log("here");
         $("#address-heading").text("Add New Address");
         $("#address-id").text('');
-        $("#street").attr('value','');
-        $("#city").attr('value','');
-        $("#pincode").attr('value','');
-        $("#state").attr('value','');
+        $("#street").val("");
+        $("#city").val("");
+        $("#pincode").val("");
+        $("#state").val("");
         $("#add-address").show();
         $("#add-address-btn").hide();
     });

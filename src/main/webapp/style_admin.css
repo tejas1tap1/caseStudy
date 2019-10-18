@@ -8,7 +8,18 @@
 #userS{
     display: none;
 }
-
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#add-product{
+    display: none;
+}
+.modify-product-btn{
+    font-size: .6em;
+    padding: 10px 10px;
+}
 .arrow-up {
     position: absolute;
     display: none;

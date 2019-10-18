@@ -8,10 +8,10 @@ import java.util.List;
 public class ProductDTO {
     private long productId;
     private String name;
-    private long price;
+    private double price;
     private String details;
     private CategoryDTO categoryDTO;
-    private SubCategoryDTO subCategoryDTO;
+    private List<SubCategoryDTO> subCategoryDTOS;
 
     public long getProductId() {
         return productId;
@@ -45,19 +45,31 @@ public class ProductDTO {
         this.categoryDTO = categoryDTO;
     }
 
-    public SubCategoryDTO getSubCategoryDTO() {
-        return subCategoryDTO;
+    public List<SubCategoryDTO> getSubCategoryDTOS() {
+        return subCategoryDTOS;
     }
 
-    public void setSubCategoryDTO(SubCategoryDTO subCategoryDTO) {
-        this.subCategoryDTO = subCategoryDTO;
+    public void setSubCategoryDTOS(List<SubCategoryDTO> subCategoryDTOS) {
+        this.subCategoryDTOS = subCategoryDTOS;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", details='" + details + '\'' +
+                ", categoryDTO=" + categoryDTO +
+                ", subCategoryDTOS=" + subCategoryDTOS +
+                '}';
     }
 }

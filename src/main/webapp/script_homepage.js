@@ -14,13 +14,12 @@ function getProductByCategory(category) {
             if(products.length==0)$("#products").text("No product of category "+category+" available")
             for(var i=0;i<products.length;i++)
             {
-                     txt+="<div class='product'><span style='display:none'>"+products[i].productId+"</span>" +
-                            "<h>"+products[i].name+"</h><br>"+
-                            "<p>"+products[i].price+"</p>"+
-                            "<p>"+products[i].details+"</p>"+
-                            "<p>"+products[i].categoryDTO.name+"</p>"+
-                            "<p>"+products[i].subCategoryDTO.name+"</p>"+
-                            "<button type=\"button\" onclick=\"addToCart(this)\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
+                     txt+="<div class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
+                            "<div class='text-center p-2'><i class=\"fa fa-dropbox \" style=\"font-size: 7em\" aria-hidden=\"true\"></i></div>\n" +
+                            "<h5>"+products[i].name+"</h5>"+
+                            "<h6>"+products[i].categoryDTO.name+" > "+products[i].subCategoryDTOS[0].name+"</h6>"+
+                            "<h5 class='font-weight-bold'>"+products[i].price+"</h5>"+
+                            "<button type=\"button\" onclick=\"addToCart(this)\" class='add-to-cart-btn'><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
                          "ADD TO CART</button></div>";
             }
             
@@ -93,6 +92,7 @@ jQuery(document).ready(function ($) {
             alert('Booh! Wrong credentials, try again!');
         });
     });
+
 });
 function logout() {
     $.removeCookie('username');
@@ -133,5 +133,55 @@ function getUserId() {
     xhttp.open("GET", "/user-id", false);
     xhttp.send();
     return userId;
+
+}
+function searchOptions() {
+    var searchString=$("#search-string").val();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var products= JSON.parse(this.responseText);
+            var txt="";
+            for(var i=0;i<products.length && i<10;i++)
+            {
+                txt+="<a>"+products[i].name+" <span class='text-muted'>-product</span></a>";
+            }
+            $("#search-content").html(txt);
+            $("#search-content").show();
+        }
+    };
+
+    var u="/products/search/"+searchString;
+    xhttp.open("GET", u, true);
+    xhttp.send();
+}
+function searchResult() {
+    console.log("here");
+    var searchString=$("#search-string").val();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var products= JSON.parse(this.responseText);
+            var txt="";
+            if(products.length==0)$("#products").text("No product of category "+category+" available")
+            for(var i=0;i<products.length;i++)
+            {
+                txt+="<div class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
+                    "<div class='text-center p-2'><i class=\"fa fa-dropbox \" style=\"font-size: 7em\" aria-hidden=\"true\"></i></div>\n" +
+                    "<h5>"+products[i].name+"</h5>"+
+                    "<h6>"+products[i].categoryDTO.name+" > "+products[i].subCategoryDTOS[0].name+"</h6>"+
+                    "<h5 class='font-weight-bold'>"+products[i].price+"</h5>"+
+                    "<button type=\"button\" onclick=\"addToCart(this)\" class='add-to-cart-btn'><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
+                    "ADD TO CART</button></div>";
+            }
+
+            $("#products").html(txt);
+            $("#search-content").hide();
+        }
+    };
+
+    var u="/products/search/"+searchString;
+    xhttp.open("GET", u, true);
+    xhttp.send();
 
 }

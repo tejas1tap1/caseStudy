@@ -12,8 +12,6 @@ public class SubCategory {
 	   private long subCategoryId;
 	 @Column(name="name")
 	   private String name;
-	  @OneToMany
-	  List<SubCategory> subCategories;
 	 public long getSubCategoryId() {
 		return subCategoryId;
 	}
@@ -26,15 +24,6 @@ public class SubCategory {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public List<SubCategory> getSubCategories() {
-		return subCategories;
-	}
-
-	public void setSubCategories(List<SubCategory> subCategories) {
-		this.subCategories = subCategories;
-	}
-
 	@Override
 	public String toString() {
 		return "SubCategory{" +

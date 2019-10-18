@@ -29,5 +29,12 @@ public class PageController {
 	{
 		return "order.html";
 	}
+
+	@RequestMapping("/admin")
+	public String adminPage()
+	{
+		return "admin.html";
+	}
+
 }
 

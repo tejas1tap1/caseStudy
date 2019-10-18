@@ -14,7 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <script src="script_admin.js"></script>
     <title>
-        HomePage
+        AdminPage
     </title>
 </head>
 
@@ -26,7 +26,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="form-inline col-md-8 " action="/action_page.php">
+        <form class="form-inline col-md-7 " action="/action_page.php">
             <div class="input-group w-75 mx-auto">
                 <input class="form-control" type="text" placeholder="Search">
                 <div class="input-group-append">
@@ -39,13 +39,13 @@
             <ul class="navbar-nav text-center ml-auto ">
 
 
-                <li class="nav-item py-3 pr-2" id="cart" ><a href="/cart" title="" class="nav-link" style="cursor: pointer">
-                    <i class="fa fa-shopping-cart pr-2" aria-hidden="true"></i>Cart</a></li>
+                <li class="nav-item py-3 pr-2" ><a id="add-product-btn" title="" class="nav-link" style="cursor: pointer">
+                    <i class="fa fa-plus pr-2" aria-hidden="true"></i>Add Product</a></li>
 
                 <li class="nav-item dropdown py-3 pr-2" id="userS">
                     <a href="" title="" class="nav-link dropbtn"><i class="fa fa-user pr-2"
                                                                     aria-hidden="true"></i><span
-                            id="user-name"></span><i class="fa fa-caret-down pl-1" aria-hidden="true"></i>
+                            id="user-name"></span>
                     </a>
                 </li>
                 <li class="nav-item  py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
@@ -116,7 +116,44 @@
     </div>
 </header>
 <div id="products"></div>
+<div id="message" class="text-success"></div>
+<div id="add-product">
+    <span id="product-id" class="d-none"></span>
+    <form class="">
+        <div class="text-primary p-3 font-weight-bold" id="product-heading" >Add New Product</div>
+        <div class="d-inline-flex p-2">
+            <div class="form-group pl-3 mb-0">
+                <input type="text" class="form-control" id="product-name" placeholder="Name">
+            </div>
+            <div class="form-group px-3 mb-0 ">
+                <input type="number" class="form-control " id="product-price" placeholder="Price">
+            </div>
+        </div>
+        <br>
+        <div class="d-inline-flex p-2 ">
+            <div class="form-group pl-3 mb-0">
+                <textarea cols="50" rows="4" id="product-details" placeholder="Details"></textarea>
+<!--                <input type="text" class="form-control" id="product-details" placeholder="Details">-->
+            </div>
 
+        </div>
+        <br>
+        <div class="d-inline-flex p-2 ">
+            <div class="form-group pl-3 mb-0">
+                <input type="text" class="form-control" id="product-category" placeholder="Category">
+            </div>
+            <div class="form-group px-3 mb-0 ">
+                <input type="text" class="form-control " id="product-subcategory" placeholder="SubCategory">
+            </div>
+        </div>
+        <br>
+        <div class="d-inline-flex px-4 py-2 w-50">
+            <input type="submit" class="btn btn-primary px-3 font-weight-bold" id="product-save-btn" value="Save">
+            <a href="#" id="hide-add-product" class="text-primary font-weight-bold ml-4 pt-2" style="text-decoration: none"> Cancel </a>
+        </div>
+
+    </form>
+</div>
 
 </body>
 

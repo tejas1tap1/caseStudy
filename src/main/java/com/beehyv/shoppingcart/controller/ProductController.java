@@ -2,6 +2,7 @@ package com.beehyv.shoppingcart.controller;
 
 import java.util.List;
 
+import com.beehyv.shoppingcart.dto.Filters;
 import com.beehyv.shoppingcart.dto.ProductDTO;
 import com.beehyv.shoppingcart.entity.Product;
 import com.beehyv.shoppingcart.mapper.ProductMapper;
@@ -18,14 +19,13 @@ public class ProductController {
     private ProductServices productServices;
     //@PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/products/add-product")
-    public ProductDTO addProduct(ProductDTO productDTO) {
-        System.out.println(productDTO.getPrice());
-        System.out.println(ProductMapper.INSTANCE.toProduct(productDTO).getPrice());
+    public ProductDTO addProduct(@RequestBody ProductDTO productDTO) {
+        System.out.println(productDTO);
         return ProductMapper.INSTANCE.toProductDTO(productServices.addProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
     }
     //@PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/products/update")
-    public ProductDTO updateProduct(ProductDTO productDTO) {
+    public ProductDTO updateProduct(@RequestBody ProductDTO productDTO) {
         return ProductMapper.INSTANCE.toProductDTO(productServices.updateProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
     }
 
@@ -42,5 +42,10 @@ public class ProductController {
     public List<ProductDTO> getProductBySerchString(@PathVariable("searchString")String search)
     {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getProductsBySearchString(search));
+    }
+    @GetMapping("/products/search/{searchString}")
+    public List<ProductDTO> getFilteredProductByCategory(@PathVariable("category")String category, Filters filters)
+    {
+        return ProductMapper.INSTANCE.toProductDTOS(productServices.getFilteredProductsByCategory(category,filters));
     }
 }
