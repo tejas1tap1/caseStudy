@@ -7,9 +7,15 @@ import com.beehyv.shoppingcart.entity.SubCategory;
 import com.beehyv.shoppingcart.repo.CategoryRepo;
 import com.beehyv.shoppingcart.repo.ProductRepo;
 import com.beehyv.shoppingcart.repo.SubCategoryRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import javax.persistence.EntityManager;
+
+import javax.persistence.Query;
+import javax.persistence.criteria.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +28,9 @@ public class ProductServices {
     private CategoryRepo categoryRepo;
     @Autowired
     private SubCategoryRepo subCategoryRepo;
+    @Autowired
+    EntityManager entityManager;
+
     public Product addProduct(Product product) {
         System.out.println(product);
         Category category = categoryRepo.findByName(product.getCategory().getName());
@@ -70,8 +79,21 @@ public class ProductServices {
     }
     public  List<Product> getFilteredProductsByCategory(String category, Filters filters)
     {
-       List<Product> products=getProductByCategory(category);
-       return null;
+        Category category1=categoryRepo.findByName(category);
+        CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
+        CriteriaQuery<Product> criteriaQuery=criteriaBuilder.createQuery(Product.class);
+        Root<Product> root= criteriaQuery.from(Product.class);
+        Join<Product,SubCategory> subCategory=root.join("subCategories");
+        //Join<Product,Category> categoryJoin=root.join("category");
+        Predicate[] predicates = new Predicate[3];
+        predicates[0] = criteriaBuilder.between(root.get("price"),filters.getMinPrice(),filters.getMaxPrice());
+        predicates[1]= criteriaBuilder.equal(root.get("category"),category1);
+        // predicates[1]= criteriaBuilder.equal(categoryJoin.get("name"),category);
+        predicates[2] = subCategory.get("name").in(filters.getSubCategories());
+        criteriaQuery.select(root).where(predicates);
+        List<Product> products= entityManager.createQuery(criteriaQuery).getResultList();
+        System.out.println(products);
+        return products;
     }
 
 }

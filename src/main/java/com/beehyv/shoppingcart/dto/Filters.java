@@ -1,18 +1,20 @@
 package com.beehyv.shoppingcart.dto;
 
+import com.beehyv.shoppingcart.entity.SubCategory;
+
 import java.util.List;
 
 public class Filters {
-    private List<String> subCategory;
+    private List<String> subCategories;
     private Double minPrice;
     private Double maxPrice;
 
-    public List<String> getSubCategory() {
-        return subCategory;
+    public List<String> getSubCategories() {
+        return subCategories;
     }
 
-    public void setSubCategory(List<String> subCategory) {
-        this.subCategory = subCategory;
+    public void setSubCategories(List<String> subCategories) {
+        this.subCategories = subCategories;
     }
 
     public Double getMinPrice() {

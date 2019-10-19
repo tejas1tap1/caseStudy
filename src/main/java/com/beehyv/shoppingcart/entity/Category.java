@@ -13,7 +13,7 @@ public class Category {
     @NotNull(message = "Name cannot be null")
     @Column(name="name")
     private String name;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<SubCategory> subCategories;
 
     public long getCategoryId() {
