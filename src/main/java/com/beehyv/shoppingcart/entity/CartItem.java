@@ -3,6 +3,7 @@ package com.beehyv.shoppingcart.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 public class CartItem {
@@ -12,6 +13,7 @@ public class CartItem {
     private long cartItemId;
     @ManyToOne
     private Product product;
+    @Min(1)
     @Column
     private long quantity;
 

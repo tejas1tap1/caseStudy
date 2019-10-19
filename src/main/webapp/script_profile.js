@@ -1,5 +1,37 @@
 function getDetails() {
-    var userId= getUserId();
+    if( ($.cookie('user'))!='' &&  ($.cookie('user'))!=undefined)
+    {
+        var user = JSON.parse($.cookie('user'));
+        var name =user.name.split(" ");
+        document.getElementById("display-name").innerHTML=name[0];
+        document.getElementById("first-name").value=name[0];
+        document.getElementById("last-name").value=name[1];
+        document.getElementById("emailId").value=user.email;
+        document.getElementById("mobile-number").value=user.phone;
+        var addresses=user.addresses;
+        var txt="";
+        for(var i=0;i<addresses.length;i++)
+        {
+            txt+="<div class='address'><div class=\"address-option\">\n" +
+                "    <i class=\"fa fa-cog address-option-btn\" aria-hidden=\"true\"></i>\n" +
+                "    <div class='bg-white text-center address-options'>\n" +
+                "        <div class=\"edit-address border border-bottom-0\" onclick='editAddress(this)'>\n" +
+                "            Edit\n" +"<span style='display: none'>"+i+"</span>"+
+                "        </div >\n" +
+                "        <div class=\"delete-address border\" onclick='deleteAddress(this)'>\n" +
+                "            Delete\n" +"<span style='display: none'>"+i+"</span>"+
+                "        </div>\n" +
+                "    </div>\n" +
+                "</div><span style='display:none'>"+
+                addresses[i].addressId+"</span>" +
+                "<h> Address "+ (i+1) +"</h><br>"+
+                "<p>"+addresses[i].street+", "+ addresses[i].city+"</p>"+
+                "<p>"+addresses[i].state+" - "+addresses[i].pincode+"</p>"+
+                "</div>";
+        }
+        $("#addresses").html(txt);
+        return;
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -165,7 +197,7 @@ jQuery(document).ready(function ($){
                 $("#name-save-btn").hide();
                 $("#first-name").attr('readonly', true);
                 $("#last-name").attr('readonly', true);
-                $.cookie('user',user);
+                $.cookie('user',JSON.stringify(user));
                 getDetails();
             }
 
@@ -187,7 +219,7 @@ jQuery(document).ready(function ($){
                 $("#edit-email").text("Edit");
                 $("#email-save-btn").hide();
                 $("#emailId").attr('readonly', true);
-                $.cookie('user',user);
+                $.cookie('user',JSON.stringify(user));
                 getDetails();
             }
 
@@ -209,7 +241,7 @@ jQuery(document).ready(function ($){
                 $("#edit-mobile-number").text("Edit");
                 $("#phone-save-btn").hide();
                 $("#mobile-number").attr('readonly', true);
-                $.cookie('user',user);
+                $.cookie('user',JSON.stringify(user));
                 getDetails();
             }
 
@@ -244,7 +276,7 @@ jQuery(document).ready(function ($){
                 $("#message-address").fadeOut(3000);
                 $("#add-address").hide();
                 $("#add-address-btn").show();
-                $.cookie('user',user);
+                $.cookie('user',JSON.stringify(user));
                 getDetails();
             }
         };
@@ -254,22 +286,22 @@ jQuery(document).ready(function ($){
     })
 
 });
-function getUserId() {
-    var userId;
-    if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
-    {
-        return $.cookie('userId');
-    }
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            userId=JSON.parse(this.responseText);
-            $.cookie('userId',userId);
-
-        }
-    };
-    xhttp.open("GET", "/user-id", false);
-    xhttp.send();
-    return userId;
-
-}
+// function getUserId() {
+//     var userId;
+//     if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
+//     {
+//         return $.cookie('userId');
+//     }
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             userId=JSON.parse(this.responseText);
+//             $.cookie('userId',userId);
+//
+//         }
+//     };
+//     xhttp.open("GET", "/user-id", false);
+//     xhttp.send();
+//     return userId;
+//
+// }

@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
     @Autowired
     private ProductServices productServices;
-    //@PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/products/add-product")
     public ProductDTO addProduct(@RequestBody ProductDTO productDTO) {
         System.out.println(productDTO);
         return ProductMapper.INSTANCE.toProductDTO(productServices.addProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
     }
-    //@PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/products/update")
     public ProductDTO updateProduct(@RequestBody ProductDTO productDTO) {
         return ProductMapper.INSTANCE.toProductDTO(productServices.updateProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
@@ -44,9 +44,8 @@ public class ProductController {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getProductsBySearchString(search));
     }
     @GetMapping("/products/{category}/getFilteredProducts")
-    public List<ProductDTO> getFilteredProductByCategory(@PathVariable("category")String category, Filters filters)
+    public List<ProductDTO> getFilteredProductByCategory(@PathVariable("category")String category,@RequestBody Filters filters)
     {
-        System.out.println("here");
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getFilteredProductsByCategory(category,filters));
     }
 }

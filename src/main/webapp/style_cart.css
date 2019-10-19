@@ -8,7 +8,7 @@ html,body
     /*overflow-y:hidden;*/
 }
 #body{
-    height: 683px;
+    height: 88%;
 }
 
 #left-bar {
@@ -45,11 +45,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .minus-quantity{
     width: 30px;
-    background-color: white;
+    border:none;
+    background-color: #e6e6e6;
 }
 .plus-quantity{
     width: 30px;
-    background-color: white;
+    border:none;
+    background-color: #e6e6e6;
 }
 .remove-item{
     width: 80px;

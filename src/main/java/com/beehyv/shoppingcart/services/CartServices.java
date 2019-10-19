@@ -76,6 +76,7 @@ public class CartServices {
 
         } else {
             cartItemRepo.delete(cartItem);
+            if(cart.getCartItems().size()==0)cartRepo.delete(cart);
             return cartItem.getProduct().getName()+" Removed from cart";
         }
     }

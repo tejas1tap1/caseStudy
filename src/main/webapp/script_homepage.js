@@ -33,30 +33,33 @@ function getProductByCategory(category) {
 
 }
 function loadUsername() {
-    if($.cookie('username')!='' && $.cookie('username')!=undefined)
+    if( ($.cookie('user'))!='' &&  ($.cookie('user'))!=undefined)
     {
-        document.getElementById("user-name").innerHTML=$.cookie('username');
+        var user = JSON.parse($.cookie('user'));
+        var name=user.name.split(" ");
+        document.getElementById("user-name").innerHTML=name[0];
         document.getElementById("sign").style.display = "none";
         document.getElementById("log").style.display = "none";
         document.getElementById("userS").style.display = "inline-block";
         document.getElementById("logout").style.display = "inline-block";
         return;
+
     }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var name=this.responseText.split(" ");
-            document.getElementById("user-name").innerHTML=name[0];
-            $.cookie('username',name[0]);
-            if (this.responseText!="") {
-                document.getElementById("sign").style.display = "none";
-                document.getElementById("log").style.display = "none";
-                document.getElementById("userS").style.display = "inline-block";
-                document.getElementById("logout").style.display = "inline-block";
-            }
+           if(this.responseText=="") return;
+           user = JSON.parse(this.responseText)
+           var name=user.name.split(" ");
+           document.getElementById("user-name").innerHTML=name[0];
+            document.getElementById("sign").style.display = "none";
+            document.getElementById("log").style.display = "none";
+            document.getElementById("userS").style.display = "inline-block";
+            document.getElementById("logout").style.display = "inline-block";
+            $.cookie('user',this.responseText);
         }
     };
-    xhttp.open("GET", "/user-email", true);
+    xhttp.open("GET", "/current-user", true);
     xhttp.send();
 
 }
@@ -64,33 +67,31 @@ jQuery(document).ready(function ($) {
     $('#loginform').submit(function (event) {
         event.preventDefault();
         var data = 'username=' + $('#username').val() + '&password=' + btoa($('#password').val());
-        $.ajax({
-            data: data,
-            timeout: 1000,
-            type: 'POST',
-            url: '/login'
-        }).done(function(data, textStatus, jqXHR) {
-            window.location = window.location;
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert('Booh! Wrong credentials, try again!');
-        });
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                window.location=this.responseURL;
+            }
+        };
+        xhttp.open("POST", "/login", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
     });
 });
 jQuery(document).ready(function ($) {
     $('#signupform').submit(function (event) {
         event.preventDefault();
         var data = 'email=' + $('#email').val() + '&password=' + btoa($('#pwd').val()) + '&userProfileDTO.name='+ $('#name').val();
-        $.ajax({
-            data: data,
-            timeout: 1000,
-            type: 'POST',
-            url: '/add-user'
-        }).done(function(data, textStatus, jqXHR) {
-            alert("successful sign up");
-            window.location=window.location;
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert('Booh! Wrong credentials, try again!');
-        });
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("successful sign up");
+                window.location="/home";
+            }
+        };
+        xhttp.open("POST", "/add-user", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
     });
 
 });
@@ -103,7 +104,14 @@ function logout() {
 }
 function addToCart(Obj) {
     productId=Obj.parentNode.children[0].innerHTML;
-    userId=getUserId();
+    if( ($.cookie('user'))!='' &&  ($.cookie('user'))!=undefined)
+    {
+    userId=JSON.parse($.cookie('user')).userId;
+    }
+    else
+    {
+        window.location="/login";
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -116,25 +124,25 @@ function addToCart(Obj) {
     xhttp.send();
 
 }
-function getUserId() {
-    var userId;
-    if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
-    {
-        return $.cookie('userId');
-    }
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            userId=JSON.parse(this.responseText);
-            $.cookie('userId',userId);
-
-        }
-    };
-    xhttp.open("GET", "/user-id", false);
-    xhttp.send();
-    return userId;
-
-}
+// function getUserId() {
+//     var userId;
+//     if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
+//     {
+//         return $.cookie('userId');
+//     }
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             userId=JSON.parse(this.responseText);
+//             $.cookie('userId',userId);
+//
+//         }
+//     };
+//     xhttp.open("GET", "/user-id", false);
+//     xhttp.send();
+//     return userId;
+//
+// }
 function searchOptions() {
     var searchString=$("#search-string").val();
     var xhttp = new XMLHttpRequest();

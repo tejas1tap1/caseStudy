@@ -14,3 +14,9 @@ html,body
 }
 .order-total {
 }
+.ordre-id{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+}

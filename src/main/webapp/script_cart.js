@@ -1,6 +1,11 @@
 function decQuantity(Obj) {
     var q=Obj.parentNode.children[1].value;
     q--;
+    if(q<=0)
+    {
+        Obj.style.backgroundColor="white";
+        return;
+    }
     Obj.parentNode.children[1].value=q;
     changeQuantity(Obj.parentNode.children[1]);
 }
@@ -11,9 +16,10 @@ function incQuantity(Obj) {
     changeQuantity(Obj.parentNode.children[1]);
 }
 function loadAddresses() {
-   var user = JSON.parse($.cookie('user'));
+    var user = JSON.parse($.cookie('user'));
    var txt="";
    var addresses=user.addresses;
+   if(addresses.length==0)return;
    for(var i=0;i<user.addresses.length;i++)
    {
        txt+="<option value='"+addresses[i].addressId+"'>"+addresses[i].street+", "+
@@ -22,8 +28,7 @@ function loadAddresses() {
    $("#addresses").html(txt);
 }
 function loadCartItems() {
-    getUserId();
-    var userId=$.cookie('userId');
+    var userId=JSON.parse($.cookie('user')).userId;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -38,9 +43,9 @@ function loadCartItems() {
                     "                        <div class=\"p-4 d-flex flex-column text-center\">\n" +
                     "                            <i class=\"fa fa-dropbox \" style=\"font-size: 7em\" aria-hidden=\"true\"></i>\n" +
                     "                            <div class=\"d-flex\">\n" +
-                    "                                <button type=\"button\" class=\"minus-quantity rounded-circle\" onclick=\"decQuantity(this)\">-</button>\n" +
-                    "                                <input type=\"number\" class=\"quantity rounded mx-2 text-center\" onchange='changeQuantity(this)' value='"+cartItems[i].quantity+"' >\n" +
-                    "                                <button type=\"button\" class=\"plus-quantity rounded-circle\" onclick=\"incQuantity(this)\">+</button>\n" +
+                    "                                <button type=\"button\" class=\"minus-quantity rounded-circle shadow\" onclick=\"decQuantity(this)\">-</button>\n" +
+                    "                                <input type=\"number\" min='1' class=\"quantity rounded mx-2 text-center\" oninput=\"validity.valid||(value='');\" onchange='changeQuantity(this)' value='"+cartItems[i].quantity+"' >\n" +
+                    "                                <button type=\"button\" class=\"plus-quantity rounded-circle shadow\" onclick=\"incQuantity(this)\">+</button>\n" +
                     "                            </div>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"d-flex flex-column p-4\" >\n" +
@@ -58,6 +63,14 @@ function loadCartItems() {
             $(".no-of-cartItems").text(cartItems.length);
             $(".total-price").text("₹ "+totalPrice);
         }
+        var txt="";
+        if(this.status==204)
+        {
+            txt+="<div class=\"item border text-center font-weight-bold text-primary\">\n" +
+                "Cart is Empty"+
+                "  </div>";
+            $("#cart-items").html(txt);
+        }
     };
 
     var u= "/cart/"+userId+"/get-cart";
@@ -67,7 +80,7 @@ function loadCartItems() {
 }
 function removeProduct(Obj) {
     var productId=Obj.parentNode.children[0].innerHTML;
-    var userId=$.cookie('userId');
+    var userId=JSON.parse($.cookie('user')).userId;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -81,7 +94,7 @@ function removeProduct(Obj) {
 function changeQuantity(Obj) {
     var q=Obj.value;
     var productId=Obj.parentNode.parentNode.parentNode.children[1].children[0].innerHTML;
-    var userId=$.cookie('userId');
+    var userId=JSON.parse($.cookie('user')).userId;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -95,7 +108,7 @@ function changeQuantity(Obj) {
 }
 function placeOrder() {
     var addressId=$("select.address-option").children("option:selected").val();
-    var userId=$.cookie('userId');
+    var userId=JSON.parse($.cookie('user')).userId;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

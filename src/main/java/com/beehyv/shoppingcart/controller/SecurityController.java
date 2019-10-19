@@ -1,7 +1,9 @@
 package com.beehyv.shoppingcart.controller;
 
+import com.beehyv.shoppingcart.entity.UserProfile;
 import com.beehyv.shoppingcart.repo.UserProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,13 +18,13 @@ import java.security.Principal;
 public class SecurityController {
     @Autowired
     UserProfileRepo userProfileRepo;
-    @RequestMapping(value = "/user-email", method = RequestMethod.GET)
+    @RequestMapping(value = "/current-user", method = RequestMethod.GET)
     @ResponseBody
-    public String currentUserEmail() {
+    public UserProfile currentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
-            return userProfileRepo.findByEmail(currentUserName).getName();
+            return userProfileRepo.findByEmail(currentUserName);
         }
         return null;
     }

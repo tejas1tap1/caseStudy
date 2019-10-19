@@ -6,9 +6,11 @@ function logout() {
 
 }
 function loadUsername() {
-    if($.cookie('username')!='' && $.cookie('username')!=undefined)
+    if( ($.cookie('user'))!='' &&  ($.cookie('user'))!=undefined)
     {
-        document.getElementById("user-name").innerHTML=$.cookie('username');
+        var user = JSON.parse($.cookie('user'));
+        var name=user.name.split(" ");
+        document.getElementById("user-name").innerHTML=name[0];
         document.getElementById("userS").style.display = "inline-block";
         document.getElementById("logout").style.display = "inline-block";
         return;
@@ -16,18 +18,17 @@ function loadUsername() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var name=this.responseText.split(" ");
+            if(this.responseText=="") return;
+            user = JSON.parse(this.responseText)
+            var name=user.name.split(" ");
             document.getElementById("user-name").innerHTML=name[0];
-            $.cookie('username',name[0]);
-            if (this.responseText!="") {
-                document.getElementById("userS").style.display = "inline-block";
-                document.getElementById("logout").style.display = "inline-block";
-            }
+            document.getElementById("userS").style.display = "inline-block";
+            document.getElementById("logout").style.display = "inline-block";
+            $.cookie('user',this.responseText);
         }
     };
-    xhttp.open("GET", "/user-email", true);
+    xhttp.open("GET", "/current-user", true);
     xhttp.send();
-
 }
 function getProductByCategory(category) {
     $("#products").show();
@@ -77,15 +78,22 @@ jQuery(document).ready(function ($) {
     $("#product-save-btn").click(function (event) {
         event.preventDefault();
         var id=$("#product-id").text();
+        var subCategories=[];
+        subCategories.push({name:$("#product-subcategory").val()});
+        for(var i=0;i<$("#sub-categories").childElementCount-1;i++)
+        {
+            subCategory={ name: $("#sub-categories").children[i].children[0].val(),}
+            subCategories.push(subCategory);
+        }
         if(id=="") {
+
             var product = {
                 name: $("#product-name").val(),
                 price: $("#product-price").val(),
                 details: $("#product-details").val(),
                 categoryDTO:{
                     name:$("#product-category").val()},
-                subCategoryDTOS:[{
-                    name:$("#product-subcategory").val()}],
+                subCategoryDTOS:subCategories,
             };
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -109,10 +117,8 @@ jQuery(document).ready(function ($) {
                 categoryDTO: {
                     name: $("#product-category").val()
                 },
-                subCategoryDTOS: [{
-                    name: $("#product-subcategory").val()
-                }],
-            };
+                subCategoryDTOS: subCategories,
+                };
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -127,6 +133,16 @@ jQuery(document).ready(function ($) {
             xhttp.send(JSON.stringify(product));
         }
     })
+    $("#add-subcategory-btn").click(function () {
+        var txt="           <div class=\"input-group\" >\n" +
+            "                    <input class=\"form-control\" type=\"text\" placeholder=\"SubCategory\" required>\n" +
+            "                    <div class=\"input-group-append\">\n" +
+            "                        <a href=\"#\" class=\"btn btn-primary text-white \" onclick=\"removeSubCategory(this)\"><i class=\"fa fa-minus\" aria-hidden=\"true\"></i></a>\n" +
+            "                    </div>\n" +
+            "                </div>";
+        $("#sub-categories").prepend(txt);
+    })
+
 
 });
 function modifyProduct(Obj) {
@@ -140,7 +156,17 @@ function modifyProduct(Obj) {
             $("#product-price").attr('value',product.price);
             $("#product-details").text(product.details);
             $("#product-category").attr('value',product.categoryDTO.name);
-            $("#product-subcategory").attr('value',product.subCategoryDTO[0].name);
+            $("#product-subcategory").attr('value',product.subCategoryDTOS[0].name);
+            for(var i=1;i<product.subCategoryDTOS.length-1;i++)
+            {
+                var txt="           <div class=\"input-group\" >\n" +
+                    "                    <input class=\"form-control\" type=\"text\" placeholder=\"SubCategory\" value='"+product.subCategoryDTOS[i]+"' required>\n" +
+                    "                    <div class=\"input-group-append\">\n" +
+                    "                        <a href=\"#\" class=\"btn btn-primary text-white \" onclick=\"removeSubCategory(this)\"><i class=\"fa fa-minus\" aria-hidden=\"true\"></i></a>\n" +
+                    "                    </div>\n" +
+                    "                </div>";
+            }
+            $("#sub-categories").prepend(txt);
             $("#product-id").text(productId);
             $("#products").hide()
             $("#add-product").show();
@@ -150,5 +176,9 @@ function modifyProduct(Obj) {
     var u="/products/getById/"+productId;
     xhttp.open("GET", u, true);
     xhttp.send();
-
 }
+function removeSubCategory(Obj) {
+    var elem=Obj.parentElement.parentElement;
+    elem.remove();
+}
+

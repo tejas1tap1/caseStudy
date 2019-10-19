@@ -18,24 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserCredentialsController {
  @Autowired
  private UserCredentialsServices userCredentialsServices;
-	@GetMapping("/login")
-	public Boolean login()
-	{
-		return true;
-	}
-//	@PostMapping("/login-user")
-//	public ResponseEntity<?> Login(UserCredentials userCredentials) {
-//		//return userCredentialsServices.Login(userCredentials);
-//
-//	}
-
-	@PostMapping("/add-user")
+ @PostMapping("/add-user")
 	public ResponseEntity<?> SignUp(UserCredentialsDTO userCredentialsDTO) {
 		return  userCredentialsServices.SignUp(UserCredentialsMapper.INSTANCE.toUserCredentials(userCredentialsDTO));
 	}
-//	@PostMapping("/logout-user")
-//     public ResponseEntity<String> Logout() {
-//		return null;
-//	}
-
 }

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -27,7 +28,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @EnableJpaRepositories(basePackageClasses = UserCredentialsRepo.class)
 @EnableWebSecurity
@@ -43,7 +44,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(new BCryptPasswordEncoder());
-
         return provider;
 
     }
@@ -51,10 +51,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/").authenticated()
+                .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/").hasRole("USER")
                 .and()
                 .formLogin()
-                //.loginPage("/login").permitAll()
+                .loginPage("/login").permitAll()
                 .failureHandler(new AuthenticationFailureHandler() {
                     @Override
                     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
@@ -75,12 +76,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
 
                 })
-                .defaultSuccessUrl("/home", true)
-                //.failureUrl("/home?error=true")
                 .and()
                 .logout().invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/logout-success").permitAll();
+                .logoutSuccessUrl("/home").permitAll();
     }
 }

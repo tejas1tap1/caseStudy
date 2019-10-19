@@ -1,6 +1,5 @@
 function loadOrderHistory() {
-    getUserId();
-    var userId=$.cookie('userId');
+    var userId=JSON.parse($.cookie('user')).userId;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -11,8 +10,8 @@ function loadOrderHistory() {
             {
                 var total=0;
                 txt+="                <div class=\"order border mb-3\">\n" +
-                    "                    <div class=\"bg-secondary p-3\">\n" +
-                    "                        <div class=\"ordre-id bg-primary d-inline p-2 shadow\">\n" +
+                    "                    <div class=\"bg-light p-3\">\n" +
+                    "                        <div class=\"ordre-id d-inline px-4 py-2 shadow\">\n Order Id: " +
                     orders[i].orderId +
                     "                        </div>\n" +
                     "                    </div>\n";
