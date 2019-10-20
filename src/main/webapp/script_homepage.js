@@ -63,6 +63,11 @@ function loadUsername() {
         document.getElementById("log").style.display = "none";
         document.getElementById("userS").style.display = "inline-block";
         document.getElementById("logout").style.display = "inline-block";
+        if (user.name=="admin")
+        {
+
+            $("#admin").show();
+        }
         return;
 
     }
@@ -78,6 +83,11 @@ function loadUsername() {
             document.getElementById("userS").style.display = "inline-block";
             document.getElementById("logout").style.display = "inline-block";
             $.cookie('user',this.responseText);
+            if (user.name=="admin")
+            {
+
+                $("#admin").show();
+            }
         }
     };
     xhttp.open("GET", "/current-user", true);
@@ -159,7 +169,7 @@ function searchOptions() {
             var txt="";
             for(var i=0;i<products.length && i<10;i++)
             {
-                txt+="<a>"+products[i].name+" <span class='text-muted'>-product</span></a>";
+                txt+="<a onclick='getProductById(this)'>"+products[i].name+" <span style='display: none'>"+products[i].productId+"</span><span class='text-muted'>-product</span></a>";
             }
             $("#search-content").html(txt);
             $("#search-content").show();
@@ -220,6 +230,20 @@ function getSubcategories(Obj) {
         }
     };
     var u="/subCategories/"+Obj;
+    xhttp.open("GET", u, true);
+    xhttp.send();
+}
+function getProductById(Obj) {
+    productId=Obj.children[0].innerHTML;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           product=JSON.parse(this.responseText);
+           $.cookie('current-product',this.responseText);
+           window.location="/productPage";
+        }
+    };
+    var u="/products/getById/"+productId;
     xhttp.open("GET", u, true);
     xhttp.send();
 }

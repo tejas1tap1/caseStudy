@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Filters {
     private List<String> subCategories;
-    private Double minPrice;
-    private Double maxPrice;
+    private long minPrice;
+    private long maxPrice;
 
     public List<String> getSubCategories() {
         return subCategories;
@@ -17,19 +17,28 @@ public class Filters {
         this.subCategories = subCategories;
     }
 
-    public Double getMinPrice() {
+    public long getMinPrice() {
         return minPrice;
     }
 
-    public void setMinPrice(Double minPrice) {
+    public void setMinPrice(long minPrice) {
         this.minPrice = minPrice;
     }
 
-    public Double getMaxPrice() {
+    public long getMaxPrice() {
         return maxPrice;
     }
 
-    public void setMaxPrice(Double maxPrice) {
+    public void setMaxPrice(long maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Filters{" +
+                "subCategories=" + subCategories +
+                ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
+                '}';
     }
 }

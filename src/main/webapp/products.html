@@ -16,6 +16,7 @@
     <script src="script_homepage.js"></script>
     <script src="script_products.js"></script>
     <title>
+        Products
     </title>
 </head>
 
@@ -203,8 +204,8 @@
         <div id="other-subcategories" class="pl-4 py-4 mt-4 border border-bottom-1">
             <h5>Price</h5>
             <div class="form-group d-flex">
-                <input type="number" class="form-control-range rounded mr-4" min="0" placeholder="Min" id="min-price" onkeyup="getFilteredProducts()">
-                <input type="number" class="form-control-range rounded" min="0" placeholder="Max" id="max-price" onkeyup="getFilteredProducts()">
+                <input type="number" class="form-control-range rounded mr-4" min="0" value="0" placeholder="Min" id="min-price" onkeyup="getFilteredProducts()">
+                <input type="number" class="form-control-range rounded" min="0" value="100000" placeholder="Max" id="max-price" onkeyup="getFilteredProducts()">
             </div>
             <h5>Filters</h5>
         </div>

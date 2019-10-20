@@ -115,21 +115,52 @@ public class ProductServices {
     }
     public  List<Product> getFilteredProductsByCategory(String category, Filters filters)
     {
+//        int n;
+//        if(filters.getSubCategories().isEmpty())
+//        {
+//            n=2;
+//        }
+//        else n=2;
+
+
         Category category1=categoryRepo.findByName(category);
         CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
         CriteriaQuery<Product> criteriaQuery=criteriaBuilder.createQuery(Product.class);
         Root<Product> root= criteriaQuery.from(Product.class);
         Join<Product,SubCategory> subCategory=root.join("subCategories");
         //Join<Product,Category> categoryJoin=root.join("category");
-        Predicate[] predicates = new Predicate[3];
+        Predicate[] predicates = new Predicate[2];
         predicates[0] = criteriaBuilder.between(root.get("price"),filters.getMinPrice(),filters.getMaxPrice());
-        predicates[1]= criteriaBuilder.equal(root.get("category"),category1);
-        // predicates[1]= criteriaBuilder.equal(categoryJoin.get("name"),category);
-        predicates[2] = subCategory.get("name").in(filters.getSubCategories());
-        criteriaQuery.select(root).where(predicates);
+        predicates[1]= criteriaBuilder.equal(root.get("category").get("name"),category);
+
+         //predicates[1]= criteriaBuilder.equal(categoryJoin.get("name"),category);
+//         for(int i=0;i<n-2;i++) {
+//             predicates[2 + i] = criteriaBuilder.equal(subCategory.get("name"), filters.getSubCategories().get(i));
+//             System.out.println("here");
+//         }
+        criteriaQuery.select(root).where(predicates).distinct(true);
         List<Product> products= entityManager.createQuery(criteriaQuery).getResultList();
-        System.out.println(products);
-        return products;
+        List<Product> productWithFilter =new ArrayList<>();
+        List<SubCategory> subCategories=new ArrayList<>();
+        for(int i=0;i<filters.getSubCategories().size();i++)
+        {
+            subCategories.add(subCategoryRepo.findByName(filters.getSubCategories().get(i)));
+        }
+        for(int i=0;i<products.size();i++)
+        {
+            boolean flag=true;
+            for(int j=0;j<subCategories.size();j++)
+            {
+               if(!products.get(i).getSubCategories().contains(subCategories.get(j)))
+               {
+                   flag=false;
+                   break;
+               }
+            }
+            if (flag==true)
+                productWithFilter.add(products.get(i));
+        }
+        return productWithFilter;
     }
 
 }

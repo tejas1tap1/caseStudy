@@ -17,6 +17,9 @@
 #sign{
   display: inline-block;
 }
+#admin{
+  display: none;
+}
 .arrow-up {
   position: absolute;
   display: none;
@@ -28,8 +31,7 @@
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
 
-  border-bottom: 15px solid #f8f9fa;
-}
+  border-bottom: 15px solid #f8f9fa;}
 .dropbtn {
     display: inline-block;
 }
