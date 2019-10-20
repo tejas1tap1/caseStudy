@@ -9,6 +9,7 @@ import com.beehyv.shoppingcart.repo.ProductRepo;
 import com.beehyv.shoppingcart.repo.SubCategoryRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -55,7 +56,42 @@ public class ProductServices {
            return productRepo.save(product);
         return null;
     }
+    public List<SubCategory> getSubCategories(String category)
+    {
+        List<SubCategory> subCategories=new ArrayList<>();
+        try{
+          subCategories=categoryRepo.findByName(category).getSubCategories();
+        }
+        catch (Exception e){
+            return null;
+        }
+        return subCategories;
+    }
+    public ResponseEntity addSubCategoryToCategory(String category,SubCategory subCategory){
+        Category category1=categoryRepo.findByName(category);
+        List<SubCategory> subCategories=new ArrayList<>();
+        try{
+            if(category1.getSubCategories()!=null)
+                subCategories=category1.getSubCategories();
+            System.out.println("outside"+ subCategories);
+            for(int i=0;i<subCategories.size();i++)
+            {
+                System.out.println(subCategories.get(i).getName()+subCategory.getName());
+                if(subCategories.get(i).getName()==subCategory.getName())
+                    return ResponseEntity.ok("Success");
+            }
+        }
+        catch (Exception e)
+        {
 
+        }
+        subCategory=subCategoryRepo.findByName(subCategory.getName());
+        subCategories.add(subCategory);
+        System.out.println(subCategories);
+        category1.setSubCategories(subCategories);
+        categoryRepo.save(category1);
+        return ResponseEntity.ok("Success");
+    }
     public Product getProduct(long productId) {
         return productRepo.findByProductId(productId);
     }

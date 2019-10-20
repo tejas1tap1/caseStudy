@@ -4,11 +4,15 @@ import java.util.List;
 
 import com.beehyv.shoppingcart.dto.Filters;
 import com.beehyv.shoppingcart.dto.ProductDTO;
+import com.beehyv.shoppingcart.dto.SubCategoryDTO;
 import com.beehyv.shoppingcart.entity.Product;
+import com.beehyv.shoppingcart.entity.SubCategory;
 import com.beehyv.shoppingcart.mapper.ProductMapper;
+import com.beehyv.shoppingcart.mapper.SubCategoryMapper;
 import com.beehyv.shoppingcart.repo.ProductRepo;
 import com.beehyv.shoppingcart.services.ProductServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +32,17 @@ public class ProductController {
     public ProductDTO updateProduct(@RequestBody ProductDTO productDTO) {
         return ProductMapper.INSTANCE.toProductDTO(productServices.updateProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/addSubCategory/{category}")
+    public ResponseEntity addSubCategoryToCategory(@PathVariable("category")String category,@RequestBody SubCategoryDTO subCategoryDTO){
+        System.out.println("here"+ subCategoryDTO.getName());
+        return productServices.addSubCategoryToCategory(category,SubCategoryMapper.INSTANCE.toSubCategory(subCategoryDTO));
+    }
+    @GetMapping("/subCategories/{category}")
+    public List<SubCategoryDTO> getSubCategories(@PathVariable("category")String category)
+    {
+        return SubCategoryMapper.INSTANCE.toSubCategoryDTOS(productServices.getSubCategories(category));
+    }
     @GetMapping("/products/getById/{productId}")
     public ProductDTO getProduct(@PathVariable("productId") long productId) {
         return ProductMapper.INSTANCE.toProductDTO(productServices.getProduct(productId));
@@ -43,7 +57,7 @@ public class ProductController {
     {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getProductsBySearchString(search));
     }
-    @GetMapping("/products/{category}/getFilteredProducts")
+    @PostMapping("/products/{category}/getFilteredProducts")
     public List<ProductDTO> getFilteredProductByCategory(@PathVariable("category")String category,@RequestBody Filters filters)
     {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getFilteredProductsByCategory(category,filters));

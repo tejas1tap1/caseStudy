@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Category {
     @Id
-    @Column(name="productId")
+    @Column(name="categoryId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categoryId;
     @NotNull(message = "Name cannot be null")

@@ -12,6 +12,7 @@ function getProductByCategory(category) {
             var products= JSON.parse(this.responseText);
             var txt="";
             if(products.length==0)$("#products").text("No product of category "+category+" available")
+            var otherSubcategories=[];
             for(var i=0;i<products.length;i++)
             {
                      txt+="<div class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
@@ -21,9 +22,29 @@ function getProductByCategory(category) {
                             "<h5 class='font-weight-bold'>"+products[i].price+"</h5>"+
                             "<button type=\"button\" onclick=\"addToCart(this)\" class='add-to-cart-btn'><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
                          "ADD TO CART</button></div>";
+                     for(var j=1;j<products[i].subCategoryDTOS.length;j++)
+                     {
+                         otherSubcategories.push(products[i].subCategoryDTOS[j].name);
+                     }
             }
-            
             $("#products").html(txt);
+            var unique=new Set(otherSubcategories);
+            try{
+                txt="";
+                for(let item of unique)
+                {
+                    txt+="         <div class=\"form-check\">\n" +
+                        "                <label class=\"form-check-label\" onclick='getFilteredProducts()'>\n" +
+                        "                    <input type=\"checkbox\" class=\"form-check-input other-subcategories-check\" name=\"optradio\"><span>"+item+"</span>\n" +
+                        "                </label>\n" +
+                        "            </div>";
+                }
+                $("#other-subcategories").append(txt);
+            }
+            catch (e) {
+
+            }
+
         }
     };
 
@@ -71,6 +92,10 @@ jQuery(document).ready(function ($) {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 window.location=this.responseURL;
+            }
+            if(this.status==403)
+            {
+                window.location="/home";
             }
         };
         xhttp.open("POST", "/login", true);
@@ -124,25 +149,7 @@ function addToCart(Obj) {
     xhttp.send();
 
 }
-// function getUserId() {
-//     var userId;
-//     if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
-//     {
-//         return $.cookie('userId');
-//     }
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             userId=JSON.parse(this.responseText);
-//             $.cookie('userId',userId);
-//
-//         }
-//     };
-//     xhttp.open("GET", "/user-id", false);
-//     xhttp.send();
-//     return userId;
-//
-// }
+
 function searchOptions() {
     var searchString=$("#search-string").val();
     var xhttp = new XMLHttpRequest();
@@ -191,5 +198,28 @@ function searchResult() {
     var u="/products/search/"+searchString;
     xhttp.open("GET", u, true);
     xhttp.send();
+}
 
+function getSubcategories(Obj) {
+    category="#"+Obj;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            try{
+                var subCategories= JSON.parse(this.responseText);
+            }
+            catch (e) {
+                return;
+            }
+            var txt="";
+            for(var i=0;i<subCategories.length;i++)
+            {
+                txt+="<a class=\"item\" href=\"#\">"+subCategories[i].name +"</a>";
+            }
+            $(category).html(txt);
+        }
+    };
+    var u="/subCategories/"+Obj;
+    xhttp.open("GET", u, true);
+    xhttp.send();
 }

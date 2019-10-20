@@ -36,7 +36,6 @@ function getProductByCategory(category) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var products= JSON.parse(this.responseText);
-            console.log(this.responseText);
             var txt="";
             if(products.length==0)$("#products").text("No product of category "+category+" available")
             for(var i=0;i<products.length;i++)
@@ -60,6 +59,7 @@ function getProductByCategory(category) {
 
 jQuery(document).ready(function ($) {
     $("#add-product-btn").click(function () {
+        getSubcategories()
         $("#product-heading").text("Add New Product");
         $("#product-id").text('');
         $("#product-name").val("");
@@ -67,6 +67,7 @@ jQuery(document).ready(function ($) {
         $("#product-details").val("");
         $("#product-category").val("");
         $("#product-subcategory").val("");
+        $("#sub-categories").html("");
         $("#products").hide()
         $("#add-product").show();
         $("#add-product-btn").hide();
@@ -80,9 +81,13 @@ jQuery(document).ready(function ($) {
         var id=$("#product-id").text();
         var subCategories=[];
         subCategories.push({name:$("#product-subcategory").val()});
-        for(var i=0;i<$("#sub-categories").childElementCount-1;i++)
+        var elements=document.getElementsByClassName("sub-category");
+        for(var i=0;i<elements.length;i++)
         {
-            subCategory={ name: $("#sub-categories").children[i].children[0].val(),}
+            if(elements[i].value=="")
+                continue;
+            subCategory={ name: elements[i].value,};
+            console.log(subCategory);
             subCategories.push(subCategory);
         }
         if(id=="") {
@@ -92,10 +97,69 @@ jQuery(document).ready(function ($) {
                 price: $("#product-price").val(),
                 details: $("#product-details").val(),
                 categoryDTO:{
-                    name:$("#product-category").val()},
+                    name:$("#select-category").val().toLowerCase(),
+                },
                 subCategoryDTOS:subCategories,
             };
             var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    $("#message").text("Saved Successfully");
+                    $("#message").fadeIn();
+                    $("#message").fadeOut(3000);
+                    $("#add-product").hide();
+                    $("#add-product-btn").show();
+                    var xhttp1 = new XMLHttpRequest();
+                    xhttp1.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                        }
+                    };
+                    var u="/addSubCategory/"+$("#select-category").val().toLowerCase();
+                    xhttp1.open("POST",u, true);
+                    xhttp1.setRequestHeader("Content-type", "application/json");
+                    xhttp1.send(JSON.stringify(subCategories[0]));
+                }
+            };
+            xhttp.open("POST","/products/add-product", true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify(product));
+
+        } else {
+            var product = {
+                productId: id,
+                name: $("#product-name").val(),
+                price: $("#product-price").val(),
+                details: $("#product-details").val(),
+                categoryDTO: {
+                    name: $("#select-category").val().toLowerCase(),
+                },
+                subCategoryDTOS: subCategories,
+                };
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    $("#message").text("Saved Successfully");
+                    $("#message").fadeIn();
+                    $("#message").fadeOut(3000);
+                    $("#add-product").hide();
+                    console.log(subCategories[0].name);
+                    var xhttp1 = new XMLHttpRequest();
+                    xhttp1.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            console.log("subcategory saved");
+                        }
+                    };
+                    var u="/addSubCategory/"+$("#select-category").val().toLowerCase();
+                    xhttp1.open("POST",u, true);
+                    xhttp1.setRequestHeader("Content-type", "application/json");
+                    xhttp1.send(JSON.stringify(subCategories[0]));
+                }
+            };
+            xhttp.open("PUT","/products/update", true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify(product));
+
+            xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     $("#message").text("Saved Successfully");
@@ -108,34 +172,11 @@ jQuery(document).ready(function ($) {
             xhttp.open("POST","/products/add-product", true);
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify(product));
-        } else {
-            var product = {
-                productId: id,
-                name: $("#product-name").val(),
-                price: $("#product-price").val(),
-                details: $("#product-details").val(),
-                categoryDTO: {
-                    name: $("#product-category").val()
-                },
-                subCategoryDTOS: subCategories,
-                };
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    $("#message").text("Saved Successfully");
-                    $("#message").fadeIn();
-                    $("#message").fadeOut(3000);
-                    $("#add-product").hide();
-                }
-            };
-            xhttp.open("PUT","/products/update", true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(JSON.stringify(product));
         }
     })
     $("#add-subcategory-btn").click(function () {
         var txt="           <div class=\"input-group\" >\n" +
-            "                    <input class=\"form-control\" type=\"text\" placeholder=\"SubCategory\" required>\n" +
+            "                    <input class=\"form-control sub-category\" type=\"text\" placeholder=\"SubCategory\" required>\n" +
             "                    <div class=\"input-group-append\">\n" +
             "                        <a href=\"#\" class=\"btn btn-primary text-white \" onclick=\"removeSubCategory(this)\"><i class=\"fa fa-minus\" aria-hidden=\"true\"></i></a>\n" +
             "                    </div>\n" +
@@ -146,27 +187,29 @@ jQuery(document).ready(function ($) {
 
 });
 function modifyProduct(Obj) {
+    getSubcategories();
     productId=Obj.parentNode.children[0].innerHTML;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var product= JSON.parse(this.responseText);
             $("#product-heading").text("Modify Product");
-            $("#product-name").attr('value',product.name);
-            $("#product-price").attr('value',product.price);
-            $("#product-details").text(product.details);
-            $("#product-category").attr('value',product.categoryDTO.name);
-            $("#product-subcategory").attr('value',product.subCategoryDTOS[0].name);
-            for(var i=1;i<product.subCategoryDTOS.length-1;i++)
+            $("#product-name").val(product.name);
+            $("#product-price").val(product.price);
+            $("#product-details").val(product.details);
+            $("#product-category").val(product.categoryDTO.name);
+            $("#product-subcategory").val(product.subCategoryDTOS[0].name);
+            var txt="";
+            for(var i=1;i<product.subCategoryDTOS.length;i++)
             {
-                var txt="           <div class=\"input-group\" >\n" +
-                    "                    <input class=\"form-control\" type=\"text\" placeholder=\"SubCategory\" value='"+product.subCategoryDTOS[i]+"' required>\n" +
+                txt+="           <div class=\"input-group\" >\n" +
+                    "                    <input class=\"form-control\" type=\"text\" placeholder=\"SubCategory\" value='"+product.subCategoryDTOS[i].name+"' required>\n" +
                     "                    <div class=\"input-group-append\">\n" +
                     "                        <a href=\"#\" class=\"btn btn-primary text-white \" onclick=\"removeSubCategory(this)\"><i class=\"fa fa-minus\" aria-hidden=\"true\"></i></a>\n" +
                     "                    </div>\n" +
                     "                </div>";
             }
-            $("#sub-categories").prepend(txt);
+            $("#sub-categories").html(txt);
             $("#product-id").text(productId);
             $("#products").hide()
             $("#add-product").show();
@@ -181,4 +224,25 @@ function removeSubCategory(Obj) {
     var elem=Obj.parentElement.parentElement;
     elem.remove();
 }
-
+function getSubcategories() {
+    category=$("#select-category").val();
+    category=category.toLowerCase();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var subCategories= JSON.parse(this.responseText);
+            var txt="";
+            for(var i=0;i<subCategories.length;i++)
+            {
+                txt+="<a class=\"item\" href=\"#\" onclick='fillSubCategory(this)'>"+subCategories[i].name +"</a>";
+            }
+            $("#main-subcategories").html(txt);
+        }
+    };
+    var u="/subCategories/"+category;
+    xhttp.open("GET", u, true);
+    xhttp.send();
+}
+function fillSubCategory(Obj) {
+    $("#product-subcategory").val(Obj.innerHTML);
+}

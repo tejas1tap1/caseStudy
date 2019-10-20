@@ -43,6 +43,10 @@ public class PageController {
 	{
 		return "login.html";
 	}
-
+	@RequestMapping("/products")
+	public String productsPage()
+	{
+		return "products.html";
+	}
 }
 

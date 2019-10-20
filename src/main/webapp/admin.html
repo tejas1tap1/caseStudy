@@ -117,7 +117,7 @@
 </header>
 <div id="products"></div>
 <div id="message" class="text-success"></div>
-<div id="add-product">
+<div id="add-product" class="p-5">
     <span id="product-id" class="d-none"></span>
     <form class="">
         <div class="text-primary p-3 font-weight-bold" id="product-heading" >Add New Product</div>
@@ -138,17 +138,24 @@
         </div>
         <br>
         <div class="d-inline-flex p-2 ">
-            <div class="form-group pl-3 mb-0">
-                <input type="text" class="form-control" id="product-category" placeholder="Category" required>
+            <div class="form-group ml-4">
+                <select class="form-control address-option" id="select-category" onclick="getSubcategories()">
+                    <option name="category">Electronics</option>
+                    <option name="category">Men</option>
+                    <option name="category">Women</option>
+                    <option name="category">Home&Furniture</option>
+                    <option name="category">Books</option>
+                </select>
             </div>
-
-            <div class="form-group px-3 mb-0 ">
-                <input type="text" class="form-control " id="product-subcategory" placeholder="Main SubCategory">
+            <div class="form-group px-3 mb-0 dropdown ">
+                <input type="text" class="form-control dropbtn" id="product-subcategory" placeholder="Main SubCategory">
+                <div class="dropdown-content" id="main-subcategories" >
+                </div>
             </div>
             <div  id="sub-categories">
-                <div class="add-subcategory mt-2">
-                    <a href="#" id="add-subcategory-btn" style="text-decoration: none" class="bg-primary p-2 rounded text-white"><i class="fa fa-plus" aria-hidden="true"></i> Add SubCategory</a>
-                </div>
+            </div>
+            <div class="add-subcategory mt-2">
+                <a href="#" id="add-subcategory-btn" style="text-decoration: none" class="bg-primary p-2 rounded text-white"><i class="fa fa-plus" aria-hidden="true"></i> Add SubCategory</a>
             </div>
         </div>
         <br>
