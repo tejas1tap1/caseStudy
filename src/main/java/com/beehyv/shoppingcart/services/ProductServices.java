@@ -16,8 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ProductServices {
@@ -119,6 +118,8 @@ public class ProductServices {
             searchProduct = productRepo.findByNameContaining(a[i]);
             searchProduct.addAll(productRepo.findByDetailsContaining(a[i]));
             searchProduct.addAll(productRepo.findByCategory(categoryRepo.findByNameLike(a[i])));
+            Set<Product> unique=new HashSet<>();
+            unique.addAll(searchProduct);
         }
         return searchProduct;
     }

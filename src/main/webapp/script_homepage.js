@@ -1,12 +1,3 @@
-$(document).ready(function () {
-    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-        localStorage.setItem('activeTab', $(e.target).attr('href'));
-    });
-    var activeTab = localStorage.getItem('activeTab');
-    if (activeTab) {
-        $('#myTab a[href="' + activeTab + '"]').tab('show');
-    }
-});
 
 function logPage() {
     $('#login').modal('show');
@@ -240,7 +231,7 @@ function searchResult() {
 }
 
 function getSubcategories(Obj) {
-    category = "#" + Obj;
+    category = Obj;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -253,7 +244,7 @@ function getSubcategories(Obj) {
             for (var i = 0; i < subCategories.length; i++) {
                 txt += "<a class=\"item\" href=\"#\" onclick='redirectMarked(this),loadMarkedFilters(this)' style='text-decoration: none'>" + subCategories[i].name + "</a>";
             }
-            $(category).html(txt);
+            document.getElementById(category).innerHTML=txt;
         }
     };
     var u = "/subCategories/" + Obj;
@@ -262,7 +253,7 @@ function getSubcategories(Obj) {
 }
 
 function getProductById(Obj) {
-    console.log("here");
+
     productId = Obj.children[0].innerHTML;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -364,8 +355,13 @@ function redirectMarked(Obj) {
     if (window.location.href.search("products") == -1 && window.location.href.search("home") == -1) {
         var str = Obj.parentNode.id + " " + Obj.innerHTML
         $.cookie('marked-filter-obj', str);
-        console.log(Obj.parentNode.id + Obj.innerHTML);
         window.location = "/products";
     }
-
+}
+function redirectSearch() {
+    if (window.location.href.search("products") == -1 && window.location.href.search("home") == -1) {
+        var searchString = $("#search-string").val();
+        $.cookie('redirect-search',searchString);
+        window.location="/products";
+    }
 }

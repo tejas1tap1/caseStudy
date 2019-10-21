@@ -113,6 +113,11 @@ function changeQuantity(Obj) {
 
 function placeOrder() {
     var addressId = $("select.address-option").children("option:selected").val();
+    if(addressId==undefined||addressId==null||addressId==0)
+    {
+        alert("Please set Address from Profile to make an Order");
+        return;
+    }
     var userId = JSON.parse($.cookie('user')).userId;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {

@@ -83,14 +83,14 @@ jQuery(document).ready(function ($) {
         var subCategories = [];
         subCategories.push({name: $("#product-subcategory").val()});
         var elements = document.getElementsByClassName("sub-category");
-        console.log(elements.length);
+
         for (var i = 0; i < elements.length; i++) {
             if (elements[i].value == "")
                 continue;
             subCategory = {name: elements[i].value,};
             subCategories.push(subCategory);
         }
-        console.log(subCategories);
+
         if (id == "") {
             var product = {
                 name: $("#product-name").val(),
@@ -125,7 +125,7 @@ jQuery(document).ready(function ($) {
             xhttp.send(JSON.stringify(product));
 
         } else {
-            console.log(subCategories);
+
             var product = {
                 productId: id,
                 name: $("#product-name").val(),
@@ -146,7 +146,7 @@ jQuery(document).ready(function ($) {
                     var xhttp1 = new XMLHttpRequest();
                     xhttp1.onreadystatechange = function () {
                         if (this.readyState == 4 && this.status == 200) {
-                            console.log("subcategory saved");
+
                         }
                     };
                     var u = "/addSubCategory/" + $("#select-category").val().toLowerCase();
@@ -174,6 +174,10 @@ jQuery(document).ready(function ($) {
 });
 
 function redirectModify() {
+    if($.cookie('productId')== undefined ||$.cookie('productId')==0)
+    {
+        return;
+    }
     modifyProduct();
 }
 
@@ -193,7 +197,9 @@ function modifyProduct(Obj) {
             $("#product-name").val(product.name);
             $("#product-price").val(product.price);
             $("#product-details").val(product.details);
-            $("#product-category").val(product.categoryDTO.name);
+           // $("#product-category").val(product.categoryDTO.name);
+            document.getElementById("select-category").value = product.categoryDTO.name;
+
             $("#product-subcategory").val(product.subCategoryDTOS[0].name);
             var txt = "";
             for (var i = 1; i < product.subCategoryDTOS.length; i++) {

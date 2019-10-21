@@ -18,6 +18,14 @@ function redirectMarkedPage() {
         $.removeCookie('marked-filter-obj');
     }
 }
+function redirectSearchPage() {
+    if ($.cookie('redirect-search') != null) {
+        var a = $.cookie('redirect-search');
+        $("#search-string").val(a);
+        searchResult();
+        $.removeCookie('redirect-search');
+    }
+}
 
 function loadFilters(category) {
     var xhttp = new XMLHttpRequest();
