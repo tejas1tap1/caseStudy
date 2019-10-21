@@ -1,6 +1,5 @@
 package com.beehyv.shoppingcart.config;
 
-import com.beehyv.shoppingcart.entity.UserCredentials;
 import com.beehyv.shoppingcart.repo.UserCredentialsRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @EnableJpaRepositories(basePackageClasses = UserCredentialsRepo.class)
@@ -38,15 +38,16 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("myUserDetailsService")
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Bean
-    public AuthenticationProvider authenticationProvider()
-    {
-        DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(new BCryptPasswordEncoder());
         return provider;
 
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

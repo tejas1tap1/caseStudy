@@ -30,11 +30,13 @@
         <form class="form-inline col-md-8" onsubmit="return false" autocomplete="off">
             <div class="flex-fill search">
                 <div class="input-group w-75 mx-auto">
-                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()" id="search-string">
+                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()"
+                           id="search-string">
                     <div class="input-group-append">
-                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search"
+                                                                                  aria-hidden="true"></i></button>
                     </div>
-                    <div  id="search-content">
+                    <div id="search-content">
                     </div>
                 </div>
 
@@ -45,28 +47,33 @@
             <ul class="navbar-nav text-center ml-auto ">
 
 
-                <li class="nav-item py-3 pr-2" id="cart" ><a href="/cart" title="" class="nav-link" style="cursor: pointer">
+                <li class="nav-item py-3 pr-2" id="cart"><a href="/cart" title="" class="nav-link"
+                                                            style="cursor: pointer">
                     <i class="fa fa-shopping-cart pr-2" aria-hidden="true"></i>Cart</a></li>
                 <li class="nav-item py-3 pr-2" id="sign"><a href="" title="" class="nav-link" data-toggle="modal"
-                                                                 data-target="#signup"><i class="fa fa-user pr-2"
-                                                                                          aria-hidden="true"></i>Sign Up</a>
+                                                            data-target="#signup"><i class="fa fa-user pr-2"
+                                                                                     aria-hidden="true"></i>Sign Up</a>
                 </li>
                 <li class="nav-item dropdown py-3 pr-2" id="userS">
                     <a href="" title="" class="nav-link dropbtn"><i class="fa fa-user pr-2"
-                                                                                            aria-hidden="true"></i><span
-                        id="user-name"></span><i class="fa fa-caret-down pl-1" aria-hidden="true"></i>
-                </a>
+                                                                    aria-hidden="true"></i><span
+                            id="user-name"></span><i class="fa fa-caret-down pl-1" aria-hidden="true"></i>
+                    </a>
                     <div class="arrow-up"></div>
                     <div class="dropdown-content" style="top:72px;left:-25px;">
-                        <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2"
+                                                                                         aria-hidden="true"></i>
                             My Profile</a>
-                        <a class="item" href="/orderHistory" style="text-decoration: none" id="order-history">My Orders</a>
+                        <a class="item" href="/orderHistory" style="text-decoration: none" id="order-history">My
+                            Orders</a>
                         <a class="item" href="/adminPage" id="admin" style="text-decoration: none">AdminPage</a>
                     </div>
                 </li>
-                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" onclick="logPage()" style="cursor: pointer"><i
+                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" onclick="logPage()"
+                                                           style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Login</a></li>
-                <li class="nav-item username py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
+                <li class="nav-item username py-3 pr-2" id="logout"><a onclick="logout()" title="" class="nav-link"
+                                                                       style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
@@ -75,27 +82,33 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics'),loadFilters('Electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
-                    <div class="dropdown-content" id="electronics" >
+                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics'),loadFilters('Electronics')"
+                          onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <div class="dropdown-content" id="electronics">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('men'),loadFilters('Men')" onmouseover="getSubcategories('men')">Men</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('men'),loadFilters('Men')"
+                          onmouseover="getSubcategories('men')">Men</span>
                     <div class="dropdown-content" id="men">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('women'),loadFilters('Women')" onmouseover="getSubcategories('women')">Women</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('women'),loadFilters('Women')"
+                          onmouseover="getSubcategories('women')">Women</span>
                     <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture'),loadFilters('Home&Furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <span class="dropbtn p-2"
+                          onclick="getProductByCategory('home&furniture'),loadFilters('Home&Furniture')"
+                          onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
                     <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('books'),loadFilters('Books')" onmouseover="getSubcategories('books')">Books</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('books'),loadFilters('Books')"
+                          onmouseover="getSubcategories('books')">Books</span>
                     <div class="dropdown-content" id="books">
                     </div>
                 </div>
@@ -124,7 +137,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
-                           placeholder="Enter password" name="password" required >
+                           placeholder="Enter password" name="password" required>
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
                                                                         style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
@@ -156,7 +169,7 @@
                     <input type="text" class="form-control" id="first-name" placeholder="First name"
                            name="first-name" required>
                     <input type="text" class="form-control" id="last-name" placeholder="Last Name"
-                           name="first-name" >
+                           name="first-name">
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -204,8 +217,10 @@
         <div class="pl-4 py-4 mt-4 border border-bottom-1">
             <h5>Price</h5>
             <div class="form-group d-flex">
-                <input type="number" class="form-control-range rounded mr-4" min="0" value="0" placeholder="Min" id="min-price" onkeyup="getFilteredProducts()">
-                <input type="number" class="form-control-range rounded" min="0" value="10000000" placeholder="Max" id="max-price" onkeyup="getFilteredProducts()">
+                <input type="number" class="form-control-range rounded mr-4" min="0" value="0" placeholder="Min"
+                       id="min-price" onkeyup="getFilteredProducts()">
+                <input type="number" class="form-control-range rounded" min="0" value="10000000" placeholder="Max"
+                       id="max-price" onkeyup="getFilteredProducts()">
             </div>
             <h5>Filters</h5>
             <div id="other-subcategories"></div>

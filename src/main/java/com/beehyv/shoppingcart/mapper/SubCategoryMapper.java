@@ -9,9 +9,13 @@ import java.util.List;
 
 @Mapper
 public interface SubCategoryMapper {
-    SubCategoryMapper INSTANCE= Mappers.getMapper(SubCategoryMapper.class);
+    SubCategoryMapper INSTANCE = Mappers.getMapper(SubCategoryMapper.class);
+
     SubCategoryDTO toSubCategoryDTO(SubCategory subCategory);
+
     SubCategory toSubCategory(SubCategoryDTO subCategoryDTO);
-    List<SubCategoryDTO> toSubCategoryDTOS (List<SubCategory> subCategories);
-    List<SubCategory> toSubCategories (List<SubCategoryDTO> subCategoryDTOS);
+
+    List<SubCategoryDTO> toSubCategoryDTOS(List<SubCategory> subCategories);
+
+    List<SubCategory> toSubCategories(List<SubCategoryDTO> subCategoryDTOS);
 }

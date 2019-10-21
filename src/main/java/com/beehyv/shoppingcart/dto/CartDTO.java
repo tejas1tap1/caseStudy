@@ -1,7 +1,5 @@
 package com.beehyv.shoppingcart.dto;
 
-import com.beehyv.shoppingcart.entity.CartItem;
-
 import java.util.List;
 
 public class CartDTO {

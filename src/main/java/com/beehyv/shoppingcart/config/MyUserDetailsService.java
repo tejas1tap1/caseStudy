@@ -14,11 +14,12 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserCredentialsRepo userCredentialsRepo;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserCredentials user = userCredentialsRepo.findByEmail(email);
-        if(user==null)
-            throw  new UsernameNotFoundException("User 404");
+        if (user == null)
+            throw new UsernameNotFoundException("User 404");
 
         return new UserPrinciple(user);
     }

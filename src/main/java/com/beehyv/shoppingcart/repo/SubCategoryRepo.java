@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SubCategoryRepo extends JpaRepository<SubCategory,Long> {
+public interface SubCategoryRepo extends JpaRepository<SubCategory, Long> {
     SubCategory findByName(String name);
+
     List<SubCategory> findByNameContaining(String search);
 }

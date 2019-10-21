@@ -1,7 +1,6 @@
 package com.beehyv.shoppingcart.dto;
 
 import com.beehyv.shoppingcart.entity.Address;
-import com.beehyv.shoppingcart.entity.OrderItem;
 
 import java.util.List;
 

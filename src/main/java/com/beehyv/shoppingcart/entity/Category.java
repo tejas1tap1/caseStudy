@@ -7,13 +7,13 @@ import java.util.List;
 @Entity
 public class Category {
     @Id
-    @Column(name="categoryId")
+    @Column(name = "categoryId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categoryId;
     @NotNull(message = "Name cannot be null")
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<SubCategory> subCategories;
 
     public long getCategoryId() {

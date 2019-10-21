@@ -1,6 +1,5 @@
 package com.beehyv.shoppingcart.services;
 
-import com.beehyv.shoppingcart.entity.Cart;
 import com.beehyv.shoppingcart.entity.UserCredentials;
 import com.beehyv.shoppingcart.entity.UserProfile;
 import com.beehyv.shoppingcart.repo.CartRepo;
@@ -44,7 +43,7 @@ public class UserCredentialsServices {
             userCredentials.setPassword(new BCryptPasswordEncoder().encode(userCredentials.getPassword()));
             userCredentials.setRole("USER");
             userCredentialsRepo.save(userCredentials);
-            Long userId=userCredentialsRepo.findByEmail(userCredentials.getEmail()).getUserProfile().getUserId();
+            Long userId = userCredentialsRepo.findByEmail(userCredentials.getEmail()).getUserProfile().getUserId();
             return ResponseEntity.ok(userId);
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");

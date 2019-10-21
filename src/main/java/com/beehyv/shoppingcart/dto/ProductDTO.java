@@ -1,8 +1,5 @@
 package com.beehyv.shoppingcart.dto;
 
-import com.beehyv.shoppingcart.entity.Category;
-import com.beehyv.shoppingcart.entity.SubCategory;
-
 import java.util.List;
 
 public class ProductDTO {

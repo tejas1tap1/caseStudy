@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class OrderServices {
     @Autowired
@@ -22,32 +23,31 @@ public class OrderServices {
     private AddressRepo addressRepo;
     @Autowired
     private CartRepo cartRepo;
+
     public List<Orders> orderHistory(long userId) {
         //System.out.println(ordersRepo.findByUserProfile(userProfileRepo.findByUserId(userId)));
         return ordersRepo.findByUserProfile(userProfileRepo.findByUserId(userId));
     }
-    public Orders createOrder(long userId,long addressId) {
-        UserProfile userProfile=userProfileRepo.findByUserId(userId);
-        Address address=addressRepo.findByAddressId(addressId);
-        List<CartItem> cartItems=cartServices.getAllCartItems(userId);
+
+    public Orders createOrder(long userId, long addressId) {
+        UserProfile userProfile = userProfileRepo.findByUserId(userId);
+        Address address = addressRepo.findByAddressId(addressId);
+        List<CartItem> cartItems = cartServices.getAllCartItems(userId);
         int n;
-        try{
-            n=cartItems.size();
-        }
-        catch (Exception e)
-        {
+        try {
+            n = cartItems.size();
+        } catch (Exception e) {
             return null;
         }
-        Orders orders =new Orders();
+        Orders orders = new Orders();
         orders.setAddress(address);
         orders.setUserProfile(userProfile);
         orders.setOrderStatus("Your Order is on the way");
-        orders=ordersRepo.save(orders);
+        orders = ordersRepo.save(orders);
 
-        List<OrderItem> orderItems=new ArrayList<>();
-        for(int i=0;i<n;i++)
-        {
-            OrderItem orderItem=new OrderItem();
+        List<OrderItem> orderItems = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            OrderItem orderItem = new OrderItem();
             orderItem.setProduct(cartItems.get(i).getProduct());
             orderItem.setQuantity(cartItems.get(i).getQuantity());
             orderItem.setOrders(orders);

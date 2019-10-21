@@ -29,11 +29,13 @@
         <form class="form-inline col-md-8" onsubmit="return false" autocomplete="off">
             <div class="flex-fill search">
                 <div class="input-group w-75 mx-auto">
-                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()" id="search-string">
+                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()"
+                           id="search-string">
                     <div class="input-group-append">
-                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search"
+                                                                                  aria-hidden="true"></i></button>
                     </div>
-                    <div  id="search-content">
+                    <div id="search-content">
                     </div>
                 </div>
 
@@ -44,7 +46,8 @@
             <ul class="navbar-nav text-center ml-auto ">
 
 
-                <li class="nav-item py-3 pr-2" id="cart" ><a href="/cart" title="" class="nav-link" style="cursor: pointer">
+                <li class="nav-item py-3 pr-2" id="cart"><a href="/cart" title="" class="nav-link"
+                                                            style="cursor: pointer">
                     <i class="fa fa-shopping-cart pr-2" aria-hidden="true"></i>Cart</a></li>
                 <li class="nav-item py-3 pr-2" id="sign"><a href="" title="" class="nav-link" data-toggle="modal"
                                                             data-target="#signup"><i class="fa fa-user pr-2"
@@ -57,15 +60,19 @@
                     </a>
                     <div class="arrow-up"></div>
                     <div class="dropdown-content" style="top:72px;left:-25px;">
-                        <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2"
+                                                                                         aria-hidden="true"></i>
                             My Profile</a>
-                        <a class="item" href="/orderHistory" id="order-history" style="text-decoration: none">My Orders</a>
+                        <a class="item" href="/orderHistory" id="order-history" style="text-decoration: none">My
+                            Orders</a>
                         <a class="item" href="/adminPage" id="admin" style="text-decoration: none">AdminPage</a>
                     </div>
                 </li>
-                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" onclick="logPage()" style="cursor: pointer"><i
+                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" onclick="logPage()"
+                                                           style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Login</a></li>
-                <li class="nav-item username py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
+                <li class="nav-item username py-3 pr-2" id="logout"><a onclick="logout()" title="" class="nav-link"
+                                                                       style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
@@ -74,8 +81,9 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
-                    <div class="dropdown-content" id="electronics" >
+                    <span class="dropbtn p-2" onclick="redirect('electronics')"
+                          onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <div class="dropdown-content" id="electronics">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
@@ -84,17 +92,20 @@
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('women')" onmouseover="getSubcategories('women')">Women</span>
+                    <span class="dropbtn p-2" onclick="redirect('women')"
+                          onmouseover="getSubcategories('women')">Women</span>
                     <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('home&furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <span class="dropbtn p-2" onclick="redirect('home&furniture')"
+                          onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
                     <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('books')" onmouseover="getSubcategories('books')">Books</span>
+                    <span class="dropbtn p-2" onclick="redirect('books')"
+                          onmouseover="getSubcategories('books')">Books</span>
                     <div class="dropdown-content" id="books">
                     </div>
                 </div>
@@ -124,7 +135,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
-                           placeholder="Enter password" name="password" >
+                           placeholder="Enter password" name="password">
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
                                                                         style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
@@ -201,68 +212,78 @@
             <div class="border border-bottom-1 p-3">
                 <div class="setting" id="get-orders">
                     <i class="fa fa-server mr-2 text-primary" aria-hidden="true"></i>
-                    <span class="text-secondary font-weight-bold">MY ORDERS</span> <i class="fa fa-chevron-right ml-4 text-secondary" aria-hidden="true"></i>
+                    <span class="text-secondary font-weight-bold">MY ORDERS</span> <i
+                        class="fa fa-chevron-right ml-4 text-secondary" aria-hidden="true"></i>
                 </div>
             </div>
             <div class="border border-bottom-1 p-3">
-                <i class="fa fa-user mr-2 text-primary" aria-hidden="true"></i> <span class="text-secondary font-weight-bold">ACCOUNT SETTINGS</span>
+                <i class="fa fa-user mr-2 text-primary" aria-hidden="true"></i> <span
+                    class="text-secondary font-weight-bold">ACCOUNT SETTINGS</span>
                 <ul id="setting-list">
                     <li id="personal-info-btn" class="setting">Personal Info</li>
                     <li id="manage-addresses-btn" class="setting">Manage Address</li>
                 </ul>
             </div>
             <div class="border border-bottom-1 p-3">
-                <div class="d-inline setting" onclick="logout()"><i class="fa fa-power-off mr-2 text-primary" aria-hidden="true"></i> <span class="text-secondary font-weight-bold">LOGOUT</span></div>
+                <div class="d-inline setting" onclick="logout()"><i class="fa fa-power-off mr-2 text-primary"
+                                                                    aria-hidden="true"></i> <span
+                        class="text-secondary font-weight-bold">LOGOUT</span></div>
             </div>
         </div>
     </div>
     <div class="container col-sm-8" id="personal-info-bar">
         <div class="bg-white mt-3" style="height: 97%">
             <div id="message" class="text-success"></div>
-        <div>
-            <div class="bg-white p-4 font-weight-bolder" >Personal Information <span id="edit-personal-info" class="text-primary ml-3 small edit">Edit</span></div>
-            <form action="#">
-                <div class="d-inline-flex">
-                    <div class="form-group pl-3 mb-0">
-                    <input type="text" class="form-control" id="first-name" placeholder="First Name" readonly>
-                    </div>
-                    <div class="form-group px-3 mb-0 ">
-                        <input type="text" class="form-control " id="last-name" placeholder="Last Name" readonly>
-                    </div>
-                    <input type="submit"  class="btn btn-primary " id="name-save-btn" value="Save">
+            <div>
+                <div class="bg-white p-4 font-weight-bolder">Personal Information <span id="edit-personal-info"
+                                                                                        class="text-primary ml-3 small edit">Edit</span>
                 </div>
+                <form action="#">
+                    <div class="d-inline-flex">
+                        <div class="form-group pl-3 mb-0">
+                            <input type="text" class="form-control" id="first-name" placeholder="First Name" readonly>
+                        </div>
+                        <div class="form-group px-3 mb-0 ">
+                            <input type="text" class="form-control " id="last-name" placeholder="Last Name" readonly>
+                        </div>
+                        <input type="submit" class="btn btn-primary " id="name-save-btn" value="Save">
+                    </div>
 
-            </form>
-        </div>
-        <div class="mt-5">
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span id="edit-email" class="text-primary ml-3 small edit">Edit</span></div>
-            <form action="#">
-                <div class="d-inline-flex">
-                <div class="form-group pl-3 mb-0 w-75 px-3">
-                    <input type="text" class="form-control" id="emailId" placeholder="Email" readonly>
+                </form>
+            </div>
+            <div class="mt-5">
+                <div class="bg-white my-3 p-2 font-weight-bolder">Email Address <span id="edit-email"
+                                                                                      class="text-primary ml-3 small edit">Edit</span>
                 </div>
-                <input type="submit" class="btn btn-primary " id="email-save-btn" value="Save">
-                </div>
-            </form>
-        </div>
-        <div class="mt-5">
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Mobile Number <span id="edit-mobile-number" class="text-primary ml-3 small edit">Edit</span></div>
-            <form action="#">
-                <div class="d-inline-flex">
-                    <div class="form-group pl-3 mb-0 w-75 px-3">
-                        <input type="text" class="form-control" id="mobile-number" placeholder="Mobile" readonly>
+                <form action="#">
+                    <div class="d-inline-flex">
+                        <div class="form-group pl-3 mb-0 w-75 px-3">
+                            <input type="text" class="form-control" id="emailId" placeholder="Email" readonly>
+                        </div>
+                        <input type="submit" class="btn btn-primary " id="email-save-btn" value="Save">
                     </div>
-                    <input type="submit" class="btn btn-primary " id="phone-save-btn" value="Save">
+                </form>
+            </div>
+            <div class="mt-5">
+                <div class="bg-white my-3 p-2 font-weight-bolder">Mobile Number <span id="edit-mobile-number"
+                                                                                      class="text-primary ml-3 small edit">Edit</span>
                 </div>
-            </form>
-        </div>
+                <form action="#">
+                    <div class="d-inline-flex">
+                        <div class="form-group pl-3 mb-0 w-75 px-3">
+                            <input type="text" class="form-control" id="mobile-number" placeholder="Mobile" readonly>
+                        </div>
+                        <input type="submit" class="btn btn-primary " id="phone-save-btn" value="Save">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="container col-sm-8 " id="manage-addresses-bar">
         <div class="bg-white mt-3" style="height: 97%">
             <div id="message-address" class="text-success"></div>
-            <div >
-                <h5 class="bg-white p-4 font-weight-bolder m-0" >Manage Addresses</h5>
+            <div>
+                <h5 class="bg-white p-4 font-weight-bolder m-0">Manage Addresses</h5>
             </div>
             <div class="border mx-3 p-3 text-primary rounded setting" id="add-address-btn">
                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -271,7 +292,7 @@
             <div id="add-address" class="px-3">
                 <span id="address-id"></span>
                 <form action="#">
-                    <div class="text-primary p-3 font-weight-bold" id="address-heading" >Add New Address</div>
+                    <div class="text-primary p-3 font-weight-bold" id="address-heading">Add New Address</div>
                     <div class="d-inline-flex p-2">
                         <div class="form-group pl-3 mb-0">
                             <input type="text" class="form-control" id="street" placeholder="Area and Street">
@@ -282,7 +303,8 @@
                     </div>
                     <div class="d-inline-flex p-2 ">
                         <div class="form-group pl-3 mb-0">
-                            <input type="text" class="form-control" id="pincode" placeholder="Pincode" maxlength="6" minlength="6">
+                            <input type="text" class="form-control" id="pincode" placeholder="Pincode" maxlength="6"
+                                   minlength="6">
                         </div>
                         <div class="form-group px-3 mb-0 ">
                             <input type="text" class="form-control " id="state" placeholder="State">
@@ -290,8 +312,10 @@
                     </div>
                     <br>
                     <div class="d-inline-flex px-4 py-2 w-50">
-                        <input type="submit" class="btn btn-primary px-3 font-weight-bold" id="address-save-btn" value="Save">
-                        <a href="#" id="hide-add-address" class="text-primary font-weight-bold ml-4 pt-2" style="text-decoration: none"> Cancel </a>
+                        <input type="submit" class="btn btn-primary px-3 font-weight-bold" id="address-save-btn"
+                               value="Save">
+                        <a href="#" id="hide-add-address" class="text-primary font-weight-bold ml-4 pt-2"
+                           style="text-decoration: none"> Cancel </a>
                     </div>
 
                 </form>

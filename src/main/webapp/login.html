@@ -31,11 +31,13 @@
         <form class="form-inline col-md-8" onsubmit="return false" autocomplete="off">
             <div class="flex-fill search">
                 <div class="input-group w-75 mx-auto">
-                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()" id="search-string">
+                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()"
+                           id="search-string">
                     <div class="input-group-append">
-                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search"
+                                                                                  aria-hidden="true"></i></button>
                     </div>
-                    <div  id="search-content">
+                    <div id="search-content">
                     </div>
                 </div>
 
@@ -46,10 +48,12 @@
             <ul class="navbar-nav text-center ml-auto ">
 
 
-                <li class="nav-item py-3 pr-2" id="cart" ><a href="/cart" title="" class="nav-link" style="cursor: pointer">
+                <li class="nav-item py-3 pr-2" id="cart"><a href="/cart" title="" class="nav-link"
+                                                            style="cursor: pointer">
                     <i class="fa fa-shopping-cart pr-2" aria-hidden="true"></i>Cart</a></li>
-                <li class="nav-item py-3 pr-2" id="sign"><a href="#" title="" class="nav-link"><i class="fa fa-user pr-2"
-                                                                                     aria-hidden="true"></i>Sign Up</a>
+                <li class="nav-item py-3 pr-2" id="sign"><a href="#" title="" class="nav-link"><i
+                        class="fa fa-user pr-2"
+                        aria-hidden="true"></i>Sign Up</a>
                 </li>
                 <li class="nav-item dropdown py-3 pr-2" id="userS">
                     <a href="" title="" class="nav-link dropbtn"><i class="fa fa-user pr-2"
@@ -58,15 +62,17 @@
                     </a>
                     <div class="arrow-up"></div>
                     <div class="dropdown-content" style="top:72px;left:-25px;">
-                        <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2"
+                                                                                         aria-hidden="true"></i>
                             My Profile</a>
                         <a class="item" href="/orderHistory" style="text-decoration: none">My Orders</a>
                         <a class="item" href="/adminPage" id="admin" style="text-decoration: none">AdminPage</a>
                     </div>
                 </li>
-                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link"  style="cursor: pointer"><i
+                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Login</a></li>
-                <li class="nav-item username py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
+                <li class="nav-item username py-3 pr-2" id="logout"><a onclick="logout()" title="" class="nav-link"
+                                                                       style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
@@ -75,8 +81,9 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
-                    <div class="dropdown-content" id="electronics" >
+                    <span class="dropbtn p-2" onclick="redirect('electronics')"
+                          onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <div class="dropdown-content" id="electronics">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
@@ -85,17 +92,20 @@
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('women')" onmouseover="getSubcategories('women')">Women</span>
+                    <span class="dropbtn p-2" onclick="redirect('women')"
+                          onmouseover="getSubcategories('women')">Women</span>
                     <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('home&furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <span class="dropbtn p-2" onclick="redirect('home&furniture')"
+                          onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
                     <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="redirect('books')" onmouseover="getSubcategories('books')">Books</span>
+                    <span class="dropbtn p-2" onclick="redirect('books')"
+                          onmouseover="getSubcategories('books')">Books</span>
                     <div class="dropdown-content" id="books">
                     </div>
                 </div>
@@ -134,7 +144,7 @@
                     <input type="submit" name="login" value="LOGIN" class="btn btn-primary w-100">
                 </div>
             </form>
-            
+
         </div>
     </div>
 </div>
@@ -179,7 +189,6 @@
         </div>
     </div>
 </div>
-
 
 
 </body>

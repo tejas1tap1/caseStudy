@@ -19,7 +19,7 @@ public class UserProfile {
     private String email;
     @Column(nullable = true)
     private long phone;
-    @OneToMany(orphanRemoval=true,cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Address> addresses;
 
     public long getUserId() {

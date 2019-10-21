@@ -1,7 +1,5 @@
 package com.beehyv.shoppingcart.dto;
 
-import com.beehyv.shoppingcart.entity.Product;
-
 public class OrderItemDTO {
     private long OrderItemId;
     private ProductDTO productDTO;

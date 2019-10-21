@@ -1,9 +1,7 @@
 package com.beehyv.shoppingcart.mapper;
 
 import com.beehyv.shoppingcart.dto.OrderItemDTO;
-import com.beehyv.shoppingcart.dto.ProductDTO;
 import com.beehyv.shoppingcart.entity.OrderItem;
-import com.beehyv.shoppingcart.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -12,7 +10,8 @@ import java.util.List;
 
 @Mapper(uses = {ProductMapper.class})
 public interface OrderItemMapper {
-    OrderItemMapper INSTANCE= Mappers.getMapper(OrderItemMapper.class);
+    OrderItemMapper INSTANCE = Mappers.getMapper(OrderItemMapper.class);
+
     @Mapping(target = "productDTO", source = "product")
     OrderItemDTO toOrderItemDTO(OrderItem orderItem);
 

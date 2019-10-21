@@ -9,8 +9,10 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface UserProfileMapper {
     UserProfileMapper INSTANCE = Mappers.getMapper(UserProfileMapper.class);
+
     @Mapping(target = "addresses", source = "addresses")
     UserProfileDTO toUserProfileDTO(UserProfile userProfile);
+
     @Mapping(target = "addresses", source = "addresses")
     UserProfile toUserProfile(UserProfileDTO userProfileDTO);
 

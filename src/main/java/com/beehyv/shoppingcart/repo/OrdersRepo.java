@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface OrdersRepo extends JpaRepository<Orders,Long> {
-List<Orders> findByUserProfile(UserProfile userProfile);
+public interface OrdersRepo extends JpaRepository<Orders, Long> {
+    List<Orders> findByUserProfile(UserProfile userProfile);
 
 }

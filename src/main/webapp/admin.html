@@ -29,11 +29,13 @@
         <form class="form-inline col-md-8" onsubmit="return false" autocomplete="off">
             <div class="flex-fill search">
                 <div class="input-group w-75 mx-auto">
-                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()" id="search-string">
+                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()"
+                           id="search-string">
                     <div class="input-group-append">
-                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search"
+                                                                                  aria-hidden="true"></i></button>
                     </div>
-                    <div  id="search-content">
+                    <div id="search-content">
                     </div>
                 </div>
 
@@ -44,7 +46,8 @@
             <ul class="navbar-nav text-center ml-auto ">
 
 
-                <li class="nav-item py-3 pr-2" ><a id="add-product-btn" title="" class="nav-link" style="cursor: pointer">
+                <li class="nav-item py-3 pr-2"><a id="add-product-btn" title="" class="nav-link"
+                                                  style="cursor: pointer">
                     <i class="fa fa-plus pr-2" aria-hidden="true"></i>Add Product</a></li>
 
                 <li class="nav-item dropdown py-3 pr-2" id="userS">
@@ -53,7 +56,8 @@
                             id="user-name"></span>
                     </a>
                 </li>
-                <li class="nav-item  py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
+                <li class="nav-item  py-3 pr-2" id="logout"><a onclick="logout()" title="" class="nav-link"
+                                                               style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
@@ -99,7 +103,7 @@
 <div id="add-product" class="p-5">
     <span id="product-id" class="d-none"></span>
     <form class="">
-        <div class="text-primary p-3 font-weight-bold" id="product-heading" >Add New Product</div>
+        <div class="text-primary p-3 font-weight-bold" id="product-heading">Add New Product</div>
         <div class="d-inline-flex p-2">
             <div class="form-group pl-3 mb-0">
                 <input type="text" class="form-control" id="product-name" placeholder="Name" required>
@@ -128,19 +132,22 @@
             </div>
             <div class="form-group px-3 mb-0 dropdown ">
                 <input type="text" class="form-control dropbtn" id="product-subcategory" placeholder="Main SubCategory">
-                <div class="dropdown-content" id="main-subcategories" >
+                <div class="dropdown-content" id="main-subcategories">
                 </div>
             </div>
-            <div  id="sub-categories">
+            <div id="sub-categories">
             </div>
             <div class="add-subcategory mt-2">
-                <a href="#" id="add-subcategory-btn" style="text-decoration: none" class="bg-primary p-2 rounded text-white"><i class="fa fa-plus" aria-hidden="true"></i> Add SubCategory</a>
+                <a href="#" id="add-subcategory-btn" style="text-decoration: none"
+                   class="bg-primary p-2 rounded text-white"><i class="fa fa-plus" aria-hidden="true"></i> Add
+                    SubCategory</a>
             </div>
         </div>
         <br>
         <div class="d-inline-flex px-4 py-2 w-50">
             <input type="submit" class="btn btn-primary px-3 font-weight-bold" id="product-save-btn" value="Save">
-            <a href="#" id="hide-add-product" class="text-primary font-weight-bold ml-4 pt-2" style="text-decoration: none"> Cancel </a>
+            <a href="#" id="hide-add-product" class="text-primary font-weight-bold ml-4 pt-2"
+               style="text-decoration: none"> Cancel </a>
         </div>
 
     </form>

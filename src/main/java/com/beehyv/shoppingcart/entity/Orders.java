@@ -1,8 +1,7 @@
 package com.beehyv.shoppingcart.entity;
 
-import java.util.List;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Orders {
@@ -11,15 +10,16 @@ public class Orders {
     @Column(name = "orderId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
-    @OneToMany(mappedBy = "orders",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
     @Column
     private String orderStatus;
-	@ManyToOne
-	UserProfile userProfile;
-	@ManyToOne
+    @ManyToOne
+    UserProfile userProfile;
+    @ManyToOne
     Address address;
-	public UserProfile getUserProfile() {
+
+    public UserProfile getUserProfile() {
         return userProfile;
     }
 

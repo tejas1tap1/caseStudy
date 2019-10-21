@@ -4,6 +4,7 @@ public class UserCredentialsDTO {
     private String email;
     private String password;
     private UserProfileDTO userProfileDTO;
+
     public String getEmail() {
         return email;
     }
