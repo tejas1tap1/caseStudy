@@ -29,7 +29,15 @@ function getDetails() {
                 "<p>"+addresses[i].state+" - "+addresses[i].pincode+"</p>"+
                 "</div>";
         }
+        if (user.email=="admin")
+        {
+            $("#order-history").hide();
+            $("#get-orders").hide();
+            $("#cart").hide();
+            $("#admin").show();
+        }
         $("#addresses").html(txt);
+
         return;
     }
     var xhttp = new XMLHttpRequest();
@@ -83,7 +91,7 @@ function deleteAddress(Obj)
             $("#message-address").text("Deleted Successfully");
             $("#message-address").fadeIn();
             $("#message-address").fadeOut(3000);
-
+            $.cookie('user',JSON.stringify(user));
             //Obj.parentNode.parentNode.parentNode.parentNode.removeChild(Obj.parentNode.parentNode.parentNode);
             getDetails();
         }
@@ -281,7 +289,7 @@ jQuery(document).ready(function ($){
                 $("#message-address").fadeOut(3000);
                 $("#add-address").hide();
                 $("#add-address-btn").show();
-                $.cookie('user',JSON.stringify(user));
+                $.removeCookie('user');
                 getDetails();
             }
         };
@@ -291,22 +299,3 @@ jQuery(document).ready(function ($){
     })
 
 });
-// function getUserId() {
-//     var userId;
-//     if($.cookie('userId')!='' && $.cookie('userId')!=undefined)
-//     {
-//         return $.cookie('userId');
-//     }
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             userId=JSON.parse(this.responseText);
-//             $.cookie('userId',userId);
-//
-//         }
-//     };
-//     xhttp.open("GET", "/user-id", false);
-//     xhttp.send();
-//     return userId;
-//
-// }

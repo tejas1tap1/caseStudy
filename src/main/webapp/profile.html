@@ -14,11 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <script src="script_profile.js"></script>
     <script src="script_homepage.js"></script>
-<!--    <script>-->
-<!--        $(function(){-->
-<!--            $("#header").load("homepage.html");-->
-<!--        });-->
-<!--    </script>-->
+
     <title>Profile</title>
 
 </head>
@@ -63,7 +59,7 @@
                     <div class="dropdown-content" style="top:72px;left:-25px;">
                         <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
                             My Profile</a>
-                        <a class="item" href="/orderHistory" style="text-decoration: none">My Orders</a>
+                        <a class="item" href="/orderHistory" id="order-history" style="text-decoration: none">My Orders</a>
                         <a class="item" href="/adminPage" id="admin" style="text-decoration: none">AdminPage</a>
                     </div>
                 </li>
@@ -78,27 +74,27 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics'),loadFilters('Electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <span class="dropbtn p-2" onclick="redirect('electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
                     <div class="dropdown-content" id="electronics" >
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('men'),loadFilters('Men')" onmouseover="getSubcategories('men')">Men</span>
+                    <span class="dropbtn p-2" onclick="redirect('men')" onmouseover="getSubcategories('men')">Men</span>
                     <div class="dropdown-content" id="men">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('women'),loadFilters('Women')" onmouseover="getSubcategories('women')">Women</span>
+                    <span class="dropbtn p-2" onclick="redirect('women')" onmouseover="getSubcategories('women')">Women</span>
                     <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture'),loadFilters('Home&Furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <span class="dropbtn p-2" onclick="redirect('home&furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
                     <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('books'),loadFilters('Books')" onmouseover="getSubcategories('books')">Books</span>
+                    <span class="dropbtn p-2" onclick="redirect('books')" onmouseover="getSubcategories('books')">Books</span>
                     <div class="dropdown-content" id="books">
                     </div>
                 </div>
@@ -107,7 +103,6 @@
     </div>
 </header>
 <script> loadUsername();</script>
-
 <div class="modal" id="login">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content pt-5">
@@ -121,7 +116,7 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="username" id="username" required>
+                           placeholder="Enter email" name="username" id="username">
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -129,7 +124,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
-                           placeholder="Enter password" name="password" required >
+                           placeholder="Enter password" name="password" >
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
                                                                         style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
@@ -140,7 +135,7 @@
                     <input type="submit" name="login" value="LOGIN" class="btn btn-primary w-100">
                 </div>
             </form>
-            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" onclick="signUpPage()">New User</a>
+            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" href="addUser">New User</a>
 
 
         </div>
@@ -157,18 +152,16 @@
             <form class="mt-5" id="signupform" method="Post">
                 <div class="input-group w-75 mx-auto mb-3">
 
-                    <input type="text" class="form-control" id="first-name" placeholder="First name"
-                           name="first-name" required>
-                    <input type="text" class="form-control" id="last-name" placeholder="Last Name"
-                           name="first-name" >
+                    <input type="text" class="form-control" id="name" placeholder="Enter name"
+                           name="userProfileDTO.name">
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-white"><i class="fa fa-user icon"
                                                                    style="width:16px"></i></span>
                     </div>
-                    <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="email" id="email" required>
+                    <input type="email" class="form-control border border-left-0 pl-0"
+                           placeholder="Enter email" name="email" id="email">
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -176,7 +169,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Enter password" name="password" id="pwd" required>
+                           placeholder="Enter password" name="password" id="pwd">
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -184,7 +177,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Reenter password" id="repwd" required>
+                           placeholder="Reenter password" id="repwd">
                 </div>
                 <div class="input-group w-75 mx-auto mb-4">
                     <input type="submit" name="Submit" value="Submit" class="btn btn-primary w-100">
@@ -198,7 +191,6 @@
         </button>
     </div>
 </div>
-<!--<div id="header"></div>-->
 <div class="container-flow row" id="body">
     <div class="container col-sm-4" id="left-bar">
         <div class="bg-white my-3 shadow p-2">
@@ -207,7 +199,7 @@
         </div>
         <div class="bg-white shadow ">
             <div class="border border-bottom-1 p-3">
-                <div class="d-inline setting" id="get-orders">
+                <div class="setting" id="get-orders">
                     <i class="fa fa-server mr-2 text-primary" aria-hidden="true"></i>
                     <span class="text-secondary font-weight-bold">MY ORDERS</span> <i class="fa fa-chevron-right ml-4 text-secondary" aria-hidden="true"></i>
                 </div>
@@ -243,7 +235,7 @@
             </form>
         </div>
         <div class="mt-5">
-            <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span id="edit-email" class="text-primary ml-3 small edit">Edit</span> <span class="text-primary ml-3 small">Change Password</span></div>
+            <div class="bg-white my-3 p-2 font-weight-bolder" >Email Address <span id="edit-email" class="text-primary ml-3 small edit">Edit</span></div>
             <form action="#">
                 <div class="d-inline-flex">
                 <div class="form-group pl-3 mb-0 w-75 px-3">

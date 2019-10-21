@@ -1,3 +1,23 @@
+function redirectCategoryPage() {
+    if($.cookie('redirect-category')!=null) {
+        category = $.cookie('redirect-category');
+        loadFilters(category);
+        getProductByCategory(category);
+        $.removeCookie('redirect-category');
+    }
+}
+function redirectMarkedPage() {
+    if($.cookie('marked-filter-obj')!=null)
+    {
+        var a=$.cookie('marked-filter-obj').split(" ");
+
+        var category=a[0];
+        loadFilters(category);
+        $.cookie('marked-subCategory',a[1]);
+        getProductByCategory(category);
+        $.removeCookie('marked-filter-obj');
+    }
+}
 function loadFilters(category) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -76,11 +96,4 @@ var filters={
     xhttp.open("POST", u, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(filters));
-}
-function loadMarkedFilters(Obj) {
-var category=Obj.parentNode.id;
-loadFilters(category);
-$.cookie('marked-subCategory',Obj.innerHTML);
-getProductByCategory(category);
-
 }

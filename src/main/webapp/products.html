@@ -20,7 +20,7 @@
     </title>
 </head>
 
-<body class="" onload="loadUsername()">
+<body class="" onload="loadUsername(),redirectCategoryPage(),redirectMarkedPage()">
 <header class="container-flow sticky-top">
     <nav class="navbar navbar-expand-sm  bg-dark navbar-dark p-0 sticky-top">
         <a class="navbar-brand text-center ml-4 mr-5 px-2 " id="demo" href="/home">Shopping Cart</a>
@@ -205,7 +205,7 @@
             <h5>Price</h5>
             <div class="form-group d-flex">
                 <input type="number" class="form-control-range rounded mr-4" min="0" value="0" placeholder="Min" id="min-price" onkeyup="getFilteredProducts()">
-                <input type="number" class="form-control-range rounded" min="0" value="100000" placeholder="Max" id="max-price" onkeyup="getFilteredProducts()">
+                <input type="number" class="form-control-range rounded" min="0" value="10000000" placeholder="Max" id="max-price" onkeyup="getFilteredProducts()">
             </div>
             <h5>Filters</h5>
             <div id="other-subcategories"></div>

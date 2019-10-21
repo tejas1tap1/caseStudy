@@ -52,9 +52,24 @@ public class ProductServices {
     }
     //need to be rewrite the code
     public Product updateProduct(Product product) {
-        if(productRepo.findByProductId(product.getProductId())!=null)
-           return productRepo.save(product);
-        return null;
+
+        if(productRepo.findByProductId(product.getProductId())==null)
+        { return null;}
+        Category category = categoryRepo.findByName(product.getCategory().getName());
+        if(category!=null)
+        {
+            product.setCategory(category);
+        }
+        List<SubCategory> subCategories=new ArrayList<>();
+        for(int i=0;i<product.getSubCategories().size();i++) {
+            SubCategory subCategory=subCategoryRepo.findByName(product.getSubCategories().get(i).getName());
+            if(subCategory!=null)
+                subCategories.add(subCategory);
+            else subCategories.add(product.getSubCategories().get(i));
+        }
+        product.setSubCategories(subCategories);
+
+        return productRepo.save(product);
     }
     public List<SubCategory> getSubCategories(String category)
     {
@@ -73,11 +88,11 @@ public class ProductServices {
         try{
             if(category1.getSubCategories()!=null)
                 subCategories=category1.getSubCategories();
-           // System.out.println("outside"+ subCategories);
+            //System.out.println("outside"+ subCategories);
             for(int i=0;i<subCategories.size();i++)
             {
                // System.out.println(subCategories.get(i).getName()+subCategory.getName());
-                if(subCategories.get(i).getName()==subCategory.getName())
+                if(subCategories.get(i).getName().equals(subCategory.getName()))
                     return ResponseEntity.ok("Success");
             }
         }
@@ -102,15 +117,13 @@ public class ProductServices {
     }
     public List<Product> getProductsBySearchString(String search)
     {
-        List<Product> searchProduct = productRepo.findByNameContaining(search);
-        searchProduct.addAll(productRepo.findByDetailsContaining(search));
-//        List<SubCategory> subCategories=subCategoryRepo.findByNameContaining(search);
-//        for(SubCategory subCategory: subCategories)
-//        {
-//            searchProduct.addAll(productRepo.findBySubCategory(subCategory));
-//        }
-        searchProduct.addAll(productRepo.findByCategory(categoryRepo.findByNameLike(search)));
-
+        List<Product> searchProduct=new ArrayList<>();
+        String[] a=search.split(" ");
+        for(int i=0;i<a.length;i++) {
+            searchProduct = productRepo.findByNameContaining(a[i]);
+            searchProduct.addAll(productRepo.findByDetailsContaining(a[i]));
+            searchProduct.addAll(productRepo.findByCategory(categoryRepo.findByNameLike(a[i])));
+        }
      return  searchProduct;
     }
     public  List<Product> getFilteredProductsByCategory(String category, Filters filters)

@@ -48,13 +48,26 @@
 
                 <li class="nav-item py-3 pr-2" id="cart" ><a href="/cart" title="" class="nav-link" style="cursor: pointer">
                     <i class="fa fa-shopping-cart pr-2" aria-hidden="true"></i>Cart</a></li>
-                <li class="nav-item py-3 pr-2" id="sign"><a href="#" title="" class="nav-link"
-                                                           ><i class="fa fa-user pr-2"
+                <li class="nav-item py-3 pr-2" id="sign"><a href="#" title="" class="nav-link"><i class="fa fa-user pr-2"
                                                                                      aria-hidden="true"></i>Sign Up</a>
                 </li>
-
-                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" style="cursor: pointer"><i
+                <li class="nav-item dropdown py-3 pr-2" id="userS">
+                    <a href="" title="" class="nav-link dropbtn"><i class="fa fa-user pr-2"
+                                                                    aria-hidden="true"></i><span
+                            id="user-name"></span><i class="fa fa-caret-down pl-1" aria-hidden="true"></i>
+                    </a>
+                    <div class="arrow-up"></div>
+                    <div class="dropdown-content" style="top:72px;left:-25px;">
+                        <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                            My Profile</a>
+                        <a class="item" href="/orderHistory" style="text-decoration: none">My Orders</a>
+                        <a class="item" href="/adminPage" id="admin" style="text-decoration: none">AdminPage</a>
+                    </div>
+                </li>
+                <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link"  style="cursor: pointer"><i
                         class="fa fa-sign-in pr-2" aria-hidden="true"></i>Login</a></li>
+                <li class="nav-item username py-3 pr-2" id="logout" ><a  onclick="logout()" title="" class="nav-link" style="cursor: pointer"><i
+                        class="fa fa-sign-in pr-2" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -62,58 +75,28 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics')">Electronics</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="redirect('electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <div class="dropdown-content" id="electronics" >
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('men')">Men</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="redirect('men')" onmouseover="getSubcategories('men')">Men</span>
+                    <div class="dropdown-content" id="men">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('women')">Women</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="redirect('women')" onmouseover="getSubcategories('women')">Women</span>
+                    <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture')">Home & Furniture</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="redirect('home&furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('books')">Books</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="redirect('books')" onmouseover="getSubcategories('books')">Books</span>
+                    <div class="dropdown-content" id="books">
                     </div>
                 </div>
             </div>

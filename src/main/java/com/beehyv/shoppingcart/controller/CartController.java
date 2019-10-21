@@ -17,36 +17,60 @@ import java.util.List;
 public class CartController {
     @Autowired
     private CartServices cartServices;
+    @Autowired
+    SecurityController securityController;
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/cart/{userId}/get-cart")
     public  ResponseEntity getAllCartItems(@PathVariable("userId") long userId) {
-        if(CartItemMapper.INSTANCE.toCartItemsDTO(cartServices.getAllCartItems(userId))==null)
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("empty");
-        return ResponseEntity.ok(CartItemMapper.INSTANCE.toCartItemsDTO(cartServices.getAllCartItems(userId)));
+        if(userId==securityController.currentUserId()) {
+            if(CartItemMapper.INSTANCE.toCartItemsDTO(cartServices.getAllCartItems(userId))==null)
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("empty");
+            return ResponseEntity.ok(CartItemMapper.INSTANCE.toCartItemsDTO(cartServices.getAllCartItems(userId)));
+        }
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failure");
     }
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/cart/{userId}/get-cart-item/{cartItemId}")
-    public CartItemDTO getCartItem(@PathVariable("userId") long userId,@PathVariable("cartItemId")long cartItemId)
+    public ResponseEntity getCartItem(@PathVariable("userId") long userId,@PathVariable("cartItemId")long cartItemId)
     {
-        return CartItemMapper.INSTANCE.cartItemToCartItemDTO(cartServices.getCartItem(userId,cartItemId));
+        if(userId==securityController.currentUserId()) {
+
+            return ResponseEntity.ok(CartItemMapper.INSTANCE.cartItemToCartItemDTO(cartServices.getCartItem(userId,cartItemId)));
+        }
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failure");
+
     }
     @PreAuthorize("hasAnyRole('USER')")
     @PostMapping("/cart/{userId}/add/{productId}")
-    public ResponseEntity<?> addToCart(@PathVariable("userId") long userId, @PathVariable("productId")long productId)
+    public ResponseEntity addToCart(@PathVariable("userId") long userId, @PathVariable("productId")long productId)
     {
-        return ResponseEntity.ok(CartItemMapper.INSTANCE.cartItemToCartItemDTO(cartServices.addToCart(userId,productId)));
+        if(userId==securityController.currentUserId()) {
+
+            return ResponseEntity.ok(CartItemMapper.INSTANCE.cartItemToCartItemDTO(cartServices.addToCart(userId,productId)));
+        }
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failure");
+
     }
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/cart/{userId}/remove/{productId}")
-    public ResponseEntity<?> removeFromCart(@PathVariable("userId") long userId,@PathVariable("productId")long productId)
+    public ResponseEntity removeFromCart(@PathVariable("userId") long userId,@PathVariable("productId")long productId)
     {
-        return ResponseEntity.ok(cartServices.removeFromCart(userId,productId));
+        if(userId==securityController.currentUserId()) {
+
+            return ResponseEntity.ok(cartServices.removeFromCart(userId,productId));
+        }
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failure");
+
     }
     @PreAuthorize("hasAnyRole('USER')")
     @PutMapping("/cart/{userId}/changeQuantity/{productId}")
-    public CartItemDTO changeQuantityOfProduct(@PathVariable("userId") long userId,@PathVariable("productId")long productId,@RequestBody long quantity)
+    public ResponseEntity changeQuantityOfProduct(@PathVariable("userId") long userId,@PathVariable("productId")long productId,@RequestBody long quantity)
     {
-        return  CartItemMapper.INSTANCE.cartItemToCartItemDTO(cartServices.changeQuantityOfProduct(userId, productId, quantity));
+        if(userId==securityController.currentUserId()) {
+
+            return ResponseEntity.ok(CartItemMapper.INSTANCE.cartItemToCartItemDTO(cartServices.changeQuantityOfProduct(userId, productId, quantity)));
+        }
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failure");
     }
 
 }

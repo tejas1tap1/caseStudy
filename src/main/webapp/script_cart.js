@@ -31,10 +31,11 @@ function loadCartItems() {
     var userId=JSON.parse($.cookie('user')).userId;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
+        var totalPrice=0;
         if (this.readyState == 4 && this.status == 200) {
             var cartItems=JSON.parse(this.responseText);
             var txt="";
-            var totalPrice=0;
+
             for(var i=0;i<cartItems.length;i++)
             {
                 totalPrice+=cartItems[i].product.price*cartItems[i].quantity;
@@ -66,10 +67,12 @@ function loadCartItems() {
         var txt="";
         if(this.status==204)
         {
-            txt+="<div class=\"item border text-center font-weight-bold text-primary\">\n" +
+            txt+="<h1 class=\"item border text-center font-weight-bold text-primary\">\n" +
                 "Cart is Empty"+
-                "  </div>";
+                "  </h1>";
             $("#cart-items").html(txt);
+            $(".total-price").text("₹ "+totalPrice);
+            $("place-order").hide();
         }
     };
 
@@ -113,6 +116,10 @@ function placeOrder() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
            window.location="/orderHistory"
+        }
+        if(this.status==204 && this.readyState==4)
+        {
+            alert("Your cart is empty");
         }
     };
     var u= "/order/"+userId+"/createOrder";

@@ -53,7 +53,7 @@ public class ProductController {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getProductByCategory(category));
     }
     @GetMapping("/products/search/{searchString}")
-    public List<ProductDTO> getProductBySerchString(@PathVariable("searchString")String search)
+    public List<ProductDTO> getProductBySearchString(@PathVariable("searchString")String search)
     {
         return ProductMapper.INSTANCE.toProductDTOS(productServices.getProductsBySearchString(search));
     }

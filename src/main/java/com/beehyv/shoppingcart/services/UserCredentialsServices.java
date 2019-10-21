@@ -34,7 +34,7 @@ public class UserCredentialsServices {
 //        }
 //    }
 
-    public ResponseEntity<?> SignUp(UserCredentials userCredentials) {
+    public ResponseEntity SignUp(UserCredentials userCredentials) {
         if (userCredentialsRepo.findByEmail(userCredentials.getEmail()) == null) {
             UserProfile userProfile = new UserProfile();
             userProfile.setName(userCredentials.getUserProfile().getName());
@@ -47,7 +47,7 @@ public class UserCredentialsServices {
             Long userId=userCredentialsRepo.findByEmail(userCredentials.getEmail()).getUserProfile().getUserId();
             return ResponseEntity.ok(userId);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failure");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
         }
     }
 }

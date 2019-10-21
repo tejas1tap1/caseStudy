@@ -4,7 +4,6 @@ function loadOrderHistory() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var orders=JSON.parse(this.responseText);
-            console.log(this.responseText);
             var txt="";
             for(var i=0;i<orders.length;i++)
             {
