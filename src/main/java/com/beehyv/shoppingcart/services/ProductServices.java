@@ -33,7 +33,7 @@ public class ProductServices {
     EntityManager entityManager;
 
     public Product addProduct(Product product) {
-        System.out.println(product);
+       // System.out.println(product);
         Category category = categoryRepo.findByName(product.getCategory().getName());
         if(category!=null)
         {
@@ -73,10 +73,10 @@ public class ProductServices {
         try{
             if(category1.getSubCategories()!=null)
                 subCategories=category1.getSubCategories();
-            System.out.println("outside"+ subCategories);
+           // System.out.println("outside"+ subCategories);
             for(int i=0;i<subCategories.size();i++)
             {
-                System.out.println(subCategories.get(i).getName()+subCategory.getName());
+               // System.out.println(subCategories.get(i).getName()+subCategory.getName());
                 if(subCategories.get(i).getName()==subCategory.getName())
                     return ResponseEntity.ok("Success");
             }
@@ -87,7 +87,7 @@ public class ProductServices {
         }
         subCategory=subCategoryRepo.findByName(subCategory.getName());
         subCategories.add(subCategory);
-        System.out.println(subCategories);
+        //System.out.println(subCategories);
         category1.setSubCategories(subCategories);
         categoryRepo.save(category1);
         return ResponseEntity.ok("Success");
@@ -115,30 +115,27 @@ public class ProductServices {
     }
     public  List<Product> getFilteredProductsByCategory(String category, Filters filters)
     {
+
 //        int n;
 //        if(filters.getSubCategories().isEmpty())
 //        {
 //            n=2;
 //        }
 //        else n=2;
-
-
-        Category category1=categoryRepo.findByName(category);
         CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
         CriteriaQuery<Product> criteriaQuery=criteriaBuilder.createQuery(Product.class);
         Root<Product> root= criteriaQuery.from(Product.class);
-        Join<Product,SubCategory> subCategory=root.join("subCategories");
+        //Join<Product,SubCategory> subCategory=root.join("subCategories");
         //Join<Product,Category> categoryJoin=root.join("category");
         Predicate[] predicates = new Predicate[2];
         predicates[0] = criteriaBuilder.between(root.get("price"),filters.getMinPrice(),filters.getMaxPrice());
         predicates[1]= criteriaBuilder.equal(root.get("category").get("name"),category);
-
-         //predicates[1]= criteriaBuilder.equal(categoryJoin.get("name"),category);
+        //predicates[1]= criteriaBuilder.equal(categoryJoin.get("name"),category);
 //         for(int i=0;i<n-2;i++) {
 //             predicates[2 + i] = criteriaBuilder.equal(subCategory.get("name"), filters.getSubCategories().get(i));
 //             System.out.println("here");
 //         }
-        criteriaQuery.select(root).where(predicates).distinct(true);
+        criteriaQuery.select(root).where(predicates);
         List<Product> products= entityManager.createQuery(criteriaQuery).getResultList();
         List<Product> productWithFilter =new ArrayList<>();
         List<SubCategory> subCategories=new ArrayList<>();
@@ -146,9 +143,11 @@ public class ProductServices {
         {
             subCategories.add(subCategoryRepo.findByName(filters.getSubCategories().get(i)));
         }
+
         for(int i=0;i<products.size();i++)
         {
             boolean flag=true;
+
             for(int j=0;j<subCategories.size();j++)
             {
                if(!products.get(i).getSubCategories().contains(subCategories.get(j)))

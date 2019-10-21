@@ -26,11 +26,15 @@ function loadFilters(category) {
     xhttp.send();
 }
 function getFilteredProducts() {
-let category=  $("#category-name").text();
+    let category=  $("#category-name").text().toLowerCase();
     var elements=document.getElementsByClassName("main-subcategories-check");
     var checkedElements=[];
     for(var i=0;i<elements.length;i++)
     {
+        if(elements[i].parentNode.children[1].textContent==$.cookie('marked-subCategory')) {
+            elements[i].checked = true;
+            $.removeCookie('marked-subCategory');
+        }
         if(elements[i].checked==true) {
             checkedElements.push(elements[i].parentNode.children[1].textContent);
         }
@@ -49,14 +53,12 @@ var filters={
          maxPrice:$("#max-price").val(),
          subCategories:checkedElements,
     };
-    console.log(filters);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var products= JSON.parse(this.responseText);
             var txt="";
             if(products.length==0)$("#products").text("No product of category "+category+" available")
-            console.log(products);
             for(var i=0;i<products.length;i++)
             {
                 txt+="<div class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
@@ -74,4 +76,11 @@ var filters={
     xhttp.open("POST", u, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(filters));
+}
+function loadMarkedFilters(Obj) {
+var category=Obj.parentNode.id;
+loadFilters(category);
+$.cookie('marked-subCategory',Obj.innerHTML);
+getProductByCategory(category);
+
 }

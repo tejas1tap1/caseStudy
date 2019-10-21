@@ -30,12 +30,17 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="form-inline col-md-8 " action="/action_page.php">
-            <div class="input-group w-75 mx-auto">
-                <input class="form-control" type="text" placeholder="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-light" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <form class="form-inline col-md-8" onsubmit="return false" autocomplete="off">
+            <div class="flex-fill search">
+                <div class="input-group w-75 mx-auto">
+                    <input class="form-control" type="text" placeholder="Search" onkeyup="searchOptions()" id="search-string">
+                    <div class="input-group-append">
+                        <button class="btn btn-light" onclick="searchResult()"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                    </div>
+                    <div  id="search-content">
+                    </div>
                 </div>
+
             </div>
         </form>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -58,10 +63,8 @@
                     <div class="dropdown-content" style="top:72px;left:-25px;">
                         <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
                             My Profile</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                        <a class="item" href="/orderHistory" style="text-decoration: none">My Orders</a>
+                        <a class="item" href="/adminPage" id="admin" style="text-decoration: none">AdminPage</a>
                     </div>
                 </li>
                 <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" onclick="logPage()" style="cursor: pointer"><i
@@ -75,58 +78,28 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics')">Electronics</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics'),loadFilters('Electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <div class="dropdown-content" id="electronics" >
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('men')">Men</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('men'),loadFilters('Men')" onmouseover="getSubcategories('men')">Men</span>
+                    <div class="dropdown-content" id="men">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('women')">Women</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('women'),loadFilters('Women')" onmouseover="getSubcategories('women')">Women</span>
+                    <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture')">Home & Furniture</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture'),loadFilters('Home&Furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('books')">Books</span>
-                    <div class="dropdown-content">
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Link 1</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('books'),loadFilters('Books')" onmouseover="getSubcategories('books')">Books</span>
+                    <div class="dropdown-content" id="books">
                     </div>
                 </div>
             </div>
@@ -134,6 +107,7 @@
     </div>
 </header>
 <script> loadUsername();</script>
+
 <div class="modal" id="login">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content pt-5">
@@ -147,7 +121,7 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="username" id="username">
+                           placeholder="Enter email" name="username" id="username" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -155,7 +129,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
-                           placeholder="Enter password" name="password" >
+                           placeholder="Enter password" name="password" required >
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
                                                                         style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
@@ -166,7 +140,7 @@
                     <input type="submit" name="login" value="LOGIN" class="btn btn-primary w-100">
                 </div>
             </form>
-            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" href="addUser">New User</a>
+            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" onclick="signUpPage()">New User</a>
 
 
         </div>
@@ -183,16 +157,18 @@
             <form class="mt-5" id="signupform" method="Post">
                 <div class="input-group w-75 mx-auto mb-3">
 
-                    <input type="text" class="form-control" id="name" placeholder="Enter name"
-                           name="userProfileDTO.name">
+                    <input type="text" class="form-control" id="first-name" placeholder="First name"
+                           name="first-name" required>
+                    <input type="text" class="form-control" id="last-name" placeholder="Last Name"
+                           name="first-name" >
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-white"><i class="fa fa-user icon"
                                                                    style="width:16px"></i></span>
                     </div>
-                    <input type="email" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="email" id="email">
+                    <input type="text" class="form-control border border-left-0 pl-0"
+                           placeholder="Enter email" name="email" id="email" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -200,7 +176,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Enter password" name="password" id="pwd">
+                           placeholder="Enter password" name="password" id="pwd" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -208,7 +184,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Reenter password" id="repwd">
+                           placeholder="Reenter password" id="repwd" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-4">
                     <input type="submit" name="Submit" value="Submit" class="btn btn-primary w-100">

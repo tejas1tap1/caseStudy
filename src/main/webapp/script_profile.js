@@ -105,6 +105,8 @@ function editAddress(Obj)
     $("#address-id").text(id);
     $("#add-address").show();
 }
+
+
 jQuery(document).ready(function ($){
     $("#get-orders").click(function () {
         window.location="/orderHistory";
@@ -128,7 +130,9 @@ jQuery(document).ready(function ($){
         $("#personal-info-btn").css("color","black");
         $("#personal-info-bar").hide();
         $("#manage-addresses-bar").show();
+
     })
+
     $("#personal-info-btn").click(function () {
         $("#personal-info-btn").css("color","dodgerblue");
         $("#manage-addresses-btn").css("color","black");
@@ -136,6 +140,7 @@ jQuery(document).ready(function ($){
         $("#manage-addresses-bar").hide();
         $("#add-address").hide();
         $("#add-address-btn").show();
+
 
     })
     $("#edit-personal-info").click(function(){

@@ -13,12 +13,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <script src="script_homepage.js"></script>
+    <script src="script_products.js"></script>
     <title>
         HomePage
     </title>
 </head>
 
-<body class="" onload="loadUsername()">
+<body class="" onload="loadUsername(),loadHomePageProducts()">
 <header class="container-flow sticky-top">
     <nav class="navbar navbar-expand-sm  bg-dark navbar-dark p-0 sticky-top">
         <a class="navbar-brand text-center ml-4 mr-5 px-2 " id="demo" href="/home">Shopping Cart</a>
@@ -74,27 +75,27 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics'),loadFilters('Electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
                     <div class="dropdown-content" id="electronics" >
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('men')" onmouseover="getSubcategories('men')">Men</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('men'),loadFilters('Men')" onmouseover="getSubcategories('men')">Men</span>
                     <div class="dropdown-content" id="men">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('women')" onmouseover="getSubcategories('women')">Women</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('women'),loadFilters('Women')" onmouseover="getSubcategories('women')">Women</span>
                     <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture'),loadFilters('Home&Furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
                     <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('books')" onmouseover="getSubcategories('books')">Books</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('books'),loadFilters('Books')" onmouseover="getSubcategories('books')">Books</span>
                     <div class="dropdown-content" id="books">
                     </div>
                 </div>
@@ -115,7 +116,7 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="username" id="username">
+                           placeholder="Enter email" name="username" id="username" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -123,7 +124,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
-                           placeholder="Enter password" name="password" >
+                           placeholder="Enter password" name="password" required >
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
                                                                         style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
@@ -134,7 +135,7 @@
                     <input type="submit" name="login" value="LOGIN" class="btn btn-primary w-100">
                 </div>
             </form>
-            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" href="addUser">New User</a>
+            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" onclick="signUpPage()">New User</a>
 
 
         </div>
@@ -151,8 +152,10 @@
             <form class="mt-5" id="signupform" method="Post">
                 <div class="input-group w-75 mx-auto mb-3">
 
-                    <input type="text" class="form-control" id="name" placeholder="Enter name"
-                           name="userProfileDTO.name">
+                    <input type="text" class="form-control" id="first-name" placeholder="First name"
+                           name="first-name" required>
+                    <input type="text" class="form-control" id="last-name" placeholder="Last Name"
+                           name="first-name" >
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -160,7 +163,7 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="email" id="email">
+                           placeholder="Enter email" name="email" id="email" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -168,7 +171,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Enter password" name="password" id="pwd">
+                           placeholder="Enter password" name="password" id="pwd" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -176,7 +179,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Reenter password" id="repwd">
+                           placeholder="Reenter password" id="repwd" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-4">
                     <input type="submit" name="Submit" value="Submit" class="btn btn-primary w-100">
@@ -191,8 +194,33 @@
     </div>
 </div>
 <div class="d-flex">
+    <div id="filters" class="col-sm-3 border p-3">
+        <div>
+            <h4 id="category-name">Electronics></h4>
+        </div>
+        <div id="main-subcategories" class="pl-4 py-4 border border-bottom-1">
+        </div>
+        <div class="pl-4 py-4 mt-4 border border-bottom-1">
+            <h5>Price</h5>
+            <div class="form-group d-flex">
+                <input type="number" class="form-control-range rounded mr-4" min="0" value="0" placeholder="Min" id="min-price" onkeyup="getFilteredProducts()">
+                <input type="number" class="form-control-range rounded" min="0" value="100000" placeholder="Max" id="max-price" onkeyup="getFilteredProducts()">
+            </div>
+            <h5>Filters</h5>
+            <div id="other-subcategories"></div>
+        </div>
+
+    </div>
     <div id="products" class="col-sm-9"></div>
 </div>
+<div id="home-page-products" class="col-sm-10 container mt-3">
+    <h3 class="ml-3">Electronics</h3>
+    <div id="home-electronics-products" class="d-flex"></div>
+    <h3>Men</h3>
+    <div id="home-men-products" class="d-flex"></div>
+    <h3>Books</h3>
+    <div id="home-books-products" class="d-flex"></div>
+</div>
 </body>
-
 </html>
+

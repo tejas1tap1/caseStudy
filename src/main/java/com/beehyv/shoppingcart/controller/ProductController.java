@@ -24,7 +24,7 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/products/add-product")
     public ProductDTO addProduct(@RequestBody ProductDTO productDTO) {
-        System.out.println(productDTO);
+        //System.out.println(productDTO);
         return ProductMapper.INSTANCE.toProductDTO(productServices.addProduct(ProductMapper.INSTANCE.toProduct(productDTO)));
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -35,7 +35,7 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/addSubCategory/{category}")
     public ResponseEntity addSubCategoryToCategory(@PathVariable("category")String category,@RequestBody SubCategoryDTO subCategoryDTO){
-        System.out.println("here"+ subCategoryDTO.getName());
+        //System.out.println("here"+ subCategoryDTO.getName());
         return productServices.addSubCategoryToCategory(category,SubCategoryMapper.INSTANCE.toSubCategory(subCategoryDTO));
     }
     @GetMapping("/subCategories/{category}")

@@ -31,6 +31,7 @@ function loadUsername() {
     xhttp.send();
 }
 function getProductByCategory(category) {
+    $("#add-product").hide();
     $("#products").show();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -230,7 +231,11 @@ function getSubcategories() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var subCategories= JSON.parse(this.responseText);
+            try{ var subCategories= JSON.parse(this.responseText);}
+            catch (e) {
+             var subCategories=[];
+            }
+
             var txt="";
             for(var i=0;i<subCategories.length;i++)
             {

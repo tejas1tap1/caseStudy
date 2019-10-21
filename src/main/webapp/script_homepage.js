@@ -1,27 +1,46 @@
+$(document).ready(function(){
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+    if(activeTab){
+        $('#myTab a[href="' + activeTab + '"]').tab('show');
+    }
+});
 function logPage() {
     $('#login').modal('show');
 }
-
+function signUpPage() {
+    $('#login').modal('hide');
+    $('#signup').modal('show');
+}
 function dropdown(){
     $(".dropdown-toggle").dropdown();
 }
 function getProductByCategory(category) {
+    try{
+        $("#home-page-products").hide();
+        $("#filters").show();
+    }
+    catch (e) {
+        
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var products= JSON.parse(this.responseText);
             var txt="";
-            if(products.length==0)$("#products").text("No product of category "+category+" available")
+            if(products.length==0){$("#products").text("No product of category "+category+" available");return}
             var otherSubcategories=[];
             for(var i=0;i<products.length;i++)
             {
-                     txt+="<div class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
+                     txt+="<a onclick='getProductById(this)' class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
                             "<div class='text-center p-2'><i class=\"fa fa-dropbox \" style=\"font-size: 7em\" aria-hidden=\"true\"></i></div>\n" +
                             "<h5>"+products[i].name+"</h5>"+
                             "<h6>"+products[i].categoryDTO.name+" > "+products[i].subCategoryDTOS[0].name+"</h6>"+
                             "<h5 class='font-weight-bold'>"+products[i].price+"</h5>"+
                             "<button type=\"button\" onclick=\"addToCart(this)\" class='add-to-cart-btn'><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
-                         "ADD TO CART</button></div>";
+                         "ADD TO CART</button></a>";
                      for(var j=1;j<products[i].subCategoryDTOS.length;j++)
                      {
                          otherSubcategories.push(products[i].subCategoryDTOS[j].name);
@@ -33,18 +52,19 @@ function getProductByCategory(category) {
                 txt="";
                 for(let item of unique)
                 {
+
                     txt+="         <div class=\"form-check\">\n" +
                         "                <label class=\"form-check-label\" onclick='getFilteredProducts()'>\n" +
                         "                    <input type=\"checkbox\" class=\"form-check-input other-subcategories-check\" name=\"optradio\"><span>"+item+"</span>\n" +
                         "                </label>\n" +
                         "            </div>";
                 }
-                $("#other-subcategories").append(txt);
+                $("#other-subcategories").html(txt);
             }
             catch (e) {
 
             }
-
+          getFilteredProducts();
         }
     };
 
@@ -116,7 +136,12 @@ jQuery(document).ready(function ($) {
 jQuery(document).ready(function ($) {
     $('#signupform').submit(function (event) {
         event.preventDefault();
-        var data = 'email=' + $('#email').val() + '&password=' + btoa($('#pwd').val()) + '&userProfileDTO.name='+ $('#name').val();
+        if($('#pwd').val()!=$('#repwd').val())
+        {
+            alert("password doesn't match");
+            return;
+        }
+        var data = 'email=' + $('#email').val() + '&password=' + btoa($('#pwd').val()) + '&userProfileDTO.name='+ $('#first-name').val()+" "+$('#last-name').val();
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -181,7 +206,6 @@ function searchOptions() {
     xhttp.send();
 }
 function searchResult() {
-    console.log("here");
     var searchString=$("#search-string").val();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -224,7 +248,7 @@ function getSubcategories(Obj) {
             var txt="";
             for(var i=0;i<subCategories.length;i++)
             {
-                txt+="<a class=\"item\" href=\"#\">"+subCategories[i].name +"</a>";
+                txt+="<a class=\"item\" href=\"#\" onclick='loadMarkedFilters(this)' style='text-decoration: none'>"+subCategories[i].name +"</a>";
             }
             $(category).html(txt);
         }
@@ -234,6 +258,7 @@ function getSubcategories(Obj) {
     xhttp.send();
 }
 function getProductById(Obj) {
+    console.log("here");
     productId=Obj.children[0].innerHTML;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -244,6 +269,77 @@ function getProductById(Obj) {
         }
     };
     var u="/products/getById/"+productId;
+    xhttp.open("GET", u, true);
+    xhttp.send();
+}
+function loadHomePageProducts() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var products= JSON.parse(this.responseText);
+            var txt="";
+            for(var i=0;i<products.length && i<5;i++)
+            {
+                txt+="<a onclick='getProductById(this)' class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
+                    "<div class='text-center p-2'><i class=\"fa fa-dropbox \" style=\"font-size: 7em\" aria-hidden=\"true\"></i></div>\n" +
+                    "<h5>"+products[i].name+"</h5>"+
+                    "<h6>"+products[i].categoryDTO.name+" > "+products[i].subCategoryDTOS[0].name+"</h6>"+
+                    "<h5 class='font-weight-bold'>"+products[i].price+"</h5>"+
+                    "<button type=\"button\" onclick=\"addToCart(this)\" class='add-to-cart-btn'><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
+                    "ADD TO CART</button></a>";
+
+            }
+            $("#home-electronics-products").html(txt);
+        }
+    };
+
+    var u="/products/electronics";
+    xhttp.open("GET", u, true);
+    xhttp.send();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var products= JSON.parse(this.responseText);
+            var txt="";
+            for(var i=0;i<products.length && i<5;i++)
+            {
+                txt+="<a onclick='getProductById(this)' class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
+                    "<div class='text-center p-2'><i class=\"fa fa-dropbox \" style=\"font-size: 7em\" aria-hidden=\"true\"></i></div>\n" +
+                    "<h5>"+products[i].name+"</h5>"+
+                    "<h6>"+products[i].categoryDTO.name+" > "+products[i].subCategoryDTOS[0].name+"</h6>"+
+                    "<h5 class='font-weight-bold'>"+products[i].price+"</h5>"+
+                    "<button type=\"button\" onclick=\"addToCart(this)\" class='add-to-cart-btn'><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
+                    "ADD TO CART</button></a>";
+
+            }
+            $("#home-men-products").html(txt);
+        }
+    };
+
+    var u="/products/men";
+    xhttp.open("GET", u, true);
+    xhttp.send();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var products= JSON.parse(this.responseText);
+            var txt="";
+            for(var i=0;i<products.length && i<5;i++)
+            {
+                txt+="<a onclick='getProductById(this)' class='product d-flex flex-column'><span style='display:none'>"+products[i].productId+"</span>" +
+                    "<div class='text-center p-2'><i class=\"fa fa-dropbox \" style=\"font-size: 7em\" aria-hidden=\"true\"></i></div>\n" +
+                    "<h5>"+products[i].name+"</h5>"+
+                    "<h6>"+products[i].categoryDTO.name+" > "+products[i].subCategoryDTOS[0].name+"</h6>"+
+                    "<h5 class='font-weight-bold'>"+products[i].price+"</h5>"+
+                    "<button type=\"button\" onclick=\"addToCart(this)\" class='add-to-cart-btn'><i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n" +
+                    "ADD TO CART</button></a>";
+
+            }
+            $("#home-books-products").html(txt);
+        }
+    };
+
+    var u="/products/books";
     xhttp.open("GET", u, true);
     xhttp.send();
 }

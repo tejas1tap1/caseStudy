@@ -1,6 +1,6 @@
 function loadProduct() {
     product=JSON.parse($.cookie('current-product'));
-    $("#product-id").text(product.productId);
+    $("#productId").text(product.productId);
     $("#product-name").text(product.name);
     $("#product-category").text(product.categoryDTO.name);
     $("#product-details").text(product.details);
@@ -14,7 +14,7 @@ function loadProduct() {
     $("#product-subCategories").html(txt);
 }
 function addToCart() {
-    productId=$("#product-id").innerHTML;
+    productId=$("#productId").text();
     if( ($.cookie('user'))!='' &&  ($.cookie('user'))!=undefined)
     {
         userId=JSON.parse($.cookie('user')).userId;

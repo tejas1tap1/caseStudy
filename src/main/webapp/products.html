@@ -61,10 +61,8 @@
                     <div class="dropdown-content" style="top:72px;left:-25px;">
                         <a class="item" href="/profile" style="text-decoration: none"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
                             My Profile</a>
-                        <a class="item" href="#">Link 2</a>
-                        <a class="item" href="#">Link 3</a>
-                        <h5 class="header">Dropdown header</h5>
-                        <a class="item" href="#">Another link</a>
+                        <a class="item" href="/orderHistory" style="text-decoration: none">My Orders</a>
+                        <a class="item" href="/adminPage" id="admin" style="text-decoration: none">AdminPage</a>
                     </div>
                 </li>
                 <li class="nav-item py-3 pr-2" id="log"><a title="" class="nav-link" onclick="logPage()" style="cursor: pointer"><i
@@ -78,27 +76,27 @@
         <nav class="navbar navbar-expand-sm bg-light py-0 navbar-light">
             <div class="d-flex w-50 mx-auto text-center">
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics'),loadFilters('electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('electronics'),loadFilters('Electronics')" onmouseover="getSubcategories('electronics')">Electronics</span>
                     <div class="dropdown-content" id="electronics" >
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('men')" onmouseover="getSubcategories('men')">Men</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('men'),loadFilters('Men')" onmouseover="getSubcategories('men')">Men</span>
                     <div class="dropdown-content" id="men">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('women')" onmouseover="getSubcategories('women')">Women</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('women'),loadFilters('Women')" onmouseover="getSubcategories('women')">Women</span>
                     <div class="dropdown-content" id="women">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('home&furniture'),loadFilters('Home&Furniture')" onmouseover="getSubcategories('home&furniture')">Home & Furniture</span>
                     <div class="dropdown-content" id="home&furniture">
                     </div>
                 </div>
                 <div class="flex-fill dropdown">
-                    <span class="dropbtn p-2" onclick="getProductByCategory('books')" onmouseover="getSubcategories('books')">Books</span>
+                    <span class="dropbtn p-2" onclick="getProductByCategory('books'),loadFilters('Books')" onmouseover="getSubcategories('books')">Books</span>
                     <div class="dropdown-content" id="books">
                     </div>
                 </div>
@@ -119,7 +117,7 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="username" id="username">
+                           placeholder="Enter email" name="username" id="username" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -127,7 +125,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0" id="password"
-                           placeholder="Enter password" name="password" >
+                           placeholder="Enter password" name="password" required >
                     <div class="input-group-append">
                         <span class="input-group-text bg-white px-1"><a class="mx-auto text-danger"
                                                                         style="font-size:.8em" id="forgot" href="">Forgot?</a></span>
@@ -138,7 +136,7 @@
                     <input type="submit" name="login" value="LOGIN" class="btn btn-primary w-100">
                 </div>
             </form>
-            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" href="addUser">New User</a>
+            <a class="mx-auto text-primary mb-4" style="font-size:1em" id="adduser" onclick="signUpPage()">New User</a>
 
 
         </div>
@@ -155,8 +153,10 @@
             <form class="mt-5" id="signupform" method="Post">
                 <div class="input-group w-75 mx-auto mb-3">
 
-                    <input type="text" class="form-control" id="name" placeholder="Enter name"
-                           name="userProfileDTO.name">
+                    <input type="text" class="form-control" id="first-name" placeholder="First name"
+                           name="first-name" required>
+                    <input type="text" class="form-control" id="last-name" placeholder="Last Name"
+                           name="first-name" >
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -164,7 +164,7 @@
                                                                    style="width:16px"></i></span>
                     </div>
                     <input type="text" class="form-control border border-left-0 pl-0"
-                           placeholder="Enter email" name="email" id="email">
+                           placeholder="Enter email" name="email" id="email" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-3">
                     <div class="input-group-prepend">
@@ -172,7 +172,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Enter password" name="password" id="pwd">
+                           placeholder="Enter password" name="password" id="pwd" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-5">
                     <div class="input-group-prepend">
@@ -180,7 +180,7 @@
                                                                      aria-hidden="true"></i></span>
                     </div>
                     <input type="password" class="form-control border border-left-0 border-right-0 pl-0"
-                           placeholder="Reenter password" id="repwd">
+                           placeholder="Reenter password" id="repwd" required>
                 </div>
                 <div class="input-group w-75 mx-auto mb-4">
                     <input type="submit" name="Submit" value="Submit" class="btn btn-primary w-100">
@@ -197,23 +197,24 @@
 <div class="d-flex">
     <div id="filters" class="col-sm-3 border p-3">
         <div>
-            <h4 id="category-name">Electronics></h4>
+            <h4 id="category-name"></h4>
         </div>
         <div id="main-subcategories" class="pl-4 py-4 border border-bottom-1">
         </div>
-        <div id="other-subcategories" class="pl-4 py-4 mt-4 border border-bottom-1">
+        <div class="pl-4 py-4 mt-4 border border-bottom-1">
             <h5>Price</h5>
             <div class="form-group d-flex">
                 <input type="number" class="form-control-range rounded mr-4" min="0" value="0" placeholder="Min" id="min-price" onkeyup="getFilteredProducts()">
                 <input type="number" class="form-control-range rounded" min="0" value="100000" placeholder="Max" id="max-price" onkeyup="getFilteredProducts()">
             </div>
             <h5>Filters</h5>
+            <div id="other-subcategories"></div>
         </div>
 
     </div>
     <div id="products" class="col-sm-9"></div>
 </div>
-<div id="product-details"></div>
+
 </body>
 
 </html>

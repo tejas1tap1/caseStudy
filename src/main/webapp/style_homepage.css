@@ -1,6 +1,10 @@
 #category{
   z-index: 0;
 }
+#filters{
+  display: none;
+}
+
 .add-to-cart-btn{
   font-size: .6em;
   padding: 10px 10px;
@@ -10,6 +14,9 @@
 }
 .username{
   display: none;
+}
+#adduser{
+  cursor: pointer;
 }
 #userS{
   display: none;
